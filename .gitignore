@@ -1,0 +1,12 @@
+# Generados por ANTLR
+*.class
+*.interp
+*.tokens
+*Lexer.java
+*Parser.java
+*Listener.java
+*Visitor.java
+
+# Python runtime
+__pycache__/
+antlr_env/
