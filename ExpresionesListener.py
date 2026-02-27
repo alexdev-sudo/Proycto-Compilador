@@ -17,12 +17,57 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ExpresionesParser#expr.
-    def enterExpr(self, ctx:ExpresionesParser.ExprContext):
+    # Enter a parse tree produced by ExpresionesParser#Div.
+    def enterDiv(self, ctx:ExpresionesParser.DivContext):
         pass
 
-    # Exit a parse tree produced by ExpresionesParser#expr.
-    def exitExpr(self, ctx:ExpresionesParser.ExprContext):
+    # Exit a parse tree produced by ExpresionesParser#Div.
+    def exitDiv(self, ctx:ExpresionesParser.DivContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#Numero.
+    def enterNumero(self, ctx:ExpresionesParser.NumeroContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#Numero.
+    def exitNumero(self, ctx:ExpresionesParser.NumeroContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#Suma.
+    def enterSuma(self, ctx:ExpresionesParser.SumaContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#Suma.
+    def exitSuma(self, ctx:ExpresionesParser.SumaContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#Parentesis.
+    def enterParentesis(self, ctx:ExpresionesParser.ParentesisContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#Parentesis.
+    def exitParentesis(self, ctx:ExpresionesParser.ParentesisContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#Multi.
+    def enterMulti(self, ctx:ExpresionesParser.MultiContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#Multi.
+    def exitMulti(self, ctx:ExpresionesParser.MultiContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#Resta.
+    def enterResta(self, ctx:ExpresionesParser.RestaContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#Resta.
+    def exitResta(self, ctx:ExpresionesParser.RestaContext):
         pass
 
 

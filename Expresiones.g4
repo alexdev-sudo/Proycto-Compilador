@@ -1,13 +1,13 @@
-grammar ExpresionesS;
+grammar Expresiones;
 
 // Regla inicial
 root : expr EOF ;
 
 // Expresiones con precedencia
 expr
-    : expr SUM expr      # Suma
+    : expr MUL expr      # Multi
     | expr RES expr      # Resta
-    | expr MUL expr      # Multi
+    | expr SUM expr      # Suma
     | expr DIV expr      # Div
     | '(' expr ')'       # Parentesis
     | NUM                # Numero

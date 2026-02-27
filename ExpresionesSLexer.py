@@ -26,7 +26,7 @@ def serializedATN():
         0,0,0,3,0,24,37,1,6,0,0
     ]
 
-class ExpresionesLexer(Lexer):
+class ExpresionesSLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
