@@ -5,10 +5,10 @@ root : expr EOF ;
 
 // Expresiones con precedencia
 expr
-    : expr MUL expr      # Multi
+    : expr DIV expr      # Div
+    | expr MUL expr      # Multi
     | expr RES expr      # Resta
     | expr SUM expr      # Suma
-    | expr DIV expr      # Div
     | '(' expr ')'       # Parentesis
     | NUM                # Numero
     ;
