@@ -1,4 +1,4 @@
-# Generated from Expresiones21.g4 by ANTLR 4.13.1
+# Generated from Expresiones_2.g4 by ANTLR 4.13.1
 from antlr4 import *
 from io import StringIO
 import sys
@@ -60,7 +60,7 @@ def serializedATN():
         0,0,4,0,126,132,137,1,6,0,0
     ]
 
-class Expresiones21Lexer(Lexer):
+class Expresiones_2Lexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -114,7 +114,7 @@ class Expresiones21Lexer(Lexer):
                   "MAYORIGUAL", "MENORIGUAL", "MAYOR", "MENOR", "IGUAL", 
                   "NOIGUAL", "DIFF", "AND", "OR", "NOT", "VAR", "NUM", "WS" ]
 
-    grammarFileName = "Expresiones21.g4"
+    grammarFileName = "Expresiones_2.g4"
 
     def __init__(self, input=None, output:TextIO = sys.stdout):
         super().__init__(input, output)

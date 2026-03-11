@@ -1,4 +1,4 @@
-# Generated from Expresiones21.g4 by ANTLR 4.13.1
+# Generated from Expresiones_2.g4 by ANTLR 4.13.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -54,9 +54,9 @@ def serializedATN():
         0,0,0,11,38,50,66,75,83,91,99,107,115,121,129
     ]
 
-class Expresiones21Parser ( Parser ):
+class Expresiones_2Parser ( Parser ):
 
-    grammarFileName = "Expresiones21.g4"
+    grammarFileName = "Expresiones_2.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -141,17 +141,17 @@ class Expresiones21Parser ( Parser ):
             self.parser = parser
 
         def PROGRAM(self):
-            return self.getToken(Expresiones21Parser.PROGRAM, 0)
+            return self.getToken(Expresiones_2Parser.PROGRAM, 0)
 
         def bloque(self):
-            return self.getTypedRuleContext(Expresiones21Parser.BloqueContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.BloqueContext,0)
 
 
         def EOF(self):
-            return self.getToken(Expresiones21Parser.EOF, 0)
+            return self.getToken(Expresiones_2Parser.EOF, 0)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_root
+            return Expresiones_2Parser.RULE_root
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterRoot" ):
@@ -172,16 +172,16 @@ class Expresiones21Parser ( Parser ):
 
     def root(self):
 
-        localctx = Expresiones21Parser.RootContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.RootContext(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_root)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 30
-            self.match(Expresiones21Parser.PROGRAM)
+            self.match(Expresiones_2Parser.PROGRAM)
             self.state = 31
             self.bloque()
             self.state = 32
-            self.match(Expresiones21Parser.EOF)
+            self.match(Expresiones_2Parser.EOF)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -199,20 +199,20 @@ class Expresiones21Parser ( Parser ):
             self.parser = parser
 
         def LLAVEI(self):
-            return self.getToken(Expresiones21Parser.LLAVEI, 0)
+            return self.getToken(Expresiones_2Parser.LLAVEI, 0)
 
         def LLAVED(self):
-            return self.getToken(Expresiones21Parser.LLAVED, 0)
+            return self.getToken(Expresiones_2Parser.LLAVED, 0)
 
         def statement(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(Expresiones21Parser.StatementContext)
+                return self.getTypedRuleContexts(Expresiones_2Parser.StatementContext)
             else:
-                return self.getTypedRuleContext(Expresiones21Parser.StatementContext,i)
+                return self.getTypedRuleContext(Expresiones_2Parser.StatementContext,i)
 
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_bloque
+            return Expresiones_2Parser.RULE_bloque
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterBloque" ):
@@ -233,13 +233,13 @@ class Expresiones21Parser ( Parser ):
 
     def bloque(self):
 
-        localctx = Expresiones21Parser.BloqueContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.BloqueContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_bloque)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 34
-            self.match(Expresiones21Parser.LLAVEI)
+            self.match(Expresiones_2Parser.LLAVEI)
             self.state = 38
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -251,7 +251,7 @@ class Expresiones21Parser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 41
-            self.match(Expresiones21Parser.LLAVED)
+            self.match(Expresiones_2Parser.LLAVED)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -269,22 +269,22 @@ class Expresiones21Parser ( Parser ):
             self.parser = parser
 
         def varint(self):
-            return self.getTypedRuleContext(Expresiones21Parser.VarintContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.VarintContext,0)
 
 
         def SEMI(self):
-            return self.getToken(Expresiones21Parser.SEMI, 0)
+            return self.getToken(Expresiones_2Parser.SEMI, 0)
 
         def asignacion(self):
-            return self.getTypedRuleContext(Expresiones21Parser.AsignacionContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.AsignacionContext,0)
 
 
         def ifstm(self):
-            return self.getTypedRuleContext(Expresiones21Parser.IfstmContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.IfstmContext,0)
 
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_statement
+            return Expresiones_2Parser.RULE_statement
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterStatement" ):
@@ -305,7 +305,7 @@ class Expresiones21Parser ( Parser ):
 
     def statement(self):
 
-        localctx = Expresiones21Parser.StatementContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.StatementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_statement)
         try:
             self.state = 50
@@ -316,14 +316,14 @@ class Expresiones21Parser ( Parser ):
                 self.state = 43
                 self.varint()
                 self.state = 44
-                self.match(Expresiones21Parser.SEMI)
+                self.match(Expresiones_2Parser.SEMI)
                 pass
             elif token in [25]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 46
                 self.asignacion()
                 self.state = 47
-                self.match(Expresiones21Parser.SEMI)
+                self.match(Expresiones_2Parser.SEMI)
                 pass
             elif token in [2]:
                 self.enterOuterAlt(localctx, 3)
@@ -350,13 +350,13 @@ class Expresiones21Parser ( Parser ):
             self.parser = parser
 
         def INT(self):
-            return self.getToken(Expresiones21Parser.INT, 0)
+            return self.getToken(Expresiones_2Parser.INT, 0)
 
         def VAR(self):
-            return self.getToken(Expresiones21Parser.VAR, 0)
+            return self.getToken(Expresiones_2Parser.VAR, 0)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_varint
+            return Expresiones_2Parser.RULE_varint
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterVarint" ):
@@ -377,14 +377,14 @@ class Expresiones21Parser ( Parser ):
 
     def varint(self):
 
-        localctx = Expresiones21Parser.VarintContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.VarintContext(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_varint)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 52
-            self.match(Expresiones21Parser.INT)
+            self.match(Expresiones_2Parser.INT)
             self.state = 53
-            self.match(Expresiones21Parser.VAR)
+            self.match(Expresiones_2Parser.VAR)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -402,17 +402,17 @@ class Expresiones21Parser ( Parser ):
             self.parser = parser
 
         def VAR(self):
-            return self.getToken(Expresiones21Parser.VAR, 0)
+            return self.getToken(Expresiones_2Parser.VAR, 0)
 
         def ASSIGN(self):
-            return self.getToken(Expresiones21Parser.ASSIGN, 0)
+            return self.getToken(Expresiones_2Parser.ASSIGN, 0)
 
         def expr(self):
-            return self.getTypedRuleContext(Expresiones21Parser.ExprContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.ExprContext,0)
 
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_asignacion
+            return Expresiones_2Parser.RULE_asignacion
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterAsignacion" ):
@@ -433,14 +433,14 @@ class Expresiones21Parser ( Parser ):
 
     def asignacion(self):
 
-        localctx = Expresiones21Parser.AsignacionContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.AsignacionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 8, self.RULE_asignacion)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 55
-            self.match(Expresiones21Parser.VAR)
+            self.match(Expresiones_2Parser.VAR)
             self.state = 56
-            self.match(Expresiones21Parser.ASSIGN)
+            self.match(Expresiones_2Parser.ASSIGN)
             self.state = 57
             self.expr()
         except RecognitionException as re:
@@ -460,30 +460,30 @@ class Expresiones21Parser ( Parser ):
             self.parser = parser
 
         def IF(self):
-            return self.getToken(Expresiones21Parser.IF, 0)
+            return self.getToken(Expresiones_2Parser.IF, 0)
 
         def PARENI(self):
-            return self.getToken(Expresiones21Parser.PARENI, 0)
+            return self.getToken(Expresiones_2Parser.PARENI, 0)
 
         def expr(self):
-            return self.getTypedRuleContext(Expresiones21Parser.ExprContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.ExprContext,0)
 
 
         def PAREND(self):
-            return self.getToken(Expresiones21Parser.PAREND, 0)
+            return self.getToken(Expresiones_2Parser.PAREND, 0)
 
         def bloque(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(Expresiones21Parser.BloqueContext)
+                return self.getTypedRuleContexts(Expresiones_2Parser.BloqueContext)
             else:
-                return self.getTypedRuleContext(Expresiones21Parser.BloqueContext,i)
+                return self.getTypedRuleContext(Expresiones_2Parser.BloqueContext,i)
 
 
         def ELSE(self):
-            return self.getToken(Expresiones21Parser.ELSE, 0)
+            return self.getToken(Expresiones_2Parser.ELSE, 0)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_ifstm
+            return Expresiones_2Parser.RULE_ifstm
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterIfstm" ):
@@ -504,19 +504,19 @@ class Expresiones21Parser ( Parser ):
 
     def ifstm(self):
 
-        localctx = Expresiones21Parser.IfstmContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.IfstmContext(self, self._ctx, self.state)
         self.enterRule(localctx, 10, self.RULE_ifstm)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 59
-            self.match(Expresiones21Parser.IF)
+            self.match(Expresiones_2Parser.IF)
             self.state = 60
-            self.match(Expresiones21Parser.PARENI)
+            self.match(Expresiones_2Parser.PARENI)
             self.state = 61
             self.expr()
             self.state = 62
-            self.match(Expresiones21Parser.PAREND)
+            self.match(Expresiones_2Parser.PAREND)
             self.state = 63
             self.bloque()
             self.state = 66
@@ -524,7 +524,7 @@ class Expresiones21Parser ( Parser ):
             _la = self._input.LA(1)
             if _la==3:
                 self.state = 64
-                self.match(Expresiones21Parser.ELSE)
+                self.match(Expresiones_2Parser.ELSE)
                 self.state = 65
                 self.bloque()
 
@@ -546,11 +546,11 @@ class Expresiones21Parser ( Parser ):
             self.parser = parser
 
         def logicalOr(self):
-            return self.getTypedRuleContext(Expresiones21Parser.LogicalOrContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.LogicalOrContext,0)
 
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_expr
+            return Expresiones_2Parser.RULE_expr
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterExpr" ):
@@ -571,7 +571,7 @@ class Expresiones21Parser ( Parser ):
 
     def expr(self):
 
-        localctx = Expresiones21Parser.ExprContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.ExprContext(self, self._ctx, self.state)
         self.enterRule(localctx, 12, self.RULE_expr)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -595,19 +595,19 @@ class Expresiones21Parser ( Parser ):
 
         def logicalAnd(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(Expresiones21Parser.LogicalAndContext)
+                return self.getTypedRuleContexts(Expresiones_2Parser.LogicalAndContext)
             else:
-                return self.getTypedRuleContext(Expresiones21Parser.LogicalAndContext,i)
+                return self.getTypedRuleContext(Expresiones_2Parser.LogicalAndContext,i)
 
 
         def OR(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.OR)
+                return self.getTokens(Expresiones_2Parser.OR)
             else:
-                return self.getToken(Expresiones21Parser.OR, i)
+                return self.getToken(Expresiones_2Parser.OR, i)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_logicalOr
+            return Expresiones_2Parser.RULE_logicalOr
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterLogicalOr" ):
@@ -628,7 +628,7 @@ class Expresiones21Parser ( Parser ):
 
     def logicalOr(self):
 
-        localctx = Expresiones21Parser.LogicalOrContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.LogicalOrContext(self, self._ctx, self.state)
         self.enterRule(localctx, 14, self.RULE_logicalOr)
         self._la = 0 # Token type
         try:
@@ -640,7 +640,7 @@ class Expresiones21Parser ( Parser ):
             _la = self._input.LA(1)
             while _la==23:
                 self.state = 71
-                self.match(Expresiones21Parser.OR)
+                self.match(Expresiones_2Parser.OR)
                 self.state = 72
                 self.logicalAnd()
                 self.state = 77
@@ -665,19 +665,19 @@ class Expresiones21Parser ( Parser ):
 
         def igualdad(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(Expresiones21Parser.IgualdadContext)
+                return self.getTypedRuleContexts(Expresiones_2Parser.IgualdadContext)
             else:
-                return self.getTypedRuleContext(Expresiones21Parser.IgualdadContext,i)
+                return self.getTypedRuleContext(Expresiones_2Parser.IgualdadContext,i)
 
 
         def AND(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.AND)
+                return self.getTokens(Expresiones_2Parser.AND)
             else:
-                return self.getToken(Expresiones21Parser.AND, i)
+                return self.getToken(Expresiones_2Parser.AND, i)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_logicalAnd
+            return Expresiones_2Parser.RULE_logicalAnd
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterLogicalAnd" ):
@@ -698,7 +698,7 @@ class Expresiones21Parser ( Parser ):
 
     def logicalAnd(self):
 
-        localctx = Expresiones21Parser.LogicalAndContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.LogicalAndContext(self, self._ctx, self.state)
         self.enterRule(localctx, 16, self.RULE_logicalAnd)
         self._la = 0 # Token type
         try:
@@ -710,7 +710,7 @@ class Expresiones21Parser ( Parser ):
             _la = self._input.LA(1)
             while _la==22:
                 self.state = 79
-                self.match(Expresiones21Parser.AND)
+                self.match(Expresiones_2Parser.AND)
                 self.state = 80
                 self.igualdad()
                 self.state = 85
@@ -735,31 +735,31 @@ class Expresiones21Parser ( Parser ):
 
         def comparacion(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(Expresiones21Parser.ComparacionContext)
+                return self.getTypedRuleContexts(Expresiones_2Parser.ComparacionContext)
             else:
-                return self.getTypedRuleContext(Expresiones21Parser.ComparacionContext,i)
+                return self.getTypedRuleContext(Expresiones_2Parser.ComparacionContext,i)
 
 
         def IGUAL(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.IGUAL)
+                return self.getTokens(Expresiones_2Parser.IGUAL)
             else:
-                return self.getToken(Expresiones21Parser.IGUAL, i)
+                return self.getToken(Expresiones_2Parser.IGUAL, i)
 
         def NOIGUAL(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.NOIGUAL)
+                return self.getTokens(Expresiones_2Parser.NOIGUAL)
             else:
-                return self.getToken(Expresiones21Parser.NOIGUAL, i)
+                return self.getToken(Expresiones_2Parser.NOIGUAL, i)
 
         def DIFF(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.DIFF)
+                return self.getTokens(Expresiones_2Parser.DIFF)
             else:
-                return self.getToken(Expresiones21Parser.DIFF, i)
+                return self.getToken(Expresiones_2Parser.DIFF, i)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_igualdad
+            return Expresiones_2Parser.RULE_igualdad
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterIgualdad" ):
@@ -780,7 +780,7 @@ class Expresiones21Parser ( Parser ):
 
     def igualdad(self):
 
-        localctx = Expresiones21Parser.IgualdadContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.IgualdadContext(self, self._ctx, self.state)
         self.enterRule(localctx, 18, self.RULE_igualdad)
         self._la = 0 # Token type
         try:
@@ -822,37 +822,37 @@ class Expresiones21Parser ( Parser ):
 
         def suma(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(Expresiones21Parser.SumaContext)
+                return self.getTypedRuleContexts(Expresiones_2Parser.SumaContext)
             else:
-                return self.getTypedRuleContext(Expresiones21Parser.SumaContext,i)
+                return self.getTypedRuleContext(Expresiones_2Parser.SumaContext,i)
 
 
         def MAYOR(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.MAYOR)
+                return self.getTokens(Expresiones_2Parser.MAYOR)
             else:
-                return self.getToken(Expresiones21Parser.MAYOR, i)
+                return self.getToken(Expresiones_2Parser.MAYOR, i)
 
         def MENOR(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.MENOR)
+                return self.getTokens(Expresiones_2Parser.MENOR)
             else:
-                return self.getToken(Expresiones21Parser.MENOR, i)
+                return self.getToken(Expresiones_2Parser.MENOR, i)
 
         def MAYORIGUAL(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.MAYORIGUAL)
+                return self.getTokens(Expresiones_2Parser.MAYORIGUAL)
             else:
-                return self.getToken(Expresiones21Parser.MAYORIGUAL, i)
+                return self.getToken(Expresiones_2Parser.MAYORIGUAL, i)
 
         def MENORIGUAL(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.MENORIGUAL)
+                return self.getTokens(Expresiones_2Parser.MENORIGUAL)
             else:
-                return self.getToken(Expresiones21Parser.MENORIGUAL, i)
+                return self.getToken(Expresiones_2Parser.MENORIGUAL, i)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_comparacion
+            return Expresiones_2Parser.RULE_comparacion
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterComparacion" ):
@@ -873,7 +873,7 @@ class Expresiones21Parser ( Parser ):
 
     def comparacion(self):
 
-        localctx = Expresiones21Parser.ComparacionContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.ComparacionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 20, self.RULE_comparacion)
         self._la = 0 # Token type
         try:
@@ -915,25 +915,25 @@ class Expresiones21Parser ( Parser ):
 
         def producto(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(Expresiones21Parser.ProductoContext)
+                return self.getTypedRuleContexts(Expresiones_2Parser.ProductoContext)
             else:
-                return self.getTypedRuleContext(Expresiones21Parser.ProductoContext,i)
+                return self.getTypedRuleContext(Expresiones_2Parser.ProductoContext,i)
 
 
         def SUM(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.SUM)
+                return self.getTokens(Expresiones_2Parser.SUM)
             else:
-                return self.getToken(Expresiones21Parser.SUM, i)
+                return self.getToken(Expresiones_2Parser.SUM, i)
 
         def REST(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.REST)
+                return self.getTokens(Expresiones_2Parser.REST)
             else:
-                return self.getToken(Expresiones21Parser.REST, i)
+                return self.getToken(Expresiones_2Parser.REST, i)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_suma
+            return Expresiones_2Parser.RULE_suma
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterSuma" ):
@@ -954,7 +954,7 @@ class Expresiones21Parser ( Parser ):
 
     def suma(self):
 
-        localctx = Expresiones21Parser.SumaContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.SumaContext(self, self._ctx, self.state)
         self.enterRule(localctx, 22, self.RULE_suma)
         self._la = 0 # Token type
         try:
@@ -996,25 +996,25 @@ class Expresiones21Parser ( Parser ):
 
         def unario(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(Expresiones21Parser.UnarioContext)
+                return self.getTypedRuleContexts(Expresiones_2Parser.UnarioContext)
             else:
-                return self.getTypedRuleContext(Expresiones21Parser.UnarioContext,i)
+                return self.getTypedRuleContext(Expresiones_2Parser.UnarioContext,i)
 
 
         def MUL(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.MUL)
+                return self.getTokens(Expresiones_2Parser.MUL)
             else:
-                return self.getToken(Expresiones21Parser.MUL, i)
+                return self.getToken(Expresiones_2Parser.MUL, i)
 
         def DIV(self, i:int=None):
             if i is None:
-                return self.getTokens(Expresiones21Parser.DIV)
+                return self.getTokens(Expresiones_2Parser.DIV)
             else:
-                return self.getToken(Expresiones21Parser.DIV, i)
+                return self.getToken(Expresiones_2Parser.DIV, i)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_producto
+            return Expresiones_2Parser.RULE_producto
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterProducto" ):
@@ -1035,7 +1035,7 @@ class Expresiones21Parser ( Parser ):
 
     def producto(self):
 
-        localctx = Expresiones21Parser.ProductoContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.ProductoContext(self, self._ctx, self.state)
         self.enterRule(localctx, 24, self.RULE_producto)
         self._la = 0 # Token type
         try:
@@ -1076,18 +1076,18 @@ class Expresiones21Parser ( Parser ):
             self.parser = parser
 
         def NOT(self):
-            return self.getToken(Expresiones21Parser.NOT, 0)
+            return self.getToken(Expresiones_2Parser.NOT, 0)
 
         def unario(self):
-            return self.getTypedRuleContext(Expresiones21Parser.UnarioContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.UnarioContext,0)
 
 
         def primario(self):
-            return self.getTypedRuleContext(Expresiones21Parser.PrimarioContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.PrimarioContext,0)
 
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_unario
+            return Expresiones_2Parser.RULE_unario
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterUnario" ):
@@ -1108,7 +1108,7 @@ class Expresiones21Parser ( Parser ):
 
     def unario(self):
 
-        localctx = Expresiones21Parser.UnarioContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.UnarioContext(self, self._ctx, self.state)
         self.enterRule(localctx, 26, self.RULE_unario)
         try:
             self.state = 121
@@ -1117,7 +1117,7 @@ class Expresiones21Parser ( Parser ):
             if token in [24]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 118
-                self.match(Expresiones21Parser.NOT)
+                self.match(Expresiones_2Parser.NOT)
                 self.state = 119
                 self.unario()
                 pass
@@ -1146,23 +1146,23 @@ class Expresiones21Parser ( Parser ):
             self.parser = parser
 
         def NUM(self):
-            return self.getToken(Expresiones21Parser.NUM, 0)
+            return self.getToken(Expresiones_2Parser.NUM, 0)
 
         def VAR(self):
-            return self.getToken(Expresiones21Parser.VAR, 0)
+            return self.getToken(Expresiones_2Parser.VAR, 0)
 
         def PARENI(self):
-            return self.getToken(Expresiones21Parser.PARENI, 0)
+            return self.getToken(Expresiones_2Parser.PARENI, 0)
 
         def expr(self):
-            return self.getTypedRuleContext(Expresiones21Parser.ExprContext,0)
+            return self.getTypedRuleContext(Expresiones_2Parser.ExprContext,0)
 
 
         def PAREND(self):
-            return self.getToken(Expresiones21Parser.PAREND, 0)
+            return self.getToken(Expresiones_2Parser.PAREND, 0)
 
         def getRuleIndex(self):
-            return Expresiones21Parser.RULE_primario
+            return Expresiones_2Parser.RULE_primario
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterPrimario" ):
@@ -1183,7 +1183,7 @@ class Expresiones21Parser ( Parser ):
 
     def primario(self):
 
-        localctx = Expresiones21Parser.PrimarioContext(self, self._ctx, self.state)
+        localctx = Expresiones_2Parser.PrimarioContext(self, self._ctx, self.state)
         self.enterRule(localctx, 28, self.RULE_primario)
         try:
             self.state = 129
@@ -1192,21 +1192,21 @@ class Expresiones21Parser ( Parser ):
             if token in [26]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 123
-                self.match(Expresiones21Parser.NUM)
+                self.match(Expresiones_2Parser.NUM)
                 pass
             elif token in [25]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 124
-                self.match(Expresiones21Parser.VAR)
+                self.match(Expresiones_2Parser.VAR)
                 pass
             elif token in [5]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 125
-                self.match(Expresiones21Parser.PARENI)
+                self.match(Expresiones_2Parser.PARENI)
                 self.state = 126
                 self.expr()
                 self.state = 127
-                self.match(Expresiones21Parser.PAREND)
+                self.match(Expresiones_2Parser.PAREND)
                 pass
             else:
                 raise NoViableAltException(self)
