@@ -41,6 +41,7 @@ producto: unario((MUL|DIV)unario)*;
 
 // expresion unario para negar una expresion 
 unario: NOT unario | primario;
+
 // expresiones primarios numero variables expresion entre parentesis 
 primario: NUM|VAR|PARENI expr PAREND;
 
