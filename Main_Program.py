@@ -235,7 +235,7 @@ def imprimir_arbol(tree, parser):
 
 def main():
 
-    input_stream = FileStream("entradas.txt")
+    input_stream = FileStream("entradas Programa.txt")
 
     lexer = Expresiones_2Lexer(input_stream)
 
