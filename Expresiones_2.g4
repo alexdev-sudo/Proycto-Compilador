@@ -14,11 +14,13 @@ statement: varint SEMI | asignacion SEMI|ifstm;
 // declaracion de variables 
 varint: INT VAR;  //variables tipo int 
 asignacion : VAR ASSIGN expr;  // instruccion de asignacion 
+
 ifstm: IF PARENI expr PAREND bloque(ELSE bloque)?; // instruccion de if 
 
 //reglas principales de expresiones 
 //definimos que todas las expresiones empiezan evaluando operadores OR.
 // para contrololar precedencia de operadores 
+
 expr : logicalOr;
 
 //puede haber muchos OR
