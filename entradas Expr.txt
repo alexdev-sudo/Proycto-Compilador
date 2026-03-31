@@ -1,0 +1,12 @@
+ {
+int num1;
+int num2;
+int num3;    
+num1=25;
+num3=50;
+if (num1>20 && num3<100)
+{
+    num2=num1+5;
+} else {
+    num2=num1+6;
+}}
