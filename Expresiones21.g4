@@ -8,7 +8,7 @@ bloque: INILLAVE statement* FIN ;
 statement: varint SEMI | asignacion SEMI|ifstm;
 
 // declaracion de variables 
-varint: INT VAR | FLOAT VAR | STRING VAR;  //variables tipo int y float
+varint: INT VAR | FLOAT VAR | STRING VAR | BOOL VAR;  //variables tipo int y float
 asignacion : VAR ASSIGN expr;  // instruccion de asignacion 
 
 ifstm: IF PARENI expr PAREND bloque(ELSE bloque); // instruccion de if 
@@ -41,7 +41,7 @@ producto: unario((MUL|DIV)unario)*;
 unario: NOT unario | primario;
 
 // expresiones primarios numero variables expresion entre parentesis 
-primario: NUM| FNUM | STRVAL | VAR|PARENI expr PAREND;
+primario: NUM| FNUM | STRVAL | TRUE | FALSE | VAR|PARENI expr PAREND;
 
 
 // tokens 
@@ -53,6 +53,9 @@ ELSE : 'else';
 INT : 'int';
 FLOAT : 'float';
 STRING : 'string';
+BOOL : 'bool';
+TRUE : 'true';
+FALSE : 'false';
 PARENI: '(';
 PAREND: ')';
 SEMI: ';';
