@@ -1,11 +1,11 @@
 grammar Expresiones21;
 
 //root o relga inicial 
-root : INI* INILLAVE funcion* bloque FIN EOF;
+root: INI* INILLAVE bloque FIN EOF;
 
 bloque: INILLAVE statement* FIN ; 
 
-statement: varint SEMI | asignacion SEMI | ifstm | whilestm | forstm | returnstm | llamada SEMI | printstm;
+statement: varint SEMI | asignacion SEMI | ifstm | whilestm | forstm | returnstm | llamada SEMI | printstm | funcion;
 
 // declaracion de variables 
 varint: INT VAR | FLOAT VAR | STRING VAR | BOOL VAR;  //variables tipo int y float
