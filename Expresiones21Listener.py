@@ -71,6 +71,15 @@ class Expresiones21Listener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by Expresiones21Parser#forstm.
+    def enterForstm(self, ctx:Expresiones21Parser.ForstmContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#forstm.
+    def exitForstm(self, ctx:Expresiones21Parser.ForstmContext):
+        pass
+
+
     # Enter a parse tree produced by Expresiones21Parser#expr.
     def enterExpr(self, ctx:Expresiones21Parser.ExprContext):
         pass

@@ -44,6 +44,11 @@ class Expresiones21Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by Expresiones21Parser#forstm.
+    def visitForstm(self, ctx:Expresiones21Parser.ForstmContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by Expresiones21Parser#expr.
     def visitExpr(self, ctx:Expresiones21Parser.ExprContext):
         return self.visitChildren(ctx)

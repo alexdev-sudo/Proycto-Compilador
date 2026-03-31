@@ -10,59 +10,63 @@ else:
 
 def serializedATN():
     return [
-        4,1,35,158,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,36,171,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
-        2,14,7,14,2,15,7,15,1,0,5,0,34,8,0,10,0,12,0,37,9,0,1,0,1,0,1,0,
-        1,0,1,0,1,1,1,1,5,1,46,8,1,10,1,12,1,49,9,1,1,1,1,1,1,2,1,2,1,2,
-        1,2,1,2,1,2,1,2,1,2,3,2,61,8,2,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,3,
-        3,71,8,3,1,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,6,1,6,
-        1,6,1,6,1,6,1,6,1,7,1,7,1,8,1,8,1,8,5,8,96,8,8,10,8,12,8,99,9,8,
-        1,9,1,9,1,9,5,9,104,8,9,10,9,12,9,107,9,9,1,10,1,10,1,10,5,10,112,
-        8,10,10,10,12,10,115,9,10,1,11,1,11,1,11,5,11,120,8,11,10,11,12,
-        11,123,9,11,1,12,1,12,1,12,5,12,128,8,12,10,12,12,12,131,9,12,1,
-        13,1,13,1,13,5,13,136,8,13,10,13,12,13,139,9,13,1,14,1,14,1,14,3,
-        14,144,8,14,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,3,
-        15,156,8,15,1,15,0,0,16,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,
-        30,0,4,1,0,25,27,1,0,21,24,1,0,17,18,1,0,19,20,162,0,35,1,0,0,0,
-        2,43,1,0,0,0,4,60,1,0,0,0,6,70,1,0,0,0,8,72,1,0,0,0,10,76,1,0,0,
-        0,12,84,1,0,0,0,14,90,1,0,0,0,16,92,1,0,0,0,18,100,1,0,0,0,20,108,
-        1,0,0,0,22,116,1,0,0,0,24,124,1,0,0,0,26,132,1,0,0,0,28,143,1,0,
-        0,0,30,155,1,0,0,0,32,34,5,1,0,0,33,32,1,0,0,0,34,37,1,0,0,0,35,
-        33,1,0,0,0,35,36,1,0,0,0,36,38,1,0,0,0,37,35,1,0,0,0,38,39,5,2,0,
-        0,39,40,3,2,1,0,40,41,5,3,0,0,41,42,5,0,0,1,42,1,1,0,0,0,43,47,5,
-        2,0,0,44,46,3,4,2,0,45,44,1,0,0,0,46,49,1,0,0,0,47,45,1,0,0,0,47,
-        48,1,0,0,0,48,50,1,0,0,0,49,47,1,0,0,0,50,51,5,3,0,0,51,3,1,0,0,
-        0,52,53,3,6,3,0,53,54,5,15,0,0,54,61,1,0,0,0,55,56,3,8,4,0,56,57,
-        5,15,0,0,57,61,1,0,0,0,58,61,3,10,5,0,59,61,3,12,6,0,60,52,1,0,0,
-        0,60,55,1,0,0,0,60,58,1,0,0,0,60,59,1,0,0,0,61,5,1,0,0,0,62,63,5,
-        6,0,0,63,71,5,31,0,0,64,65,5,7,0,0,65,71,5,31,0,0,66,67,5,8,0,0,
-        67,71,5,31,0,0,68,69,5,9,0,0,69,71,5,31,0,0,70,62,1,0,0,0,70,64,
-        1,0,0,0,70,66,1,0,0,0,70,68,1,0,0,0,71,7,1,0,0,0,72,73,5,31,0,0,
-        73,74,5,16,0,0,74,75,3,14,7,0,75,9,1,0,0,0,76,77,5,4,0,0,77,78,5,
-        13,0,0,78,79,3,14,7,0,79,80,5,14,0,0,80,81,3,2,1,0,81,82,5,5,0,0,
-        82,83,3,2,1,0,83,11,1,0,0,0,84,85,5,11,0,0,85,86,5,13,0,0,86,87,
-        3,14,7,0,87,88,5,14,0,0,88,89,3,2,1,0,89,13,1,0,0,0,90,91,3,16,8,
-        0,91,15,1,0,0,0,92,97,3,18,9,0,93,94,5,29,0,0,94,96,3,18,9,0,95,
-        93,1,0,0,0,96,99,1,0,0,0,97,95,1,0,0,0,97,98,1,0,0,0,98,17,1,0,0,
-        0,99,97,1,0,0,0,100,105,3,20,10,0,101,102,5,28,0,0,102,104,3,20,
-        10,0,103,101,1,0,0,0,104,107,1,0,0,0,105,103,1,0,0,0,105,106,1,0,
-        0,0,106,19,1,0,0,0,107,105,1,0,0,0,108,113,3,22,11,0,109,110,7,0,
-        0,0,110,112,3,22,11,0,111,109,1,0,0,0,112,115,1,0,0,0,113,111,1,
-        0,0,0,113,114,1,0,0,0,114,21,1,0,0,0,115,113,1,0,0,0,116,121,3,24,
-        12,0,117,118,7,1,0,0,118,120,3,24,12,0,119,117,1,0,0,0,120,123,1,
-        0,0,0,121,119,1,0,0,0,121,122,1,0,0,0,122,23,1,0,0,0,123,121,1,0,
-        0,0,124,129,3,26,13,0,125,126,7,2,0,0,126,128,3,26,13,0,127,125,
-        1,0,0,0,128,131,1,0,0,0,129,127,1,0,0,0,129,130,1,0,0,0,130,25,1,
-        0,0,0,131,129,1,0,0,0,132,137,3,28,14,0,133,134,7,3,0,0,134,136,
-        3,28,14,0,135,133,1,0,0,0,136,139,1,0,0,0,137,135,1,0,0,0,137,138,
-        1,0,0,0,138,27,1,0,0,0,139,137,1,0,0,0,140,141,5,30,0,0,141,144,
-        3,28,14,0,142,144,3,30,15,0,143,140,1,0,0,0,143,142,1,0,0,0,144,
-        29,1,0,0,0,145,156,5,32,0,0,146,156,5,33,0,0,147,156,5,34,0,0,148,
-        156,5,10,0,0,149,156,5,12,0,0,150,156,5,31,0,0,151,152,5,13,0,0,
-        152,153,3,14,7,0,153,154,5,14,0,0,154,156,1,0,0,0,155,145,1,0,0,
-        0,155,146,1,0,0,0,155,147,1,0,0,0,155,148,1,0,0,0,155,149,1,0,0,
-        0,155,150,1,0,0,0,155,151,1,0,0,0,156,31,1,0,0,0,12,35,47,60,70,
-        97,105,113,121,129,137,143,155
+        2,14,7,14,2,15,7,15,2,16,7,16,1,0,5,0,36,8,0,10,0,12,0,39,9,0,1,
+        0,1,0,1,0,1,0,1,0,1,1,1,1,5,1,48,8,1,10,1,12,1,51,9,1,1,1,1,1,1,
+        2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,64,8,2,1,3,1,3,1,3,1,3,1,3,
+        1,3,1,3,1,3,3,3,74,8,3,1,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,1,5,1,5,1,
+        5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,
+        7,1,7,1,8,1,8,1,9,1,9,1,9,5,9,109,8,9,10,9,12,9,112,9,9,1,10,1,10,
+        1,10,5,10,117,8,10,10,10,12,10,120,9,10,1,11,1,11,1,11,5,11,125,
+        8,11,10,11,12,11,128,9,11,1,12,1,12,1,12,5,12,133,8,12,10,12,12,
+        12,136,9,12,1,13,1,13,1,13,5,13,141,8,13,10,13,12,13,144,9,13,1,
+        14,1,14,1,14,5,14,149,8,14,10,14,12,14,152,9,14,1,15,1,15,1,15,3,
+        15,157,8,15,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,3,
+        16,169,8,16,1,16,0,0,17,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,
+        30,32,0,4,1,0,26,28,1,0,22,25,1,0,18,19,1,0,20,21,175,0,37,1,0,0,
+        0,2,45,1,0,0,0,4,63,1,0,0,0,6,73,1,0,0,0,8,75,1,0,0,0,10,79,1,0,
+        0,0,12,87,1,0,0,0,14,93,1,0,0,0,16,103,1,0,0,0,18,105,1,0,0,0,20,
+        113,1,0,0,0,22,121,1,0,0,0,24,129,1,0,0,0,26,137,1,0,0,0,28,145,
+        1,0,0,0,30,156,1,0,0,0,32,168,1,0,0,0,34,36,5,1,0,0,35,34,1,0,0,
+        0,36,39,1,0,0,0,37,35,1,0,0,0,37,38,1,0,0,0,38,40,1,0,0,0,39,37,
+        1,0,0,0,40,41,5,2,0,0,41,42,3,2,1,0,42,43,5,3,0,0,43,44,5,0,0,1,
+        44,1,1,0,0,0,45,49,5,2,0,0,46,48,3,4,2,0,47,46,1,0,0,0,48,51,1,0,
+        0,0,49,47,1,0,0,0,49,50,1,0,0,0,50,52,1,0,0,0,51,49,1,0,0,0,52,53,
+        5,3,0,0,53,3,1,0,0,0,54,55,3,6,3,0,55,56,5,16,0,0,56,64,1,0,0,0,
+        57,58,3,8,4,0,58,59,5,16,0,0,59,64,1,0,0,0,60,64,3,10,5,0,61,64,
+        3,12,6,0,62,64,3,14,7,0,63,54,1,0,0,0,63,57,1,0,0,0,63,60,1,0,0,
+        0,63,61,1,0,0,0,63,62,1,0,0,0,64,5,1,0,0,0,65,66,5,6,0,0,66,74,5,
+        32,0,0,67,68,5,7,0,0,68,74,5,32,0,0,69,70,5,8,0,0,70,74,5,32,0,0,
+        71,72,5,9,0,0,72,74,5,32,0,0,73,65,1,0,0,0,73,67,1,0,0,0,73,69,1,
+        0,0,0,73,71,1,0,0,0,74,7,1,0,0,0,75,76,5,32,0,0,76,77,5,17,0,0,77,
+        78,3,16,8,0,78,9,1,0,0,0,79,80,5,4,0,0,80,81,5,14,0,0,81,82,3,16,
+        8,0,82,83,5,15,0,0,83,84,3,2,1,0,84,85,5,5,0,0,85,86,3,2,1,0,86,
+        11,1,0,0,0,87,88,5,11,0,0,88,89,5,14,0,0,89,90,3,16,8,0,90,91,5,
+        15,0,0,91,92,3,2,1,0,92,13,1,0,0,0,93,94,5,13,0,0,94,95,5,14,0,0,
+        95,96,3,8,4,0,96,97,5,16,0,0,97,98,3,16,8,0,98,99,5,16,0,0,99,100,
+        3,8,4,0,100,101,5,15,0,0,101,102,3,2,1,0,102,15,1,0,0,0,103,104,
+        3,18,9,0,104,17,1,0,0,0,105,110,3,20,10,0,106,107,5,30,0,0,107,109,
+        3,20,10,0,108,106,1,0,0,0,109,112,1,0,0,0,110,108,1,0,0,0,110,111,
+        1,0,0,0,111,19,1,0,0,0,112,110,1,0,0,0,113,118,3,22,11,0,114,115,
+        5,29,0,0,115,117,3,22,11,0,116,114,1,0,0,0,117,120,1,0,0,0,118,116,
+        1,0,0,0,118,119,1,0,0,0,119,21,1,0,0,0,120,118,1,0,0,0,121,126,3,
+        24,12,0,122,123,7,0,0,0,123,125,3,24,12,0,124,122,1,0,0,0,125,128,
+        1,0,0,0,126,124,1,0,0,0,126,127,1,0,0,0,127,23,1,0,0,0,128,126,1,
+        0,0,0,129,134,3,26,13,0,130,131,7,1,0,0,131,133,3,26,13,0,132,130,
+        1,0,0,0,133,136,1,0,0,0,134,132,1,0,0,0,134,135,1,0,0,0,135,25,1,
+        0,0,0,136,134,1,0,0,0,137,142,3,28,14,0,138,139,7,2,0,0,139,141,
+        3,28,14,0,140,138,1,0,0,0,141,144,1,0,0,0,142,140,1,0,0,0,142,143,
+        1,0,0,0,143,27,1,0,0,0,144,142,1,0,0,0,145,150,3,30,15,0,146,147,
+        7,3,0,0,147,149,3,30,15,0,148,146,1,0,0,0,149,152,1,0,0,0,150,148,
+        1,0,0,0,150,151,1,0,0,0,151,29,1,0,0,0,152,150,1,0,0,0,153,154,5,
+        31,0,0,154,157,3,30,15,0,155,157,3,32,16,0,156,153,1,0,0,0,156,155,
+        1,0,0,0,157,31,1,0,0,0,158,169,5,33,0,0,159,169,5,34,0,0,160,169,
+        5,35,0,0,161,169,5,10,0,0,162,169,5,12,0,0,163,169,5,32,0,0,164,
+        165,5,14,0,0,165,166,3,16,8,0,166,167,5,15,0,0,167,169,1,0,0,0,168,
+        158,1,0,0,0,168,159,1,0,0,0,168,160,1,0,0,0,168,161,1,0,0,0,168,
+        162,1,0,0,0,168,163,1,0,0,0,168,164,1,0,0,0,169,33,1,0,0,0,12,37,
+        49,63,73,110,118,126,134,142,150,156,168
     ]
 
 class Expresiones21Parser ( Parser ):
@@ -77,14 +81,15 @@ class Expresiones21Parser ( Parser ):
 
     literalNames = [ "<INVALID>", "'program {'", "'{'", "'}'", "'if'", "'else'", 
                      "'int'", "'float'", "'string'", "'bool'", "'true'", 
-                     "'while'", "'false'", "'('", "')'", "';'", "'='", "'+'", 
-                     "'-'", "'/'", "'*'", "'>='", "'<='", "'>'", "'<'", 
-                     "'=='", "'<>'", "'!='", "'&&'", "'||'", "'!'" ]
+                     "'while'", "'false'", "'for'", "'('", "')'", "';'", 
+                     "'='", "'+'", "'-'", "'/'", "'*'", "'>='", "'<='", 
+                     "'>'", "'<'", "'=='", "'<>'", "'!='", "'&&'", "'||'", 
+                     "'!'" ]
 
     symbolicNames = [ "<INVALID>", "INI", "INILLAVE", "FIN", "IF", "ELSE", 
                       "INT", "FLOAT", "STRING", "BOOL", "TRUE", "WHILE", 
-                      "FALSE", "PARENI", "PAREND", "SEMI", "ASSIGN", "SUM", 
-                      "REST", "DIV", "MUL", "MAYORIGUAL", "MENORIGUAL", 
+                      "FALSE", "FOR", "PARENI", "PAREND", "SEMI", "ASSIGN", 
+                      "SUM", "REST", "DIV", "MUL", "MAYORIGUAL", "MENORIGUAL", 
                       "MAYOR", "MENOR", "IGUAL", "NOIGUAL", "DIFF", "AND", 
                       "OR", "NOT", "VAR", "NUM", "FNUM", "STRVAL", "WS" ]
 
@@ -95,18 +100,19 @@ class Expresiones21Parser ( Parser ):
     RULE_asignacion = 4
     RULE_ifstm = 5
     RULE_whilestm = 6
-    RULE_expr = 7
-    RULE_logicalOr = 8
-    RULE_logicalAnd = 9
-    RULE_igualdad = 10
-    RULE_comparacion = 11
-    RULE_suma = 12
-    RULE_producto = 13
-    RULE_unario = 14
-    RULE_primario = 15
+    RULE_forstm = 7
+    RULE_expr = 8
+    RULE_logicalOr = 9
+    RULE_logicalAnd = 10
+    RULE_igualdad = 11
+    RULE_comparacion = 12
+    RULE_suma = 13
+    RULE_producto = 14
+    RULE_unario = 15
+    RULE_primario = 16
 
     ruleNames =  [ "root", "bloque", "statement", "varint", "asignacion", 
-                   "ifstm", "whilestm", "expr", "logicalOr", "logicalAnd", 
+                   "ifstm", "whilestm", "forstm", "expr", "logicalOr", "logicalAnd", 
                    "igualdad", "comparacion", "suma", "producto", "unario", 
                    "primario" ]
 
@@ -123,29 +129,30 @@ class Expresiones21Parser ( Parser ):
     TRUE=10
     WHILE=11
     FALSE=12
-    PARENI=13
-    PAREND=14
-    SEMI=15
-    ASSIGN=16
-    SUM=17
-    REST=18
-    DIV=19
-    MUL=20
-    MAYORIGUAL=21
-    MENORIGUAL=22
-    MAYOR=23
-    MENOR=24
-    IGUAL=25
-    NOIGUAL=26
-    DIFF=27
-    AND=28
-    OR=29
-    NOT=30
-    VAR=31
-    NUM=32
-    FNUM=33
-    STRVAL=34
-    WS=35
+    FOR=13
+    PARENI=14
+    PAREND=15
+    SEMI=16
+    ASSIGN=17
+    SUM=18
+    REST=19
+    DIV=20
+    MUL=21
+    MAYORIGUAL=22
+    MENORIGUAL=23
+    MAYOR=24
+    MENOR=25
+    IGUAL=26
+    NOIGUAL=27
+    DIFF=28
+    AND=29
+    OR=30
+    NOT=31
+    VAR=32
+    NUM=33
+    FNUM=34
+    STRVAL=35
+    WS=36
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -209,23 +216,23 @@ class Expresiones21Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 35
+            self.state = 37
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==1:
-                self.state = 32
+                self.state = 34
                 self.match(Expresiones21Parser.INI)
-                self.state = 37
+                self.state = 39
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 38
-            self.match(Expresiones21Parser.INILLAVE)
-            self.state = 39
-            self.bloque()
             self.state = 40
-            self.match(Expresiones21Parser.FIN)
+            self.match(Expresiones21Parser.INILLAVE)
             self.state = 41
+            self.bloque()
+            self.state = 42
+            self.match(Expresiones21Parser.FIN)
+            self.state = 43
             self.match(Expresiones21Parser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -283,19 +290,19 @@ class Expresiones21Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 43
+            self.state = 45
             self.match(Expresiones21Parser.INILLAVE)
-            self.state = 47
+            self.state = 49
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 2147486672) != 0):
-                self.state = 44
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 4294978512) != 0):
+                self.state = 46
                 self.statement()
-                self.state = 49
+                self.state = 51
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 50
+            self.state = 52
             self.match(Expresiones21Parser.FIN)
         except RecognitionException as re:
             localctx.exception = re
@@ -332,6 +339,10 @@ class Expresiones21Parser ( Parser ):
             return self.getTypedRuleContext(Expresiones21Parser.WhilestmContext,0)
 
 
+        def forstm(self):
+            return self.getTypedRuleContext(Expresiones21Parser.ForstmContext,0)
+
+
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_statement
 
@@ -357,32 +368,37 @@ class Expresiones21Parser ( Parser ):
         localctx = Expresiones21Parser.StatementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_statement)
         try:
-            self.state = 60
+            self.state = 63
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [6, 7, 8, 9]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 52
+                self.state = 54
                 self.varint()
-                self.state = 53
+                self.state = 55
                 self.match(Expresiones21Parser.SEMI)
                 pass
-            elif token in [31]:
+            elif token in [32]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 55
+                self.state = 57
                 self.asignacion()
-                self.state = 56
+                self.state = 58
                 self.match(Expresiones21Parser.SEMI)
                 pass
             elif token in [4]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 58
+                self.state = 60
                 self.ifstm()
                 pass
             elif token in [11]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 59
+                self.state = 61
                 self.whilestm()
+                pass
+            elif token in [13]:
+                self.enterOuterAlt(localctx, 5)
+                self.state = 62
+                self.forstm()
                 pass
             else:
                 raise NoViableAltException(self)
@@ -443,35 +459,35 @@ class Expresiones21Parser ( Parser ):
         localctx = Expresiones21Parser.VarintContext(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_varint)
         try:
-            self.state = 70
+            self.state = 73
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [6]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 62
+                self.state = 65
                 self.match(Expresiones21Parser.INT)
-                self.state = 63
+                self.state = 66
                 self.match(Expresiones21Parser.VAR)
                 pass
             elif token in [7]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 64
+                self.state = 67
                 self.match(Expresiones21Parser.FLOAT)
-                self.state = 65
+                self.state = 68
                 self.match(Expresiones21Parser.VAR)
                 pass
             elif token in [8]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 66
+                self.state = 69
                 self.match(Expresiones21Parser.STRING)
-                self.state = 67
+                self.state = 70
                 self.match(Expresiones21Parser.VAR)
                 pass
             elif token in [9]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 68
+                self.state = 71
                 self.match(Expresiones21Parser.BOOL)
-                self.state = 69
+                self.state = 72
                 self.match(Expresiones21Parser.VAR)
                 pass
             else:
@@ -529,11 +545,11 @@ class Expresiones21Parser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_asignacion)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 72
+            self.state = 75
             self.match(Expresiones21Parser.VAR)
-            self.state = 73
+            self.state = 76
             self.match(Expresiones21Parser.ASSIGN)
-            self.state = 74
+            self.state = 77
             self.expr()
         except RecognitionException as re:
             localctx.exception = re
@@ -600,20 +616,20 @@ class Expresiones21Parser ( Parser ):
         self.enterRule(localctx, 10, self.RULE_ifstm)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 76
-            self.match(Expresiones21Parser.IF)
-            self.state = 77
-            self.match(Expresiones21Parser.PARENI)
-            self.state = 78
-            self.expr()
             self.state = 79
-            self.match(Expresiones21Parser.PAREND)
+            self.match(Expresiones21Parser.IF)
             self.state = 80
+            self.match(Expresiones21Parser.PARENI)
+            self.state = 81
+            self.expr()
+            self.state = 82
+            self.match(Expresiones21Parser.PAREND)
+            self.state = 83
             self.bloque()
 
-            self.state = 81
+            self.state = 84
             self.match(Expresiones21Parser.ELSE)
-            self.state = 82
+            self.state = 85
             self.bloque()
         except RecognitionException as re:
             localctx.exception = re
@@ -674,15 +690,105 @@ class Expresiones21Parser ( Parser ):
         self.enterRule(localctx, 12, self.RULE_whilestm)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 84
-            self.match(Expresiones21Parser.WHILE)
-            self.state = 85
-            self.match(Expresiones21Parser.PARENI)
-            self.state = 86
-            self.expr()
             self.state = 87
-            self.match(Expresiones21Parser.PAREND)
+            self.match(Expresiones21Parser.WHILE)
             self.state = 88
+            self.match(Expresiones21Parser.PARENI)
+            self.state = 89
+            self.expr()
+            self.state = 90
+            self.match(Expresiones21Parser.PAREND)
+            self.state = 91
+            self.bloque()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ForstmContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def FOR(self):
+            return self.getToken(Expresiones21Parser.FOR, 0)
+
+        def PARENI(self):
+            return self.getToken(Expresiones21Parser.PARENI, 0)
+
+        def asignacion(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(Expresiones21Parser.AsignacionContext)
+            else:
+                return self.getTypedRuleContext(Expresiones21Parser.AsignacionContext,i)
+
+
+        def SEMI(self, i:int=None):
+            if i is None:
+                return self.getTokens(Expresiones21Parser.SEMI)
+            else:
+                return self.getToken(Expresiones21Parser.SEMI, i)
+
+        def expr(self):
+            return self.getTypedRuleContext(Expresiones21Parser.ExprContext,0)
+
+
+        def PAREND(self):
+            return self.getToken(Expresiones21Parser.PAREND, 0)
+
+        def bloque(self):
+            return self.getTypedRuleContext(Expresiones21Parser.BloqueContext,0)
+
+
+        def getRuleIndex(self):
+            return Expresiones21Parser.RULE_forstm
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterForstm" ):
+                listener.enterForstm(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitForstm" ):
+                listener.exitForstm(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitForstm" ):
+                return visitor.visitForstm(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def forstm(self):
+
+        localctx = Expresiones21Parser.ForstmContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 14, self.RULE_forstm)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 93
+            self.match(Expresiones21Parser.FOR)
+            self.state = 94
+            self.match(Expresiones21Parser.PARENI)
+            self.state = 95
+            self.asignacion()
+            self.state = 96
+            self.match(Expresiones21Parser.SEMI)
+            self.state = 97
+            self.expr()
+            self.state = 98
+            self.match(Expresiones21Parser.SEMI)
+            self.state = 99
+            self.asignacion()
+            self.state = 100
+            self.match(Expresiones21Parser.PAREND)
+            self.state = 101
             self.bloque()
         except RecognitionException as re:
             localctx.exception = re
@@ -727,10 +833,10 @@ class Expresiones21Parser ( Parser ):
     def expr(self):
 
         localctx = Expresiones21Parser.ExprContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_expr)
+        self.enterRule(localctx, 16, self.RULE_expr)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 90
+            self.state = 103
             self.logicalOr()
         except RecognitionException as re:
             localctx.exception = re
@@ -784,21 +890,21 @@ class Expresiones21Parser ( Parser ):
     def logicalOr(self):
 
         localctx = Expresiones21Parser.LogicalOrContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_logicalOr)
+        self.enterRule(localctx, 18, self.RULE_logicalOr)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 92
+            self.state = 105
             self.logicalAnd()
-            self.state = 97
+            self.state = 110
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==29:
-                self.state = 93
+            while _la==30:
+                self.state = 106
                 self.match(Expresiones21Parser.OR)
-                self.state = 94
+                self.state = 107
                 self.logicalAnd()
-                self.state = 99
+                self.state = 112
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -854,21 +960,21 @@ class Expresiones21Parser ( Parser ):
     def logicalAnd(self):
 
         localctx = Expresiones21Parser.LogicalAndContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_logicalAnd)
+        self.enterRule(localctx, 20, self.RULE_logicalAnd)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 100
+            self.state = 113
             self.igualdad()
-            self.state = 105
+            self.state = 118
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==28:
-                self.state = 101
+            while _la==29:
+                self.state = 114
                 self.match(Expresiones21Parser.AND)
-                self.state = 102
+                self.state = 115
                 self.igualdad()
-                self.state = 107
+                self.state = 120
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -936,26 +1042,26 @@ class Expresiones21Parser ( Parser ):
     def igualdad(self):
 
         localctx = Expresiones21Parser.IgualdadContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_igualdad)
+        self.enterRule(localctx, 22, self.RULE_igualdad)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 108
+            self.state = 121
             self.comparacion()
-            self.state = 113
+            self.state = 126
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 234881024) != 0):
-                self.state = 109
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 469762048) != 0):
+                self.state = 122
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 234881024) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 469762048) != 0)):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 110
+                self.state = 123
                 self.comparacion()
-                self.state = 115
+                self.state = 128
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1029,26 +1135,26 @@ class Expresiones21Parser ( Parser ):
     def comparacion(self):
 
         localctx = Expresiones21Parser.ComparacionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_comparacion)
+        self.enterRule(localctx, 24, self.RULE_comparacion)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 116
+            self.state = 129
             self.suma()
-            self.state = 121
+            self.state = 134
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 31457280) != 0):
-                self.state = 117
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 62914560) != 0):
+                self.state = 130
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 31457280) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 62914560) != 0)):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 118
+                self.state = 131
                 self.suma()
-                self.state = 123
+                self.state = 136
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1110,26 +1216,26 @@ class Expresiones21Parser ( Parser ):
     def suma(self):
 
         localctx = Expresiones21Parser.SumaContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_suma)
+        self.enterRule(localctx, 26, self.RULE_suma)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 124
+            self.state = 137
             self.producto()
-            self.state = 129
+            self.state = 142
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==17 or _la==18:
-                self.state = 125
+            while _la==18 or _la==19:
+                self.state = 138
                 _la = self._input.LA(1)
-                if not(_la==17 or _la==18):
+                if not(_la==18 or _la==19):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 126
+                self.state = 139
                 self.producto()
-                self.state = 131
+                self.state = 144
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1191,26 +1297,26 @@ class Expresiones21Parser ( Parser ):
     def producto(self):
 
         localctx = Expresiones21Parser.ProductoContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_producto)
+        self.enterRule(localctx, 28, self.RULE_producto)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 132
+            self.state = 145
             self.unario()
-            self.state = 137
+            self.state = 150
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==19 or _la==20:
-                self.state = 133
+            while _la==20 or _la==21:
+                self.state = 146
                 _la = self._input.LA(1)
-                if not(_la==19 or _la==20):
+                if not(_la==20 or _la==21):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 134
+                self.state = 147
                 self.unario()
-                self.state = 139
+                self.state = 152
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1264,21 +1370,21 @@ class Expresiones21Parser ( Parser ):
     def unario(self):
 
         localctx = Expresiones21Parser.UnarioContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_unario)
+        self.enterRule(localctx, 30, self.RULE_unario)
         try:
-            self.state = 143
+            self.state = 156
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [30]:
+            if token in [31]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 140
+                self.state = 153
                 self.match(Expresiones21Parser.NOT)
-                self.state = 141
+                self.state = 154
                 self.unario()
                 pass
-            elif token in [10, 12, 13, 31, 32, 33, 34]:
+            elif token in [10, 12, 14, 32, 33, 34, 35]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 142
+                self.state = 155
                 self.primario()
                 pass
             else:
@@ -1351,48 +1457,48 @@ class Expresiones21Parser ( Parser ):
     def primario(self):
 
         localctx = Expresiones21Parser.PrimarioContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 30, self.RULE_primario)
+        self.enterRule(localctx, 32, self.RULE_primario)
         try:
-            self.state = 155
+            self.state = 168
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [32]:
+            if token in [33]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 145
+                self.state = 158
                 self.match(Expresiones21Parser.NUM)
                 pass
-            elif token in [33]:
+            elif token in [34]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 146
+                self.state = 159
                 self.match(Expresiones21Parser.FNUM)
                 pass
-            elif token in [34]:
+            elif token in [35]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 147
+                self.state = 160
                 self.match(Expresiones21Parser.STRVAL)
                 pass
             elif token in [10]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 148
+                self.state = 161
                 self.match(Expresiones21Parser.TRUE)
                 pass
             elif token in [12]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 149
+                self.state = 162
                 self.match(Expresiones21Parser.FALSE)
                 pass
-            elif token in [31]:
+            elif token in [32]:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 150
+                self.state = 163
                 self.match(Expresiones21Parser.VAR)
                 pass
-            elif token in [13]:
+            elif token in [14]:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 151
+                self.state = 164
                 self.match(Expresiones21Parser.PARENI)
-                self.state = 152
+                self.state = 165
                 self.expr()
-                self.state = 153
+                self.state = 166
                 self.match(Expresiones21Parser.PAREND)
                 pass
             else:
