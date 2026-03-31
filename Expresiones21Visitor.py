@@ -49,6 +49,36 @@ class Expresiones21Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by Expresiones21Parser#tipodato.
+    def visitTipodato(self, ctx:Expresiones21Parser.TipodatoContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by Expresiones21Parser#parametro.
+    def visitParametro(self, ctx:Expresiones21Parser.ParametroContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by Expresiones21Parser#parametros.
+    def visitParametros(self, ctx:Expresiones21Parser.ParametrosContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by Expresiones21Parser#funcion.
+    def visitFuncion(self, ctx:Expresiones21Parser.FuncionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by Expresiones21Parser#returnstm.
+    def visitReturnstm(self, ctx:Expresiones21Parser.ReturnstmContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by Expresiones21Parser#llamada.
+    def visitLlamada(self, ctx:Expresiones21Parser.LlamadaContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by Expresiones21Parser#expr.
     def visitExpr(self, ctx:Expresiones21Parser.ExprContext):
         return self.visitChildren(ctx)

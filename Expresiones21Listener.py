@@ -80,6 +80,60 @@ class Expresiones21Listener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by Expresiones21Parser#tipodato.
+    def enterTipodato(self, ctx:Expresiones21Parser.TipodatoContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#tipodato.
+    def exitTipodato(self, ctx:Expresiones21Parser.TipodatoContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#parametro.
+    def enterParametro(self, ctx:Expresiones21Parser.ParametroContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#parametro.
+    def exitParametro(self, ctx:Expresiones21Parser.ParametroContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#parametros.
+    def enterParametros(self, ctx:Expresiones21Parser.ParametrosContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#parametros.
+    def exitParametros(self, ctx:Expresiones21Parser.ParametrosContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#funcion.
+    def enterFuncion(self, ctx:Expresiones21Parser.FuncionContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#funcion.
+    def exitFuncion(self, ctx:Expresiones21Parser.FuncionContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#returnstm.
+    def enterReturnstm(self, ctx:Expresiones21Parser.ReturnstmContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#returnstm.
+    def exitReturnstm(self, ctx:Expresiones21Parser.ReturnstmContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#llamada.
+    def enterLlamada(self, ctx:Expresiones21Parser.LlamadaContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#llamada.
+    def exitLlamada(self, ctx:Expresiones21Parser.LlamadaContext):
+        pass
+
+
     # Enter a parse tree produced by Expresiones21Parser#expr.
     def enterExpr(self, ctx:Expresiones21Parser.ExprContext):
         pass

@@ -1,11 +1,11 @@
 grammar Expresiones21;
 
 //root o relga inicial 
-root : INI* INILLAVE bloque FIN EOF;
+root : INI* INILLAVE funcion* bloque FIN EOF;
 
 bloque: INILLAVE statement* FIN ; 
 
-statement: varint SEMI | asignacion SEMI | ifstm | whilestm | forstm;
+statement: varint SEMI | asignacion SEMI | ifstm | whilestm | forstm | returnstm | llamada SEMI;
 
 // declaracion de variables 
 varint: INT VAR | FLOAT VAR | STRING VAR | BOOL VAR;  //variables tipo int y float
@@ -14,6 +14,16 @@ asignacion : VAR ASSIGN expr;  // instruccion de asignacion
 ifstm: IF PARENI expr PAREND bloque(ELSE bloque); // instruccion de if 
 whilestm: WHILE PARENI expr PAREND bloque; // instruccion de while
 forstm: FOR PARENI asignacion SEMI expr SEMI asignacion PAREND bloque; // regla del for
+
+tipodato: INT | FLOAT | STRING | BOOL | VOID; 
+
+parametro: tipodato VAR;
+parametros: parametro (COMMA parametro)*;
+
+funcion: tipodato VAR PARENI parametros? PAREND bloque;
+
+returnstm: RETURN expr SEMI;
+llamada: VAR PARENI (expr (COMMA expr)*)? PAREND;
 
 //reglas principales de expresiones 
 //definimos que todas las expresiones empiezan evaluando operadores OR.
@@ -60,6 +70,9 @@ TRUE : 'true';
 WHILE : 'while';
 FALSE : 'false';
 FOR : 'for';
+VOID : 'void';
+RETURN : 'return';
+COMMA : ',';
 PARENI: '(';
 PAREND: ')';
 SEMI: ';';
