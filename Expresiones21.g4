@@ -5,7 +5,7 @@ root : INI* INILLAVE funcion* bloque FIN EOF;
 
 bloque: INILLAVE statement* FIN ; 
 
-statement: varint SEMI | asignacion SEMI | ifstm | whilestm | forstm | returnstm | llamada SEMI;
+statement: varint SEMI | asignacion SEMI | ifstm | whilestm | forstm | returnstm | llamada SEMI | printstm;
 
 // declaracion de variables 
 varint: INT VAR | FLOAT VAR | STRING VAR | BOOL VAR;  //variables tipo int y float
@@ -24,6 +24,8 @@ funcion: tipodato VAR PARENI parametros? PAREND bloque;
 
 returnstm: RETURN expr SEMI;
 llamada: VAR PARENI (expr (COMMA expr)*)? PAREND;
+
+printstm: PRINT PARENI expr PAREND SEMI;
 
 //reglas principales de expresiones 
 //definimos que todas las expresiones empiezan evaluando operadores OR.
@@ -73,6 +75,7 @@ FOR : 'for';
 VOID : 'void';
 RETURN : 'return';
 COMMA : ',';
+PRINT : 'print';
 PARENI: '(';
 PAREND: ')';
 SEMI: ';';
