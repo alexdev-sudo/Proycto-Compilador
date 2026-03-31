@@ -103,7 +103,7 @@ class Expresiones21Parser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'program {'", "'{'", "'}'", "'if'", "'else'", 
+    literalNames = [ "<INVALID>", "'program'", "'{'", "'}'", "'if'", "'else'", 
                      "'int'", "'float'", "'string'", "'bool'", "'true'", 
                      "'while'", "'false'", "'for'", "'void'", "'return'", 
                      "','", "'print'", "'('", "')'", "';'", "'='", "'+'", 

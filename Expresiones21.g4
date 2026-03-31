@@ -59,7 +59,7 @@ primario: NUM| FNUM | STRVAL | TRUE | FALSE | VAR|PARENI expr PAREND;
 
 
 // tokens 
-INI : 'program {';
+INI : 'program';
 INILLAVE : '{';
 FIN : '}';
 IF : 'if';
