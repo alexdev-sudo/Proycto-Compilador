@@ -39,6 +39,21 @@ class EvalVisitor(Expresiones21Visitor):
         if ctx.ifstm():
             return self.visit(ctx.ifstm())
 
+        if ctx.whilestm():
+            return self.visit(ctx.whilestm())
+
+        if ctx.forstm():
+            return self.visit(ctx.forstm())
+
+        if ctx.printstm():
+            return self.visit(ctx.printstm())
+
+        if ctx.returnstm():
+            return self.visit(ctx.returnstm())
+
+        if ctx.llamada():
+            return self.visit(ctx.llamada())
+
 
 # ==============================
 # VARIABLES
@@ -49,7 +64,14 @@ class EvalVisitor(Expresiones21Visitor):
         nombre = ctx.VAR().getText()
 
         if nombre not in self.memory:
-            self.memory[nombre] = 0
+            if ctx.INT():
+                self.memory[nombre] = 0
+            elif ctx.FLOAT():
+                self.memory[nombre] = 0.0
+            elif ctx.STRING():
+                self.memory[nombre] = ""
+            elif ctx.BOOL():
+                self.memory[nombre] = False
 
 
     def visitAsignacion(self, ctx):
@@ -76,6 +98,39 @@ class EvalVisitor(Expresiones21Visitor):
         else:
             if ctx.ELSE():
                 self.visit(ctx.bloque(1))
+
+
+# ==============================
+# WHILE
+# ==============================
+
+    def visitWhilestm(self, ctx):
+
+        while self.visit(ctx.expr()):
+            self.visit(ctx.bloque())
+
+
+# ==============================
+# FOR
+# ==============================
+
+    def visitForstm(self, ctx):
+
+        self.visit(ctx.asignacion(0))
+
+        while self.visit(ctx.expr()):
+            self.visit(ctx.bloque())
+            self.visit(ctx.asignacion(1))
+
+
+# ==============================
+# PRINT
+# ==============================
+
+    def visitPrintstm(self, ctx):
+
+        valor = self.visit(ctx.expr())
+        print(valor)
 
 
 # ==============================
@@ -211,6 +266,18 @@ class EvalVisitor(Expresiones21Visitor):
         if ctx.NUM():
             return int(ctx.NUM().getText())
 
+        if ctx.FNUM():
+            return float(ctx.FNUM().getText())
+
+        if ctx.STRVAL():
+            return ctx.STRVAL().getText()[1:-1]  # quita las comillas
+
+        if ctx.TRUE():
+            return True
+
+        if ctx.FALSE():
+            return False
+
         if ctx.VAR():
             nombre = ctx.VAR().getText()
             return self.memory.get(nombre, 0)
@@ -235,7 +302,10 @@ def imprimir_arbol(tree, parser):
 
 def main():
 
-    input_stream = FileStream("entradas Expr.txt")
+    if len(sys.argv) > 1:
+        input_stream = FileStream(sys.argv[1])
+    else:
+        input_stream = FileStream("entradas Programa.txt")
 
     lexer = Expresiones21Lexer(input_stream)
 
