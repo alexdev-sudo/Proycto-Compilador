@@ -5,13 +5,14 @@ root : INI* INILLAVE bloque FIN EOF;
 
 bloque: INILLAVE statement* FIN ; 
 
-statement: varint SEMI | asignacion SEMI|ifstm;
+statement: varint SEMI | asignacion SEMI | ifstm | whilestm;
 
 // declaracion de variables 
 varint: INT VAR | FLOAT VAR | STRING VAR | BOOL VAR;  //variables tipo int y float
 asignacion : VAR ASSIGN expr;  // instruccion de asignacion 
 
 ifstm: IF PARENI expr PAREND bloque(ELSE bloque); // instruccion de if 
+whilestm: WHILE PARENI expr PAREND bloque; // instruccion de while
 
 //reglas principales de expresiones 
 //definimos que todas las expresiones empiezan evaluando operadores OR.
@@ -55,6 +56,7 @@ FLOAT : 'float';
 STRING : 'string';
 BOOL : 'bool';
 TRUE : 'true';
+WHILE : 'while';
 FALSE : 'false';
 PARENI: '(';
 PAREND: ')';

@@ -62,6 +62,15 @@ class Expresiones21Listener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by Expresiones21Parser#whilestm.
+    def enterWhilestm(self, ctx:Expresiones21Parser.WhilestmContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#whilestm.
+    def exitWhilestm(self, ctx:Expresiones21Parser.WhilestmContext):
+        pass
+
+
     # Enter a parse tree produced by Expresiones21Parser#expr.
     def enterExpr(self, ctx:Expresiones21Parser.ExprContext):
         pass
