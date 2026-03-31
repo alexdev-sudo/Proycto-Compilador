@@ -1,12 +1,33 @@
- {
-int num1;
-int num2;
-int num3;    
-num1=25;
-num3=50;
-if (num1>20 && num3<100)
+program {
 {
-    num2=num1+5;
-} else {
-    num2=num1+6;
-}}
+    int x;
+    float pi;
+    string mensaje;
+    bool activo;
+
+    x = 10;
+    pi = 3.14;
+    mensaje = "Hola mundo";
+    activo = true;
+
+    print(x);
+    print(pi);
+    print(mensaje);
+    print(activo);
+
+    while (x > 0) {
+        x = x - 1;
+        print(x);
+    }
+
+    for (x = 0; x < 5; x = x + 1) {
+        print(x);
+    }
+
+    if (activo == true) {
+        print("activo es verdadero");
+    } else {
+        print("activo es falso");
+    }
+}
+}
