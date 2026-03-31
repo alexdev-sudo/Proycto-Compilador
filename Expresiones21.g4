@@ -8,7 +8,7 @@ bloque: INILLAVE statement* FIN ;
 statement: varint SEMI | asignacion SEMI|ifstm;
 
 // declaracion de variables 
-varint: INT VAR;  //variables tipo int 
+varint: INT VAR | FLOAT VAR;  //variables tipo int y float
 asignacion : VAR ASSIGN expr;  // instruccion de asignacion 
 
 ifstm: IF PARENI expr PAREND bloque(ELSE bloque); // instruccion de if 
@@ -41,7 +41,7 @@ producto: unario((MUL|DIV)unario)*;
 unario: NOT unario | primario;
 
 // expresiones primarios numero variables expresion entre parentesis 
-primario: NUM|VAR|PARENI expr PAREND;
+primario: NUM| FNUM | VAR|PARENI expr PAREND;
 
 
 // tokens 
@@ -51,6 +51,8 @@ FIN : '}';
 IF : 'if';
 ELSE : 'else';
 INT : 'int';
+FLOAT : 'float';
+
 PARENI: '(';
 PAREND: ')';
 SEMI: ';';
@@ -73,4 +75,5 @@ NOT: '!';
 
 VAR : [a-zA-Z][a-zA-Z0-9]*;
 NUM: [0-9]+;
+FNUM: [0-9]+ '.' [0-9]+;
 WS : [ \t\r\n]+ -> skip;
