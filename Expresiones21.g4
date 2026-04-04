@@ -1,9 +1,13 @@
 grammar Expresiones21;
 
 //root o relga inicial 
-root: INI* INILLAVE bloque FIN EOF;
+root
+      : expr EOF  #exprInput
+      |programa EOF #progInput
+      ;  
+programa: INI* INILLAVE bloque FIN ;
 
-bloque: INILLAVE statement* FIN ; 
+bloque:  statement*  ; 
 
 statement: varint SEMI | asignacion SEMI | ifstm | whilestm | forstm | returnstm | llamada SEMI | printstm | funcion;
 
@@ -11,7 +15,7 @@ statement: varint SEMI | asignacion SEMI | ifstm | whilestm | forstm | returnstm
 varint: INT VAR | FLOAT VAR | STRING VAR | BOOL VAR;  //variables tipo int y float
 asignacion : VAR ASSIGN expr;  // instruccion de asignacion 
 
-ifstm: IF PARENI expr PAREND bloque(ELSE bloque); // instruccion de if 
+ifstm: IF PARENI expr PAREND bloque(ELSE bloque)?; // instruccion de if 
 whilestm: WHILE PARENI expr PAREND bloque; // instruccion de while
 forstm: FOR PARENI asignacion SEMI expr SEMI asignacion PAREND bloque; // regla del for
 
@@ -55,7 +59,8 @@ producto: unario((MUL|DIV)unario)*;
 unario: NOT unario | primario;
 
 // expresiones primarios numero variables expresion entre parentesis 
-primario: NUM| FNUM | STRVAL | TRUE | FALSE | VAR|PARENI expr PAREND;
+primario
+: llamada|VAR | NUM| FNUM | STRVAL | TRUE | FALSE | PARENI expr PAREND;
 
 
 // tokens 
