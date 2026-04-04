@@ -1,33 +1,12 @@
 program {
 {
-    int x;
-    float pi;
-    string mensaje;
-    bool activo;
+int suma(int a) {
+    return a + 5;
+}
 
-    x = 10;
-    pi = 3.14;
-    mensaje = "Hola mundo";
-    activo = true;
+int x;
+x = 3;
 
-    print(x);
-    print(pi);
-    print(mensaje);
-    print(activo);
-
-    while (x > 0) {
-        x = x - 1;
-        print(x);
-    }
-
-    for (x = 0; x < 5; x = x + 1) {
-        print(x);
-    }
-
-    if (activo == true) {
-        print("activo es verdadero");
-    } else {
-        print("activo es falso");
-    }
+print(suma(x));
 }
 }
