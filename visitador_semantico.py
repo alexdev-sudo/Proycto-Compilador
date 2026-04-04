@@ -1,7 +1,12 @@
 from Expresiones21Visitor import Expresiones21Visitor
 from tabla_simbolos import TablaSibolos
-
+from Expresiones21Parser import Expresiones21Parser
 class semanticVisitor(Expresiones21Visitor):
+    def visitExprInput(self, ctx):
+        return self.visit(ctx.expr())
+
+    def visitProgInput(self, ctx):
+        return self.visit(ctx.programa())
 
     def __init__(self):
         self.tabla_simbolos = TablaSibolos()
@@ -42,6 +47,8 @@ class semanticVisitor(Expresiones21Visitor):
 # Expresiones
     def visitPrimario(self, ctx):
         
+        if ctx.llamada():
+            return self.visit(ctx.llamada())
         if ctx.NUM():
             return 'int'
         if ctx.FNUM():
@@ -50,7 +57,7 @@ class semanticVisitor(Expresiones21Visitor):
             return 'string'
         if ctx.TRUE() or ctx.FALSE():
             return 'bool'
-        if ctx.VAR():
+        if ctx.VAR():            
             try:
                 return self.tabla_simbolos.lookup(ctx.VAR().getText())
             except Exception as e:
@@ -99,8 +106,8 @@ class semanticVisitor(Expresiones21Visitor):
     # =========================
 
     def visitBloque(self, ctx):
-        # solo crea un nuevo scope si No es el global (root)
-        is_global = len(self.tabla_simbolos.Scopes) == 1
+        # verifica si el padre es ''programa'' para no crear un scope global adicional
+        is_global = isinstance(ctx.parentCtx, Expresiones21Parser.ProgramaContext)
 
         if not is_global:
             self.tabla_simbolos.push()
@@ -128,7 +135,7 @@ class semanticVisitor(Expresiones21Visitor):
         if len(args) != len(func["params"]):
             self.error("Cantidad incorrecta de argumentos", ctx)
 
-        return func["return"]
+        return func["return_type"]
     def visitReturnstm(self, ctx):
         expr_type = self.visit(ctx.expr())
         if self.current_function and expr_type != self.current_function:

@@ -9,6 +9,12 @@ class ReturnValue(Exception):
 
 class EvalVisitor(Expresiones21Visitor):
 
+    def visitExprInput(self, ctx):
+        return self.visit(ctx.expr())
+
+    def visitProgInput(self, ctx):
+        return self.visit(ctx.programa())
+
     def __init__(self):
         self.memory = [{}]
         self.funtions = {}
