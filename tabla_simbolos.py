@@ -36,8 +36,7 @@ class TablaSibolos:
             'kind': 'function',
             'return_type': return_type,
             'params': params,
-            'ctx': ctx
-        }  # Guardamos el contexto para reportar errores semánticos
+            'ctx': ctx}  # Guardamos el contexto para reportar errores semánticos
 
     def get_function(self, name):
         if name in self.Scopes[0]:
