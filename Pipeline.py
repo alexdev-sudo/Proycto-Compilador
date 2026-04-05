@@ -12,7 +12,7 @@ from custom_errors import LexerErrorListener
 def main():
 
     input_file = sys.argv[1] if len(sys.argv) > 1 else "entradas Expr.txt"
-    input_stream = FileStream(input_file)
+    input_stream = FileStream(input_file, encoding='utf-8')
     print("\n ----- Analisis lexico---------")
 
     #Lexer--------------------------------- 

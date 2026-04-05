@@ -1,12 +1,19 @@
 program {
-    int x;
-    x = 10;
+    int x = 10;
+    string prefijo = "El resultado es: ";
 
-    if (x > 5) {
-        int y;
-        y = 100;
-        print(y);
+    int factorial(int n) {
+        if (n <= 1) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
     }
 
-    print(x);
+    while (x > 0) {
+        int temp = factorial(x);
+        print(prefijo);
+        print(temp);
+        x = x - 2;
+    }
 }
