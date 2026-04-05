@@ -142,3 +142,6 @@ class semanticVisitor(Expresiones21Visitor):
             self.error(f"Tipo de retorno incorrecto: se esperaba '{self.current_function}' pero se obtuvo '{expr_type}'", ctx)
             
         return expr_type
+    
+    def visitPrintstm(self, ctx):
+        return self.visit(ctx.expr())
