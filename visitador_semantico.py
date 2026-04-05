@@ -22,13 +22,20 @@ class semanticVisitor(Expresiones21Visitor):
  #variables 
 
     def visitVarint(self, ctx):
-        name = ctx.VAR().getText()  # nombre de la variable
-        tipo = ctx.getChild(0).getText()  # tipo de dato (int, float, etc.)
+        name = ctx.VAR().getText()
+        tipo = ctx.getChild(0).getText()
 
-        try: 
-            self.tabla_simbolos.declare(name,tipo)
+        try:
+            self.tabla_simbolos.declare(name, tipo)
         except Exception as e:
             self.error(str(e), ctx)
+
+        # Valida asignacion si existe
+        if ctx.expr():
+            expr_type = self.visit(ctx.expr())
+
+            if expr_type != tipo:
+                self.error(f"Tipo incompatible: no se puede asignar '{expr_type}' a '{tipo}'", ctx)
           
 
 #Asignaciones 
