@@ -23,11 +23,12 @@ def imprimir_arbol(tree, parser):
 # ==============================
 
 def main():
+    DEBUG = False # cambiamos a false para quitar los prints de debug
 
     if len(sys.argv) > 1:
         input_stream = FileStream(sys.argv[1])
     else:
-        input_stream = FileStream("entradas Programa.txt")
+        input_stream = FileStream("entradas Expr.txt")
 
 
      # lexer
@@ -39,17 +40,23 @@ def main():
     parser = Expresiones21Parser(token_stream)
 
     tree = parser.root()
-
-    imprimir_arbol(tree, parser)
+    if DEBUG:
+        imprimir_arbol(tree, parser)
     #Interpretar
     visitor = EvalVisitor()
 
-    visitor.visit(tree)
+    visitor.visitProgInput(tree)
 
-    print("\n=== MEMORIA FINAL ===")
+    if DEBUG:
+        print("scopes:", visitor.scopes)
 
-    for var, val in visitor.memory.items():
-        print(var, "=", val)
+
+    if DEBUG:
+
+        print("\n=== MEMORIA FINAL ===")
+    #imprimir solo el scope global
+        for var, val in visitor.scopes[0].items():
+            print(var, "=", val)
 
 
 if __name__ == "__main__":
