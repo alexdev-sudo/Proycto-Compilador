@@ -5,9 +5,9 @@ root
       : expr EOF  #exprInput
       |programa EOF #progInput
       ;  
-programa: INI* INILLAVE bloque FIN ;
+programa: INI  bloque  #programaRule;
 
-bloque:  statement*  ; 
+bloque: INILLAVE statement* FIN ; 
 
 statement: varint SEMI | asignacion SEMI | ifstm | whilestm | forstm | returnstm | llamada SEMI | printstm | funcion;
 
