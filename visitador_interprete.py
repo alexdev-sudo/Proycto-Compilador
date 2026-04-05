@@ -1,4 +1,4 @@
-
+from Expresiones21Parser import Expresiones21Parser
 from Expresiones21Visitor import Expresiones21Visitor
 # ==============================
 # Visitor para evaluar programa
@@ -9,64 +9,47 @@ class ReturnValue(Exception):
 
 class EvalVisitor(Expresiones21Visitor):
 
+    def visitProgInput(self, ctx):
+        programa_ctx = ctx.getChild(0)  # asumiendo que el programa es el primer hijo
+        return self.visit(programa_ctx)
+
     def visitExprInput(self, ctx):
         return self.visit(ctx.expr())
-
-    def visitProgInput(self, ctx):
-        return self.visit(ctx.programa())
+    
+    
+    
 
     def __init__(self):
-        self.memory = [{}]
-        self.funtions = {}
+        self.scopes = [{}]
+        self.functions = {}
 
 
 # ==============================
 # PROGRAMA
 # ==============================
-
-    def visitRoot(self, ctx):
+   
+    
+    def visitProgramaRule(self, ctx):
+       
         return self.visit(ctx.bloque())
+        
 
 
     def visitBloque(self, ctx):
+       
 
-        is_global = len(self.scopes) == 1
+        is_program_block = isinstance(ctx.parentCtx, Expresiones21Parser.ProgramaContext)
 
-        if not is_global:
+
+        if not is_program_block:
             self.push()
 
         for stmt in ctx.statement():
             self.visit(stmt)
 
-        if not is_global:
+        if not is_program_block:
             self.pop()
-
-
-    def visitStatement(self, ctx):
-
-        if ctx.varint():
-            return self.visit(ctx.varint())
-
-        if ctx.asignacion():
-            return self.visit(ctx.asignacion())
-
-        if ctx.ifstm():
-            return self.visit(ctx.ifstm())
-
-        if ctx.whilestm():
-            return self.visit(ctx.whilestm())
-
-        if ctx.forstm():
-            return self.visit(ctx.forstm())
-
-        if ctx.printstm():
-            return self.visit(ctx.printstm())
-
-        if ctx.returnstm():
-            self.visit(ctx.returnstm())
-
-        if ctx.llamada():
-            return self.visit(ctx.llamada())
+    
 
 
 # ==============================
@@ -141,7 +124,7 @@ class EvalVisitor(Expresiones21Visitor):
 # ==============================
 
     def visitPrintstm(self, ctx):
-
+           
         valor = self.visit(ctx.expr())
         print(valor)
 
@@ -275,7 +258,9 @@ class EvalVisitor(Expresiones21Visitor):
 # ==============================
 
     def visitPrimario(self, ctx):
-
+         
+        if ctx.llamada():
+            return self.visit(ctx.llamada())
         if ctx.NUM():
             return int(ctx.NUM().getText())
 
@@ -323,9 +308,10 @@ class EvalVisitor(Expresiones21Visitor):
     def visitReturnstm(self, ctx):
         value = self.visit(ctx.expr())
         raise ReturnValue(value) 
+    
     def visitFuncion(self, ctx):
         name = ctx.VAR().getText()
-        self.funtions[name] = ctx 
+        self.functions[name] = ctx 
 
     def visitLlamada(self, ctx):
 
