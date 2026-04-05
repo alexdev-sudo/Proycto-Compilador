@@ -60,14 +60,24 @@ class EvalVisitor(Expresiones21Visitor):
 
         nombre = ctx.VAR().getText()
 
-        if ctx.INT():
-            self.scopes[-1][nombre] = 0
-        elif ctx.FLOAT():
-            self.scopes[-1][nombre] = 0.0
-        elif ctx.STRING():
-            self.scopes[-1][nombre] = ""
-        elif ctx.BOOL():
-            self.scopes[-1][nombre] = False
+        # valor por defecto segun tipo
+        tipo = ctx.getChild(0).getText()
+
+        if tipo == "int":
+            valor = 0
+        elif tipo == "float":
+            valor = 0.0
+        elif tipo == "string":
+            valor = ""
+        elif tipo == "bool":
+            valor = False
+
+        # si hay asignación
+        if ctx.expr():
+            valor = self.visit(ctx.expr())
+
+        # declarar variable en el scope actual
+        self.scopes[-1][nombre] = valor
 
 
     def visitAsignacion(self, ctx):
