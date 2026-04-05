@@ -9,8 +9,18 @@ else:
 
 class Expresiones21Visitor(ParseTreeVisitor):
 
-    # Visit a parse tree produced by Expresiones21Parser#root.
-    def visitRoot(self, ctx:Expresiones21Parser.RootContext):
+    # Visit a parse tree produced by Expresiones21Parser#exprInput.
+    def visitExprInput(self, ctx:Expresiones21Parser.ExprInputContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by Expresiones21Parser#progInput.
+    def visitProgInput(self, ctx:Expresiones21Parser.ProgInputContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by Expresiones21Parser#programaRule.
+    def visitProgramaRule(self, ctx:Expresiones21Parser.ProgramaRuleContext):
         return self.visitChildren(ctx)
 
 

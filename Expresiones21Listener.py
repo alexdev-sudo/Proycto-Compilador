@@ -1,4 +1,4 @@
-# Generated from Expresiones21.g4 by ANTLR 4.13.2
+# Generated from Expresiones21.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .Expresiones21Parser import Expresiones21Parser
@@ -8,12 +8,30 @@ else:
 # This class defines a complete listener for a parse tree produced by Expresiones21Parser.
 class Expresiones21Listener(ParseTreeListener):
 
-    # Enter a parse tree produced by Expresiones21Parser#root.
-    def enterRoot(self, ctx:Expresiones21Parser.RootContext):
+    # Enter a parse tree produced by Expresiones21Parser#exprInput.
+    def enterExprInput(self, ctx:Expresiones21Parser.ExprInputContext):
         pass
 
-    # Exit a parse tree produced by Expresiones21Parser#root.
-    def exitRoot(self, ctx:Expresiones21Parser.RootContext):
+    # Exit a parse tree produced by Expresiones21Parser#exprInput.
+    def exitExprInput(self, ctx:Expresiones21Parser.ExprInputContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#progInput.
+    def enterProgInput(self, ctx:Expresiones21Parser.ProgInputContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#progInput.
+    def exitProgInput(self, ctx:Expresiones21Parser.ProgInputContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#programaRule.
+    def enterProgramaRule(self, ctx:Expresiones21Parser.ProgramaRuleContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#programaRule.
+    def exitProgramaRule(self, ctx:Expresiones21Parser.ProgramaRuleContext):
         pass
 
 

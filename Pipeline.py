@@ -42,7 +42,9 @@ def main():
     
     #Interpretar
     interpreter = EvalVisitor()
+    print("\n=== iniciando interpretación ===")
     interpreter.visit(tree)
+    print("\n=== interpretación finalizada ===")
 
 if __name__ == "__main__":
     main()

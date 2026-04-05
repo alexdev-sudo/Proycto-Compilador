@@ -1,12 +1,12 @@
 program {
-{
-int suma(int a) {
-    return a + 5;
-}
+    int x;
+    x = 10;
 
-int x;
-x = 3;
+    if (x > 5) {
+        int y;
+        y = 100;
+        print(y);
+    }
 
-print(suma(x));
-}
+    print(x);
 }
