@@ -145,3 +145,12 @@ class semanticVisitor(Expresiones21Visitor):
     
     def visitPrintstm(self, ctx):
         return self.visit(ctx.expr())
+    
+    def visitSuma(self, ctx):
+        left = self.visit(ctx.producto(0))
+
+        for i in range(1, len(ctx.producto())):
+            right = self.visit(ctx.producto(i))
+            if left != right:
+                self.error(f"Tipos incompatibles en operacion arimetica: '{left}' y '{right}'", ctx)
+        return left
