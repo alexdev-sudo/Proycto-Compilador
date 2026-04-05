@@ -7,6 +7,7 @@ from Expresiones21Parser import Expresiones21Parser
 from custom_errors import CustomErrorListener
 from visitador_semantico import semanticVisitor
 from visitador_interprete import EvalVisitor
+from custom_errors import LexerErrorListener
 
 def main():
 
@@ -17,33 +18,32 @@ def main():
     #Lexer--------------------------------- 
 
     lexer = Expresiones21Lexer(input_stream)
-    # Error lexico
-    error_listener = CustomErrorListener()
+    lexer_listener = LexerErrorListener()
     lexer.removeErrorListeners()
-    lexer.addErrorListener(error_listener)  
-
+    lexer.addErrorListener(lexer_listener)
     
     token_stream = CommonTokenStream(lexer)
     token_stream.fill()
 
-    if error_listener.errors:
-        for e in error_listener.errors:
+    if lexer_listener.errors:
+        for e in lexer_listener.errors:
             print(e)
         print("\n Error en Fase Lexica, Pipeline detendo ")    
         return
     print("Lexico correcto, iniciando fase sintactica")
 
-    #Parser-----------------------------------
+    # Fase sintacitca Parser-----------------------------
+    
     parser = Expresiones21Parser(token_stream)
-    # error_listener = CustomErrorListener()
+    parser_listener = CustomErrorListener()
     parser.removeErrorListeners()
-    parser.addErrorListener(error_listener)
+    parser.addErrorListener(parser_listener)
     
     tree = parser.root()
 
     #errores sintacticos
-    if error_listener.errors:
-        for e in error_listener.errors:
+    if parser_listener.errors:
+        for e in parser_listener.errors:
             print(e)
         print("\n Error en Fase Sintactica, Pipeline detendo ")    
         return
@@ -66,7 +66,7 @@ def main():
     interpreter = EvalVisitor()
     print("\n=== iniciando interpretación ===")
     interpreter.visit(tree)
-    
+
     print("\n=== interpretación finalizada ===")
 
 if __name__ == "__main__":
