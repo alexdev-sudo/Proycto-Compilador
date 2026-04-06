@@ -3,7 +3,7 @@
 
 ---
 
-## 👥 Integrantes — Grupo 2
+## Integrantes — Grupo 2
 
 | Nombre | Carné |
 |--------|-------|
@@ -15,7 +15,7 @@
 
 ---
 
-## 📋 Descripción
+## Descripción
 
 Este proyecto corresponde a la **Fase II** del compilador desarrollado en el curso de Compiladores. En esta fase se evolucionó el analizador de la Fase I hacia un **front-end de compilación completo** con un **intérprete funcional**.
 
@@ -23,7 +23,7 @@ El compilador procesa un lenguaje propio llamado **Expresiones21**, implementado
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 | Tecnología | Uso |
 |------------|-----|
@@ -35,7 +35,7 @@ El compilador procesa un lenguaje propio llamado **Expresiones21**, implementado
 
 ---
 
-## 🏗️ Arquitectura del Proyecto
+## Arquitectura del Proyecto
 
 El compilador sigue un **pipeline secuencial** de 4 fases. Si en cualquier fase se detectan errores, el pipeline se detiene y no continúa a la siguiente fase.
 
@@ -65,7 +65,7 @@ Código fuente (.txt)
 
 ---
 
-## 📁 Estructura de Archivos
+## Estructura de Archivos
 
 ```
 Proycto-Compilador/
@@ -91,7 +91,7 @@ Proycto-Compilador/
 
 ---
 
-## 🔤 Gramática del Lenguaje (Expresiones21)
+## Gramática del Lenguaje (Expresiones21)
 
 ### Tipos de datos soportados
 ```
@@ -135,7 +135,7 @@ bool activo;
 
 ---
 
-## ⚙️ Requisitos de instalación
+## Requisitos de instalación
 
 ### 1. Tener WSL 2 con Ubuntu instalado
 
@@ -162,7 +162,7 @@ wget https://www.antlr.org/download/antlr-4.13.1-complete.jar
 
 ---
 
-## 🚀 Cómo ejecutar el proyecto
+## Cómo ejecutar el proyecto
 
 ### Paso 1: Clonar el repositorio
 ```bash
@@ -187,9 +187,9 @@ python3 Pipeline.py entradas/programa_valido.txt
 
 ---
 
-## 🧪 Casos de Prueba
+## Casos de Prueba
 
-### ✅ Programa válido
+### Programa válido
 ```
 program {
     int x;
@@ -218,7 +218,7 @@ program {
 
 ---
 
-### ❌ Error semántico — Tipos incompatibles
+### Error semántico — Tipos incompatibles
 ```
 program {
     int x;
@@ -233,7 +233,7 @@ Error en Fase Semantica, Pipeline detenido
 
 ---
 
-### ❌ Error sintáctico — Falta semicolon
+### Error sintáctico — Falta semicolon
 ```
 program {
     int x
@@ -248,7 +248,7 @@ Error en Fase Sintactica, Pipeline detendo
 
 ---
 
-### ❌ Error léxico — Carácter no reconocido
+### Error léxico — Carácter no reconocido
 ```
 program {
     int x;
@@ -263,7 +263,7 @@ Error en Fase Lexica, Pipeline detendo
 
 ---
 
-## 🧩 Componentes principales
+## Componentes principales
 
 ### `Pipeline.py`
 Punto de entrada del compilador. Orquesta las 4 fases secuencialmente. Si alguna fase falla, detiene la ejecución e imprime los errores encontrados.
@@ -294,7 +294,7 @@ Visitor que ejecuta el programa una vez superadas todas las validaciones:
 
 ---
 
-## ⚠️ Observaciones y Limitaciones conocidas
+## Observaciones y Limitaciones conocidas
 
 - La ejecución de funciones no está completamente implementada en tiempo de ejecución.
 - El manejo de instrucciones `return` no está totalmente integrado en el proceso de interpretación.
@@ -302,7 +302,7 @@ Visitor que ejecuta el programa una vez superadas todas las validaciones:
 
 ---
 
-## 🌿 Control de versiones (Git)
+## Control de versiones (Git)
 
 El proyecto utiliza la siguiente estructura de ramas:
 
