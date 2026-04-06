@@ -10,7 +10,7 @@
 | Jermi Emanuel Pinto Patzan | 7690-20-11486 |
 | Cintia Yadira Robles Sotoj | 7690-16-13986 |
 | Ezequiel Alexander Castro | 7690-21-7934 |
-| Cristian Romeo García de La Rosa | 7690-23-12903 |
+| Cristian Roméo García de La Rosa | 7690-23-12903 |
 | Madelin Velvet Mendoza Bedoya | 7690-22-4338 |
 
 ---
