@@ -62,7 +62,7 @@ def main():
     print("Semantica correcta, iniciando fase de ejecucion")
 
     #Interpretar--------------------------------
-
+    # Si no hay errores en ninguna fase, se procede a ejecutar el programa con el intérprete
     interpreter = EvalVisitor()
     print("\n=== iniciando interpretación ===")
     interpreter.visit(tree)
