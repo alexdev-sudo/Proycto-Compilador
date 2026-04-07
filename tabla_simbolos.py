@@ -28,7 +28,7 @@ class TablaSibolos:
                 return scope[name]
         raise Exception(f"Variable '{name}' no declarada.")
     
-    #Funciiones 
+    #Registra una función en el scope global con su tipo de retorno, parámetros y contexto
     def declare_function(self, name, return_type, params, ctx):
         if name in self.Scopes[0]:  # Solo se permiten funciones en el scope global
             raise Exception(f"Función '{name}' ya declarada en el scope actual.")
@@ -37,7 +37,8 @@ class TablaSibolos:
             'return_type': return_type,
             'params': params,
             'ctx': ctx}  # Guardamos el contexto para reportar errores semánticos
-
+        
+    #Recupera la información de una función previamente declarada en el scope global
     def get_function(self, name):
         if name in self.Scopes[0]:
             return self.Scopes[0][name]
