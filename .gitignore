@@ -1,6 +1,15 @@
-antlr_env/
-__pycache__/
-*.pyc
+# ANTLR
 *.tokens
 *.interp
-*.java
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+antlr_env/
+venv/
+env/
+
+# VSCode
+.vscode/

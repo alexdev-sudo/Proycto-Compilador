@@ -235,7 +235,7 @@ def imprimir_arbol(tree, parser):
 
 def main():
 
-    input_stream = FileStream("entradas Programa.txt")
+    input_stream = FileStream("entradas Expr.txt")
 
     lexer = Expresiones_2Lexer(input_stream)
 
@@ -243,16 +243,19 @@ def main():
 
     parser = Expresiones_2Parser(token_stream)
 
-    tree = parser.root()
+    tree = parser.expr()
 
     imprimir_arbol(tree, parser)
 
     visitor = EvalVisitor()
 
     visitor.visit(tree)
+    resultado_final = visitor.visit(tree)
+
+    print("\n=== RESULTADO DE LA EXPRESIÓN ===")
+    print(f"Resultado: {resultado_final}")
 
     print("\n=== MEMORIA FINAL ===")
-
     for var, val in visitor.memory.items():
         print(var, "=", val)
 
