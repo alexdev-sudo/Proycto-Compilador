@@ -39,7 +39,7 @@ class semanticVisitor(Expresiones21Visitor):
           
 
 #Asignaciones 
-
+    # Verifica que la variable exista y que el tipo de la expresión sea compatible con el declarado
     def visitAsignacion(self, ctx):
         name = ctx.VAR().getText()
         expr_type = self.visit(ctx.expr())
@@ -73,7 +73,7 @@ class semanticVisitor(Expresiones21Visitor):
         return self.visit(ctx.expr())
     # FUNCIONES
     # =========================
-
+    # Registra la función en la tabla de símbolos y valida su cuerpo en un nuevo scope
     def visitFuncion(self, ctx):
 
         name = ctx.VAR().getText()
@@ -111,7 +111,7 @@ class semanticVisitor(Expresiones21Visitor):
 
     # SCOPES
     # =========================
-
+    # Crea un nuevo scope al entrar a un bloque, excepto en el bloque global del programa
     def visitBloque(self, ctx):
         # verifica si el padre es ''programa'' para no crear un scope global adicional
         is_global = isinstance(ctx.parentCtx, Expresiones21Parser.ProgramaContext)
