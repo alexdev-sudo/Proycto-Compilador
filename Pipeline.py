@@ -10,7 +10,7 @@ from visitador_interprete import EvalVisitor
 from custom_errors import LexerErrorListener
 
 def main():
-
+    # Se lee el archivo de entrada proporcionado como argumento o se usa el archivo por defecto
     input_file = sys.argv[1] if len(sys.argv) > 1 else "entradas Expr.txt"
     input_stream = FileStream(input_file, encoding='utf-8')
     print("\n ----- Analisis lexico---------")
