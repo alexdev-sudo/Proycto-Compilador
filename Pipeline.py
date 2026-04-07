@@ -16,7 +16,7 @@ def main():
     print("\n ----- Analisis lexico---------")
 
     #Lexer--------------------------------- 
-
+    # Se inicializa el parser con el flujo de tokens generado por el analizador léxico
     lexer = Expresiones21Lexer(input_stream)
     lexer_listener = LexerErrorListener()
     lexer.removeErrorListeners()
