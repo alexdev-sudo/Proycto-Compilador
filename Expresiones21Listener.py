@@ -1,0 +1,246 @@
+# Generated from Expresiones21.g4 by ANTLR 4.13.1
+from antlr4 import *
+if "." in __name__:
+    from .Expresiones21Parser import Expresiones21Parser
+else:
+    from Expresiones21Parser import Expresiones21Parser
+
+# This class defines a complete listener for a parse tree produced by Expresiones21Parser.
+class Expresiones21Listener(ParseTreeListener):
+
+    # Enter a parse tree produced by Expresiones21Parser#exprInput.
+    def enterExprInput(self, ctx:Expresiones21Parser.ExprInputContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#exprInput.
+    def exitExprInput(self, ctx:Expresiones21Parser.ExprInputContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#progInput.
+    def enterProgInput(self, ctx:Expresiones21Parser.ProgInputContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#progInput.
+    def exitProgInput(self, ctx:Expresiones21Parser.ProgInputContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#programaRule.
+    def enterProgramaRule(self, ctx:Expresiones21Parser.ProgramaRuleContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#programaRule.
+    def exitProgramaRule(self, ctx:Expresiones21Parser.ProgramaRuleContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#bloque.
+    def enterBloque(self, ctx:Expresiones21Parser.BloqueContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#bloque.
+    def exitBloque(self, ctx:Expresiones21Parser.BloqueContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#statement.
+    def enterStatement(self, ctx:Expresiones21Parser.StatementContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#statement.
+    def exitStatement(self, ctx:Expresiones21Parser.StatementContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#varint.
+    def enterVarint(self, ctx:Expresiones21Parser.VarintContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#varint.
+    def exitVarint(self, ctx:Expresiones21Parser.VarintContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#asignacion.
+    def enterAsignacion(self, ctx:Expresiones21Parser.AsignacionContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#asignacion.
+    def exitAsignacion(self, ctx:Expresiones21Parser.AsignacionContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#ifstm.
+    def enterIfstm(self, ctx:Expresiones21Parser.IfstmContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#ifstm.
+    def exitIfstm(self, ctx:Expresiones21Parser.IfstmContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#whilestm.
+    def enterWhilestm(self, ctx:Expresiones21Parser.WhilestmContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#whilestm.
+    def exitWhilestm(self, ctx:Expresiones21Parser.WhilestmContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#forstm.
+    def enterForstm(self, ctx:Expresiones21Parser.ForstmContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#forstm.
+    def exitForstm(self, ctx:Expresiones21Parser.ForstmContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#tipodato.
+    def enterTipodato(self, ctx:Expresiones21Parser.TipodatoContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#tipodato.
+    def exitTipodato(self, ctx:Expresiones21Parser.TipodatoContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#parametro.
+    def enterParametro(self, ctx:Expresiones21Parser.ParametroContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#parametro.
+    def exitParametro(self, ctx:Expresiones21Parser.ParametroContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#parametros.
+    def enterParametros(self, ctx:Expresiones21Parser.ParametrosContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#parametros.
+    def exitParametros(self, ctx:Expresiones21Parser.ParametrosContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#funcion.
+    def enterFuncion(self, ctx:Expresiones21Parser.FuncionContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#funcion.
+    def exitFuncion(self, ctx:Expresiones21Parser.FuncionContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#returnstm.
+    def enterReturnstm(self, ctx:Expresiones21Parser.ReturnstmContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#returnstm.
+    def exitReturnstm(self, ctx:Expresiones21Parser.ReturnstmContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#llamada.
+    def enterLlamada(self, ctx:Expresiones21Parser.LlamadaContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#llamada.
+    def exitLlamada(self, ctx:Expresiones21Parser.LlamadaContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#printstm.
+    def enterPrintstm(self, ctx:Expresiones21Parser.PrintstmContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#printstm.
+    def exitPrintstm(self, ctx:Expresiones21Parser.PrintstmContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#expr.
+    def enterExpr(self, ctx:Expresiones21Parser.ExprContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#expr.
+    def exitExpr(self, ctx:Expresiones21Parser.ExprContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#logicalOr.
+    def enterLogicalOr(self, ctx:Expresiones21Parser.LogicalOrContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#logicalOr.
+    def exitLogicalOr(self, ctx:Expresiones21Parser.LogicalOrContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#logicalAnd.
+    def enterLogicalAnd(self, ctx:Expresiones21Parser.LogicalAndContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#logicalAnd.
+    def exitLogicalAnd(self, ctx:Expresiones21Parser.LogicalAndContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#igualdad.
+    def enterIgualdad(self, ctx:Expresiones21Parser.IgualdadContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#igualdad.
+    def exitIgualdad(self, ctx:Expresiones21Parser.IgualdadContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#comparacion.
+    def enterComparacion(self, ctx:Expresiones21Parser.ComparacionContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#comparacion.
+    def exitComparacion(self, ctx:Expresiones21Parser.ComparacionContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#suma.
+    def enterSuma(self, ctx:Expresiones21Parser.SumaContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#suma.
+    def exitSuma(self, ctx:Expresiones21Parser.SumaContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#producto.
+    def enterProducto(self, ctx:Expresiones21Parser.ProductoContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#producto.
+    def exitProducto(self, ctx:Expresiones21Parser.ProductoContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#unario.
+    def enterUnario(self, ctx:Expresiones21Parser.UnarioContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#unario.
+    def exitUnario(self, ctx:Expresiones21Parser.UnarioContext):
+        pass
+
+
+    # Enter a parse tree produced by Expresiones21Parser#primario.
+    def enterPrimario(self, ctx:Expresiones21Parser.PrimarioContext):
+        pass
+
+    # Exit a parse tree produced by Expresiones21Parser#primario.
+    def exitPrimario(self, ctx:Expresiones21Parser.PrimarioContext):
+        pass
+
+
+
+del Expresiones21Parser
