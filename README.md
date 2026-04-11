@@ -308,7 +308,7 @@ El proyecto utiliza la siguiente estructura de ramas:
 
 | Rama | Descripción |
 |------|-------------|
-| `main` | Rama de producción — código estable y entregable |
+| `produccion` | Rama de producción — código estable y entregable |
 | `test` | Rama de desarrollo — commits de trabajo y pruebas |
 
 Los commits están organizados de forma descriptiva para evidenciar el progreso incremental del proyecto.
