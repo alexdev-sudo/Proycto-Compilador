@@ -1,4 +1,4 @@
-# Generated from Expresiones21.g4 by ANTLR 4.13.1
+# Generated from Expresiones21.g4 by ANTLR 4.13.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -194,7 +194,7 @@ class Expresiones21Parser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.13.1")
+        self.checkVersion("4.13.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -230,6 +230,14 @@ class Expresiones21Parser ( Parser ):
         def EOF(self):
             return self.getToken(Expresiones21Parser.EOF, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterExprInput" ):
+                listener.enterExprInput(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitExprInput" ):
+                listener.exitExprInput(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprInput" ):
                 return visitor.visitExprInput(self)
@@ -248,6 +256,14 @@ class Expresiones21Parser ( Parser ):
 
         def EOF(self):
             return self.getToken(Expresiones21Parser.EOF, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterProgInput" ):
+                listener.enterProgInput(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitProgInput" ):
+                listener.exitProgInput(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitProgInput" ):
@@ -322,6 +338,14 @@ class Expresiones21Parser ( Parser ):
             return self.getTypedRuleContext(Expresiones21Parser.BloqueContext,0)
 
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterProgramaRule" ):
+                listener.enterProgramaRule(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitProgramaRule" ):
+                listener.exitProgramaRule(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitProgramaRule" ):
                 return visitor.visitProgramaRule(self)
@@ -372,6 +396,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_bloque
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBloque" ):
+                listener.enterBloque(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBloque" ):
+                listener.exitBloque(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitBloque" ):
@@ -460,6 +492,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_statement
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStatement" ):
+                listener.enterStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStatement" ):
+                listener.exitStatement(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitStatement" ):
@@ -580,6 +620,14 @@ class Expresiones21Parser ( Parser ):
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_varint
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVarint" ):
+                listener.enterVarint(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVarint" ):
+                listener.exitVarint(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitVarint" ):
                 return visitor.visitVarint(self)
@@ -644,6 +692,14 @@ class Expresiones21Parser ( Parser ):
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_asignacion
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAsignacion" ):
+                listener.enterAsignacion(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAsignacion" ):
+                listener.exitAsignacion(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAsignacion" ):
                 return visitor.visitAsignacion(self)
@@ -706,6 +762,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_ifstm
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterIfstm" ):
+                listener.enterIfstm(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitIfstm" ):
+                listener.exitIfstm(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitIfstm" ):
@@ -778,6 +842,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_whilestm
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterWhilestm" ):
+                listener.enterWhilestm(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitWhilestm" ):
+                listener.exitWhilestm(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitWhilestm" ):
@@ -853,6 +925,14 @@ class Expresiones21Parser ( Parser ):
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_forstm
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterForstm" ):
+                listener.enterForstm(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitForstm" ):
+                listener.exitForstm(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitForstm" ):
                 return visitor.visitForstm(self)
@@ -920,6 +1000,14 @@ class Expresiones21Parser ( Parser ):
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_tipodato
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterTipodato" ):
+                listener.enterTipodato(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitTipodato" ):
+                listener.exitTipodato(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTipodato" ):
                 return visitor.visitTipodato(self)
@@ -968,6 +1056,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_parametro
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParametro" ):
+                listener.enterParametro(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParametro" ):
+                listener.exitParametro(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitParametro" ):
@@ -1019,6 +1115,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_parametros
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParametros" ):
+                listener.enterParametros(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParametros" ):
+                listener.exitParametros(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitParametros" ):
@@ -1090,6 +1194,14 @@ class Expresiones21Parser ( Parser ):
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_funcion
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterFuncion" ):
+                listener.enterFuncion(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitFuncion" ):
+                listener.exitFuncion(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitFuncion" ):
                 return visitor.visitFuncion(self)
@@ -1153,6 +1265,14 @@ class Expresiones21Parser ( Parser ):
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_returnstm
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterReturnstm" ):
+                listener.enterReturnstm(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitReturnstm" ):
+                listener.exitReturnstm(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitReturnstm" ):
                 return visitor.visitReturnstm(self)
@@ -1214,6 +1334,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_llamada
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLlamada" ):
+                listener.enterLlamada(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLlamada" ):
+                listener.exitLlamada(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLlamada" ):
@@ -1292,6 +1420,14 @@ class Expresiones21Parser ( Parser ):
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_printstm
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPrintstm" ):
+                listener.enterPrintstm(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPrintstm" ):
+                listener.exitPrintstm(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPrintstm" ):
                 return visitor.visitPrintstm(self)
@@ -1339,6 +1475,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_expr
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterExpr" ):
+                listener.enterExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitExpr" ):
+                listener.exitExpr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExpr" ):
@@ -1388,6 +1532,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_logicalOr
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLogicalOr" ):
+                listener.enterLogicalOr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLogicalOr" ):
+                listener.exitLogicalOr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLogicalOr" ):
@@ -1450,6 +1602,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_logicalAnd
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLogicalAnd" ):
+                listener.enterLogicalAnd(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLogicalAnd" ):
+                listener.exitLogicalAnd(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLogicalAnd" ):
@@ -1524,6 +1684,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_igualdad
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterIgualdad" ):
+                listener.enterIgualdad(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitIgualdad" ):
+                listener.exitIgualdad(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitIgualdad" ):
@@ -1610,6 +1778,14 @@ class Expresiones21Parser ( Parser ):
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_comparacion
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterComparacion" ):
+                listener.enterComparacion(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitComparacion" ):
+                listener.exitComparacion(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitComparacion" ):
                 return visitor.visitComparacion(self)
@@ -1682,6 +1858,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_suma
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSuma" ):
+                listener.enterSuma(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSuma" ):
+                listener.exitSuma(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSuma" ):
@@ -1756,6 +1940,14 @@ class Expresiones21Parser ( Parser ):
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_producto
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterProducto" ):
+                listener.enterProducto(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitProducto" ):
+                listener.exitProducto(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitProducto" ):
                 return visitor.visitProducto(self)
@@ -1820,6 +2012,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_unario
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnario" ):
+                listener.enterUnario(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnario" ):
+                listener.exitUnario(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitUnario" ):
@@ -1903,6 +2103,14 @@ class Expresiones21Parser ( Parser ):
 
         def getRuleIndex(self):
             return Expresiones21Parser.RULE_primario
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPrimario" ):
+                listener.enterPrimario(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPrimario" ):
+                listener.exitPrimario(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPrimario" ):
