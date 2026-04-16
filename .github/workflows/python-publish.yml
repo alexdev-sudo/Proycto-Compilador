@@ -1,0 +1,26 @@
+name: Python ANTLR CI
+
+on:
+  push:
+    branches: [ test ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v3
+
+    - name: Configurar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Instalar dependencias
+      run: |
+        pip install antlr4-python3-runtime
+
+    - name: Ejecutar ANTLR
+      run: |
+        java -jar antlr-4.13.1-complete.jar -Dlanguage=Python3 Expresiones21.g4 -visitor
