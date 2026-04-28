@@ -53,7 +53,7 @@ logicalAnd: igualdad (AND igualdad)*;
 igualdad: comparacion ((IGUAL | NOIGUAL | DIFF) comparacion)*;
 comparacion: suma ((MAYOR | MENOR | MAYORIGUAL | MENORIGUAL) suma)*;
 suma: producto ((SUM | REST) producto)*;
-producto: unario ((MUL | DIV) unario)*;
+producto: unario ((MUL | DIV | MOD) unario)*;
 unario: NOT unario | primario;
 
 // FIX primario: llamada y TRUE/FALSE antes de VAR para evitar ambigüedad
@@ -116,6 +116,7 @@ OR        : '||';
 NOT       : '!';
 LBRACKET : '[';
 RBRACKET : ']';
+MOD: '%';
 
 // VAR al final, después de todas las keywords
 VAR   : [a-zA-Z][a-zA-Z0-9]*;
