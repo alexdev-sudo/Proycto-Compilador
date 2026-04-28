@@ -61,10 +61,10 @@ def serializedATN():
         109,111,3,42,21,0,110,108,1,0,0,0,110,111,1,0,0,0,111,9,1,0,0,0,
         112,113,5,42,0,0,113,114,5,21,0,0,114,115,3,42,21,0,115,11,1,0,0,
         0,116,117,7,0,0,0,117,118,5,36,0,0,118,119,5,37,0,0,119,133,5,42,
-        0,0,120,121,5,21,0,0,121,130,5,2,0,0,122,127,3,42,21,0,123,124,5,
-        17,0,0,124,126,3,42,21,0,125,123,1,0,0,0,126,129,1,0,0,0,127,125,
+        0,0,120,121,5,21,0,0,121,130,5,36,0,0,122,127,3,42,21,0,123,124,
+        5,17,0,0,124,126,3,42,21,0,125,123,1,0,0,0,126,129,1,0,0,0,127,125,
         1,0,0,0,127,128,1,0,0,0,128,131,1,0,0,0,129,127,1,0,0,0,130,122,
-        1,0,0,0,130,131,1,0,0,0,131,132,1,0,0,0,132,134,5,3,0,0,133,120,
+        1,0,0,0,130,131,1,0,0,0,131,132,1,0,0,0,132,134,5,37,0,0,133,120,
         1,0,0,0,133,134,1,0,0,0,134,13,1,0,0,0,135,136,5,42,0,0,136,137,
         5,36,0,0,137,138,3,42,21,0,138,139,5,37,0,0,139,140,5,21,0,0,140,
         141,3,42,21,0,141,15,1,0,0,0,142,143,5,4,0,0,143,144,5,18,0,0,144,
@@ -773,11 +773,17 @@ class gramatica_v3Parser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def LBRACKET(self):
-            return self.getToken(gramatica_v3Parser.LBRACKET, 0)
+        def LBRACKET(self, i:int=None):
+            if i is None:
+                return self.getTokens(gramatica_v3Parser.LBRACKET)
+            else:
+                return self.getToken(gramatica_v3Parser.LBRACKET, i)
 
-        def RBRACKET(self):
-            return self.getToken(gramatica_v3Parser.RBRACKET, 0)
+        def RBRACKET(self, i:int=None):
+            if i is None:
+                return self.getTokens(gramatica_v3Parser.RBRACKET)
+            else:
+                return self.getToken(gramatica_v3Parser.RBRACKET, i)
 
         def VAR(self):
             return self.getToken(gramatica_v3Parser.VAR, 0)
@@ -796,12 +802,6 @@ class gramatica_v3Parser ( Parser ):
 
         def ASSIGN(self):
             return self.getToken(gramatica_v3Parser.ASSIGN, 0)
-
-        def INILLAVE(self):
-            return self.getToken(gramatica_v3Parser.INILLAVE, 0)
-
-        def FIN(self):
-            return self.getToken(gramatica_v3Parser.FIN, 0)
 
         def expr(self, i:int=None):
             if i is None:
@@ -855,7 +855,7 @@ class gramatica_v3Parser ( Parser ):
                 self.state = 120
                 self.match(gramatica_v3Parser.ASSIGN)
                 self.state = 121
-                self.match(gramatica_v3Parser.INILLAVE)
+                self.match(gramatica_v3Parser.LBRACKET)
                 self.state = 130
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -877,7 +877,7 @@ class gramatica_v3Parser ( Parser ):
 
 
                 self.state = 132
-                self.match(gramatica_v3Parser.FIN)
+                self.match(gramatica_v3Parser.RBRACKET)
 
 
         except RecognitionException as re:

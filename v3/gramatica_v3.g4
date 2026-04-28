@@ -30,7 +30,7 @@ statement
 varint: (INT | FLOAT | STRING | BOOL) VAR (ASSIGN expr)?;
 asignacion: VAR ASSIGN expr;
 
-arraydecl: (INT | FLOAT | STRING | BOOL) LBRACKET RBRACKET VAR (ASSIGN INILLAVE (expr (COMMA expr)*)? FIN)?;
+arraydecl: (INT | FLOAT | STRING | BOOL) LBRACKET RBRACKET VAR (ASSIGN LBRACKET (expr (COMMA expr)*)? RBRACKET)?;
 arrayasign: VAR LBRACKET expr RBRACKET ASSIGN expr;
 
 ifstm: IF PARENI expr PAREND bloque (ELSE bloque)?;

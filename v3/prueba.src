@@ -1,0 +1,19 @@
+program {
+    int[] nums = [3, 1, 4, 1, 5];
+    int total = 0;
+    int i = 0;
+
+    while (i < 5) {
+        int r = nums[i] % 2;
+        if (r == 0) {
+            total = total + nums[i];
+        }
+        i = i + 1;
+        if (total > 10) { break; }
+    }
+
+    string msg = "Fibonacci(15) = ";
+    print(msg);
+    print("Total pares: ");
+    print(total);
+}
