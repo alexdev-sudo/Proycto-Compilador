@@ -44,6 +44,16 @@ class gramatica_v3Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by gramatica_v3Parser#arraydecl.
+    def visitArraydecl(self, ctx:gramatica_v3Parser.ArraydeclContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gramatica_v3Parser#arrayasign.
+    def visitArrayasign(self, ctx:gramatica_v3Parser.ArrayasignContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by gramatica_v3Parser#ifstm.
     def visitIfstm(self, ctx:gramatica_v3Parser.IfstmContext):
         return self.visitChildren(ctx)
@@ -81,6 +91,21 @@ class gramatica_v3Visitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by gramatica_v3Parser#returnstm.
     def visitReturnstm(self, ctx:gramatica_v3Parser.ReturnstmContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gramatica_v3Parser#breakstm.
+    def visitBreakstm(self, ctx:gramatica_v3Parser.BreakstmContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gramatica_v3Parser#continuestm.
+    def visitContinuestm(self, ctx:gramatica_v3Parser.ContinuestmContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gramatica_v3Parser#importstm.
+    def visitImportstm(self, ctx:gramatica_v3Parser.ImportstmContext):
         return self.visitChildren(ctx)
 
 
