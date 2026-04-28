@@ -24,6 +24,7 @@ statement
     | funcion
     | breakstm
     | continuestm
+    | importstm
     ;
 
 varint: (INT | FLOAT | STRING | BOOL) VAR (ASSIGN expr)?;
@@ -48,6 +49,7 @@ funcion: tipodato VAR PARENI parametros? PAREND bloque;
 returnstm: RETURN expr SEMI;
 breakstm: BREAK SEMI;
 continuestm: CONTINUE SEMI;
+importstm: IMPORT VAR SEMI;
 llamada: VAR PARENI (expr (COMMA expr)*)? PAREND;
 
 printstm: PRINT PARENI expr PAREND SEMI;
@@ -124,6 +126,7 @@ RBRACKET : ']';
 MOD: '%';
 BREAK    : 'break';
 CONTINUE : 'continue';
+IMPORT : 'import';
 
 // VAR al final, después de todas las keywords
 VAR   : [a-zA-Z][a-zA-Z0-9]*;

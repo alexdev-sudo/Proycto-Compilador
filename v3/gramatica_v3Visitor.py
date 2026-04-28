@@ -104,6 +104,11 @@ class gramatica_v3Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by gramatica_v3Parser#importstm.
+    def visitImportstm(self, ctx:gramatica_v3Parser.ImportstmContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by gramatica_v3Parser#llamada.
     def visitLlamada(self, ctx:gramatica_v3Parser.LlamadaContext):
         return self.visitChildren(ctx)
