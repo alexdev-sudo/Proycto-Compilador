@@ -12,6 +12,7 @@ bloque: INILLAVE statement* FIN;
 
 statement
     : varint SEMI
+    | arraydecl SEMI
     | asignacion SEMI
     | ifstm
     | whilestm
@@ -24,6 +25,9 @@ statement
 
 varint: (INT | FLOAT | STRING | BOOL) VAR (ASSIGN expr)?;
 asignacion: VAR ASSIGN expr;
+
+arraydecl: (INT | FLOAT | STRING | BOOL) LBRACKET RBRACKET VAR (ASSIGN INILLAVE (expr (COMMA expr)*)? FIN)?;
+arrayasign: VAR LBRACKET expr RBRACKET ASSIGN expr;
 
 ifstm: IF PARENI expr PAREND bloque (ELSE bloque)?;
 whilestm: WHILE PARENI expr PAREND bloque;
@@ -55,6 +59,7 @@ unario: NOT unario | primario;
 // FIX primario: llamada y TRUE/FALSE antes de VAR para evitar ambigüedad
 primario
     : llamada
+    | VAR LBRACKET expr RBRACKET
     | TRUE
     | FALSE
     | VAR
@@ -109,6 +114,8 @@ DIFF      : '!=';
 AND       : '&&';
 OR        : '||';
 NOT       : '!';
+LBRACKET : '[';
+RBRACKET : ']';
 
 // VAR al final, después de todas las keywords
 VAR   : [a-zA-Z][a-zA-Z0-9]*;
