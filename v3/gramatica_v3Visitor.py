@@ -94,6 +94,16 @@ class gramatica_v3Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by gramatica_v3Parser#breakstm.
+    def visitBreakstm(self, ctx:gramatica_v3Parser.BreakstmContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gramatica_v3Parser#continuestm.
+    def visitContinuestm(self, ctx:gramatica_v3Parser.ContinuestmContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by gramatica_v3Parser#llamada.
     def visitLlamada(self, ctx:gramatica_v3Parser.LlamadaContext):
         return self.visitChildren(ctx)

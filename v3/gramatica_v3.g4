@@ -14,6 +14,7 @@ statement
     : varint SEMI
     | arraydecl SEMI
     | asignacion SEMI
+    | arrayasign SEMI
     | ifstm
     | whilestm
     | forstm
@@ -21,6 +22,8 @@ statement
     | llamada SEMI
     | printstm
     | funcion
+    | breakstm
+    | continuestm
     ;
 
 varint: (INT | FLOAT | STRING | BOOL) VAR (ASSIGN expr)?;
@@ -43,6 +46,8 @@ parametros: parametro (COMMA parametro)*;
 funcion: tipodato VAR PARENI parametros? PAREND bloque;
 
 returnstm: RETURN expr SEMI;
+breakstm: BREAK SEMI;
+continuestm: CONTINUE SEMI;
 llamada: VAR PARENI (expr (COMMA expr)*)? PAREND;
 
 printstm: PRINT PARENI expr PAREND SEMI;
@@ -117,6 +122,8 @@ NOT       : '!';
 LBRACKET : '[';
 RBRACKET : ']';
 MOD: '%';
+BREAK    : 'break';
+CONTINUE : 'continue';
 
 // VAR al final, después de todas las keywords
 VAR   : [a-zA-Z][a-zA-Z0-9]*;
