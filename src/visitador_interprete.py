@@ -1,5 +1,5 @@
-from v1.Expresiones21Parser import Expresiones21Parser
-from v1.Expresiones21Visitor import Expresiones21Visitor
+from antlr.v1.Expresiones21Parser import Expresiones21Parser
+from antlr.v1.Expresiones21Visitor import Expresiones21Visitor
 # ==============================
 # Visitor para evaluar programa
 # ==============================
