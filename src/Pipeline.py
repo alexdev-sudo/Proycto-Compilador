@@ -1,13 +1,17 @@
 import sys
+import os
+# agregar directorio raiz al path para importar módulos
+sys.path.append(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from antlr4 import *
 
-from v1.Expresiones21Lexer import Expresiones21Lexer
-from v1.Expresiones21Parser import Expresiones21Parser
+from antlr.v1.Expresiones21Lexer import Expresiones21Lexer
+from antlr.v1.Expresiones21Parser import Expresiones21Parser
 
-from src.custom_errors import CustomErrorListener
-from src.visitador_semantico import semanticVisitor
-from src.visitador_interprete import EvalVisitor
-from src.custom_errors import LexerErrorListener
+from .custom_errors import CustomErrorListener
+from .visitador_semantico import semanticVisitor
+from .visitador_interprete import EvalVisitor
+from .custom_errors import LexerErrorListener
 
 def main():
     # Se lee el archivo de entrada proporcionado como argumento o se usa el archivo por defecto
