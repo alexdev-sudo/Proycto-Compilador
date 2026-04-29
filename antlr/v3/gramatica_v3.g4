@@ -12,7 +12,9 @@ bloque: INILLAVE statement* FIN;
 
 statement
     : varint SEMI
+    | arraydecl SEMI
     | asignacion SEMI
+    | arrayasign SEMI
     | ifstm
     | whilestm
     | forstm
@@ -20,10 +22,16 @@ statement
     | llamada SEMI
     | printstm
     | funcion
+    | breakstm
+    | continuestm
+    | importstm
     ;
 
 varint: (INT | FLOAT | STRING | BOOL) VAR (ASSIGN expr)?;
 asignacion: VAR ASSIGN expr;
+
+arraydecl: (INT | FLOAT | STRING | BOOL) LBRACKET RBRACKET VAR (ASSIGN LBRACKET (expr (COMMA expr)*)? RBRACKET)?;
+arrayasign: VAR LBRACKET expr RBRACKET ASSIGN expr;
 
 ifstm: IF PARENI expr PAREND bloque (ELSE bloque)?;
 whilestm: WHILE PARENI expr PAREND bloque;
@@ -39,6 +47,9 @@ parametros: parametro (COMMA parametro)*;
 funcion: tipodato VAR PARENI parametros? PAREND bloque;
 
 returnstm: RETURN expr SEMI;
+breakstm: BREAK SEMI;
+continuestm: CONTINUE SEMI;
+importstm: IMPORT VAR SEMI;
 llamada: VAR PARENI (expr (COMMA expr)*)? PAREND;
 
 printstm: PRINT PARENI expr PAREND SEMI;
@@ -49,12 +60,13 @@ logicalAnd: igualdad (AND igualdad)*;
 igualdad: comparacion ((IGUAL | NOIGUAL | DIFF) comparacion)*;
 comparacion: suma ((MAYOR | MENOR | MAYORIGUAL | MENORIGUAL) suma)*;
 suma: producto ((SUM | REST) producto)*;
-producto: unario ((MUL | DIV) unario)*;
+producto: unario ((MUL | DIV | MOD) unario)*;
 unario: NOT unario | primario;
 
 // FIX primario: llamada y TRUE/FALSE antes de VAR para evitar ambigüedad
 primario
     : llamada
+    | VAR LBRACKET expr RBRACKET
     | TRUE
     | FALSE
     | VAR
@@ -109,6 +121,12 @@ DIFF      : '!=';
 AND       : '&&';
 OR        : '||';
 NOT       : '!';
+LBRACKET : '[';
+RBRACKET : ']';
+MOD: '%';
+BREAK    : 'break';
+CONTINUE : 'continue';
+IMPORT : 'import';
 
 // VAR al final, después de todas las keywords
 VAR   : [a-zA-Z][a-zA-Z0-9]*;
