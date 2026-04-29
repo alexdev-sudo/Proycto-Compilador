@@ -1,7 +1,7 @@
 import sys
 import os
 # agregar directorio raiz al path para importar módulos
-sys.path.append(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from antlr4 import *
 
