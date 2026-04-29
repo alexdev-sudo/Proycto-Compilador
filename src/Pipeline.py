@@ -5,8 +5,8 @@ sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from antlr4 import *
 
-from antlr.v1.Expresiones21Lexer import Expresiones21Lexer
-from antlr.v1.Expresiones21Parser import Expresiones21Parser
+from antlr.v3.gramatica_v3Lexer import gramatica_v3Lexer
+from antlr.v3.gramatica_v3Parser import gramatica_v3Parser
 
 from .custom_errors import CustomErrorListener
 from .visitador_semantico import semanticVisitor
@@ -21,7 +21,7 @@ def main():
 
     #Lexer--------------------------------- 
     # Se inicializa el parser con el flujo de tokens generado por el analizador léxico
-    lexer = Expresiones21Lexer(input_stream)
+    lexer = gramatica_v3Lexer(input_stream)
     lexer_listener = LexerErrorListener()
     lexer.removeErrorListeners()
     lexer.addErrorListener(lexer_listener)
@@ -38,7 +38,7 @@ def main():
 
     # Fase sintacitca Parser-----------------------------
     
-    parser = Expresiones21Parser(token_stream)
+    parser = gramatica_v3Parser(token_stream)
     parser_listener = CustomErrorListener()
     parser.removeErrorListeners()
     parser.addErrorListener(parser_listener)
