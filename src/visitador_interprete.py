@@ -1,5 +1,5 @@
-from antlr.v1.Expresiones21Parser import Expresiones21Parser
-from antlr.v1.Expresiones21Visitor import Expresiones21Visitor
+from antlr.v3.gramatica_v3Parser import gramatica_v3Parser
+from antlr.v3.gramatica_v3Visitor import gramatica_v3Visitor
 # ==============================
 # Visitor para evaluar programa
 # ==============================
@@ -7,7 +7,7 @@ class ReturnValue(Exception):
     def __init__(self, value):
         self.value = value
 
-class EvalVisitor(Expresiones21Visitor):
+class EvalVisitor(gramatica_v3Visitor):
 
     def visitProgInput(self, ctx):
         programa_ctx = ctx.getChild(0)  # asumiendo que el programa es el primer hijo
@@ -38,7 +38,7 @@ class EvalVisitor(Expresiones21Visitor):
     def visitBloque(self, ctx):
        
 
-        is_program_block = isinstance(ctx.parentCtx, Expresiones21Parser.ProgramaContext)
+        is_program_block = isinstance(ctx.parentCtx, gramatica_v3Parser.ProgramaContext)
 
 
         if not is_program_block:

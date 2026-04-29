@@ -1,7 +1,7 @@
-from antlr.v1.Expresiones21Visitor import Expresiones21Visitor
+from antlr.v3.gramatica_v3Visitor import gramatica_v3Visitor
 from src.tabla_simbolos import TablaSibolos
-from  antlr.v1.Expresiones21Parser import Expresiones21Parser
-class semanticVisitor(Expresiones21Visitor):
+from  antlr.v3.gramatica_v3Parser import gramatica_v3Parser
+class semanticVisitor(gramatica_v3Visitor):
     def visitExprInput(self, ctx):
         return self.visit(ctx.expr())
 
@@ -114,7 +114,7 @@ class semanticVisitor(Expresiones21Visitor):
     # Crea un nuevo scope al entrar a un bloque, excepto en el bloque global del programa
     def visitBloque(self, ctx):
         # verifica si el padre es ''programa'' para no crear un scope global adicional
-        is_global = isinstance(ctx.parentCtx, Expresiones21Parser.ProgramaContext)
+        is_global = isinstance(ctx.parentCtx, gramatica_v3Parser.ProgramaContext)
 
         if not is_global:
             self.tabla_simbolos.push()
@@ -124,7 +124,7 @@ class semanticVisitor(Expresiones21Visitor):
 
         if not is_global:
             self.tabla_simbolos.pop()    
-     # llamadas  y Reterno 
+     # llamadas  y Retorno 
 
     def visitLlamada(self, ctx):
         name = ctx.VAR().getText()
@@ -158,6 +158,17 @@ class semanticVisitor(Expresiones21Visitor):
 
         for i in range(1, len(ctx.producto())):
             right = self.visit(ctx.producto(i))
-            if left != right:
-                self.error(f"Tipos incompatibles en operacion arimetica: '{left}' y '{right}'", ctx)
+            #regla de tipos
+            if left == right:
+                continue
+            #permitir int + float -> float
+            if (left == "int" and right == "float") or (left == "float" and right == "int"):
+                left = "float"
+                continue
+            #permitir string + string -> string
+            if left == "string" and right == "string":
+                left = "string"
+                continue
+
+                self.error(f"Tipos incompatibles en operacion suma : '{left}' y '{right}'", ctx)
         return left
