@@ -3,7 +3,7 @@ from antlr4 import *
 from antlr4.tree.Trees import Trees
 from Expresiones21Lexer import Expresiones21Lexer
 from Expresiones21Parser import Expresiones21Parser
-from visitador_interprete import EvalVisitor
+from src.visitador_interprete import EvalVisitor
 
 
 

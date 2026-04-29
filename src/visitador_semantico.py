@@ -1,6 +1,6 @@
-from Expresiones21Visitor import Expresiones21Visitor
-from tabla_simbolos import TablaSibolos
-from Expresiones21Parser import Expresiones21Parser
+from v1.Expresiones21Visitor import Expresiones21Visitor
+from src.tabla_simbolos import TablaSibolos
+from  v1.Expresiones21Parser import Expresiones21Parser
 class semanticVisitor(Expresiones21Visitor):
     def visitExprInput(self, ctx):
         return self.visit(ctx.expr())

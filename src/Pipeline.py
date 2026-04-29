@@ -1,13 +1,13 @@
 import sys
 from antlr4 import *
 
-from Expresiones21Lexer import Expresiones21Lexer
-from Expresiones21Parser import Expresiones21Parser
+from v1.Expresiones21Lexer import Expresiones21Lexer
+from v1.Expresiones21Parser import Expresiones21Parser
 
-from custom_errors import CustomErrorListener
-from visitador_semantico import semanticVisitor
-from visitador_interprete import EvalVisitor
-from custom_errors import LexerErrorListener
+from src.custom_errors import CustomErrorListener
+from src.visitador_semantico import semanticVisitor
+from src.visitador_interprete import EvalVisitor
+from src.custom_errors import LexerErrorListener
 
 def main():
     # Se lee el archivo de entrada proporcionado como argumento o se usa el archivo por defecto
