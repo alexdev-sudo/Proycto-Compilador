@@ -175,6 +175,7 @@ class TACGenerator(gramatica_v3Visitor):
 
         self.code.append(f"{L2}:")
         
+   # Validación de operadores de igualdad ==, !=     
     def visitIgualdad(self, ctx):
 
         left = self.visit(ctx.comparacion(0))
