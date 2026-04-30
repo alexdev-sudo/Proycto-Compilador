@@ -8,6 +8,7 @@ class TACGenerator(gramatica_v3Visitor):
         self.temp_count = 0
         self.label_count = 0
 
+
     def visitPrimario(self, ctx):
 
         if ctx.NUM():
@@ -182,4 +183,3 @@ class TACGenerator(gramatica_v3Visitor):
             left = temp
 
         return left
-        
