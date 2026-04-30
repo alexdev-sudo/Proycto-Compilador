@@ -192,3 +192,5 @@ class TACGenerator(gramatica_v3Visitor):
             left = temp
 
         return left
+    def get_code(self):
+        return "\n".join(self.code)
