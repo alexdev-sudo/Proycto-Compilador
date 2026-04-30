@@ -153,6 +153,7 @@ class TACGenerator(gramatica_v3Visitor):
 
         return left
     
+    # Manejo de estructura condicional if-else  
     def visitIfstm(self, ctx):
         cond = self.visit(ctx.expr())
 
