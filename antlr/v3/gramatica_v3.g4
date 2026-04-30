@@ -79,7 +79,7 @@ primario
 
 // TOKENS
 // FIX: todas las keywords ANTES de VAR para que ANTLR4 las priorice
-
+//FIX BREAK, CONTINUE, IMPORT, LBRACKET, RBRACKET y MOD antes de VAR
 INI       : 'program';
 INILLAVE  : '{';
 FIN       : '}';
@@ -88,6 +88,9 @@ ELSE      : 'else';
 WHILE     : 'while';
 FOR       : 'for';
 RETURN    : 'return';
+BREAK    : 'break';
+CONTINUE : 'continue';
+IMPORT : 'import';
 
 INT    : 'int';
 FLOAT  : 'float';
@@ -101,6 +104,9 @@ FALSE : 'false';
 
 // FIX print: keyword explícita antes de VAR
 PRINT : 'print';
+LBRACKET : '[';
+RBRACKET : ']';
+MOD: '%';
 
 COMMA     : ',';
 PARENI    : '(';
@@ -121,12 +127,6 @@ DIFF      : '!=';
 AND       : '&&';
 OR        : '||';
 NOT       : '!';
-LBRACKET : '[';
-RBRACKET : ']';
-MOD: '%';
-BREAK    : 'break';
-CONTINUE : 'continue';
-IMPORT : 'import';
 
 // VAR al final, después de todas las keywords
 VAR   : [a-zA-Z][a-zA-Z0-9]*;
