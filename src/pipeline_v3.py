@@ -7,9 +7,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from antlr4 import *
 from antlr.v3.gramatica_v3Lexer import gramatica_v3Lexer
 from antlr.v3.gramatica_v3Parser import gramatica_v3Parser
-from src.custom_errors import CustomErrorListener, LexerErrorListener
-from src.visitador_semantico import semanticVisitor
-from src.visitador_interprete import EvalVisitor
+from .custom_errors import CustomErrorListener, LexerErrorListener
+from .visitador_semantico import semanticVisitor
+from .visitador_interprete import EvalVisitor
+from src.ir_generator import IRGenerator
 
 def fase(nombre, numero):
     print(f"\n{'='*50}")
