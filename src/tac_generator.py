@@ -101,7 +101,7 @@ class TACGenerator(gramatica_v3Visitor):
         self.code.append(f"{name} = {value}")
 
 
-
+    # Implementacion del ciclo while usando etiquetas de inicio y fin
     def visitWhilestm(self, ctx):
 
         Lstart = self.new_label()
