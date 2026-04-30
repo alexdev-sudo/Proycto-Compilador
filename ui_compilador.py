@@ -5,6 +5,7 @@ import subprocess
 import tempfile
 import os
 
+# Inicia la consola con rich para mostrar salida estilizada
 console = Console()
 
 
