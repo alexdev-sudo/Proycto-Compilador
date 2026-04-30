@@ -16,7 +16,7 @@ def ejecutar_pipeline(codigo):
 
     # Ejecutar pipeline
     result = subprocess.run(
-        ["python3", "Pipeline.py", filename],
+        ["python3", "main.py", filename],
         capture_output=True,
         text=True
     )
