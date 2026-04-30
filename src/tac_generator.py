@@ -79,7 +79,7 @@ class TACGenerator(gramatica_v3Visitor):
             left = temp
 
         return left
-        
+
     
     def visitAsignacion(self, ctx):
 
@@ -99,6 +99,7 @@ class TACGenerator(gramatica_v3Visitor):
             value = "0"
 
         self.code.append(f"{name} = {value}")
+        
 
     def visitWhilestm(self, ctx):
 
