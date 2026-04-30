@@ -2,6 +2,7 @@ from turtle import left
 from antlr.v3.gramatica_v3Visitor import gramatica_v3Visitor
 from src.tabla_simbolos import TablaSibolos
 
+
 class TACGenerator(gramatica_v3Visitor):
     def __init__(self):
         self.code = []
@@ -99,6 +100,7 @@ class TACGenerator(gramatica_v3Visitor):
             value = "0"
 
         self.code.append(f"{name} = {value}")
+
 
 
     # Implementacion del ciclo while usando etiquetas de inicio y fin
