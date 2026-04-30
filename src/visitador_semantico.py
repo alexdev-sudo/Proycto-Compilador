@@ -13,7 +13,7 @@ class semanticVisitor(gramatica_v3Visitor):
     def error(self, msg, ctx):
         line = ctx.start.line
         col = ctx.start.column
-        self.errors.append(f"[Error semántico] en línea {line}, columna {col}: {msg}")
+        self.errors.append(f"[Error Semántico] Línea {line}, Columna {col}: {msg}")
 
     def visitExprInput(self, ctx):
         return self.visit(ctx.expr())
