@@ -80,7 +80,7 @@ class TACGenerator(gramatica_v3Visitor):
 
         return left
 
-    
+   # Manejo de asignaciones y declaracion de variables 
     def visitAsignacion(self, ctx):
 
         name = ctx.VAR().getText()
@@ -99,7 +99,8 @@ class TACGenerator(gramatica_v3Visitor):
             value = "0"
 
         self.code.append(f"{name} = {value}")
-        
+
+
 
     def visitWhilestm(self, ctx):
 
