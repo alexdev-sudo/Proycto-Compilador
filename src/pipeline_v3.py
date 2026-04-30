@@ -24,9 +24,9 @@ def main():
     resultados = []
 
     # ─────────────────────────────────────────
-    # FASE 1 — LÉXICO
+    # FASE 1 — LEXICO
     # ─────────────────────────────────────────
-    fase("LÉXICO", 1)
+    fase("LEXICO", 1)
     t_inicio = time.time()
 
     lexer = gramatica_v3Lexer(input_stream)
@@ -43,16 +43,16 @@ def main():
         for e in lexer_listener.errors:
             print(e)
         print(f"\n  Estado: ERROR | Tiempo: {t_lexico:.2f}ms")
-        print("\n  Pipeline detenido en fase léxica.")
+        print("\n  Pipeline detenido en fase lexica.")
         return
 
     print(f"  Estado: OK | Tiempo: {t_lexico:.2f}ms")
-    resultados.append(("Léxico", "OK", t_lexico))
+    resultados.append(("Lexico", "OK", t_lexico))
 
     # ─────────────────────────────────────────
-    # FASE 2 — SINTÁCTICO
+    # FASE 2 — SINTACTICO
     # ─────────────────────────────────────────
-    fase("SINTÁCTICO", 2)
+    fase("SINTACTICO", 2)
     t_inicio = time.time()
 
     parser = gramatica_v3Parser(token_stream)
@@ -68,16 +68,16 @@ def main():
         for e in parser_listener.errors:
             print(e)
         print(f"\n  Estado: ERROR | Tiempo: {t_sintactico:.2f}ms")
-        print("\n  Pipeline detenido en fase sintáctica.")
+        print("\n  Pipeline detenido en fase sintactica.")
         return
 
     print(f"  Estado: OK | Tiempo: {t_sintactico:.2f}ms")
-    resultados.append(("Sintáctico", "OK", t_sintactico))
+    resultados.append(("Sintactico", "OK", t_sintactico))
 
     # ─────────────────────────────────────────
-    # FASE 3 — SEMÁNTICO
+    # FASE 3 — SEMANTICO
     # ─────────────────────────────────────────
-    fase("SEMÁNTICO", 3)
+    fase("SEMANTICO", 3)
     t_inicio = time.time()
 
     semantico = semanticVisitor()
@@ -89,16 +89,16 @@ def main():
         for e in semantico.errors:
             print(e)
         print(f"\n  Estado: ERROR | Tiempo: {t_semantico:.2f}ms")
-        print("\n  Pipeline detenido en fase semántica.")
+        print("\n  Pipeline detenido en fase semantica.")
         return
 
     print(f"  Estado: OK | Tiempo: {t_semantico:.2f}ms")
-    resultados.append(("Semántico", "OK", t_semantico))
+    resultados.append(("Semantico", "OK", t_semantico))
 
     # ─────────────────────────────────────────
-    # FASE 4 — GENERACIÓN TAC
+    # FASE 4 — GENERACION TAC
     # ─────────────────────────────────────────
-    fase("GENERACIÓN TAC", 4)
+    fase("GENERACION TAC", 4)
     t_inicio = time.time()
 
     try:
@@ -112,7 +112,6 @@ def main():
             f.write(tac_output)
 
         t_tac = (time.time() - t_inicio) * 1000
-        print(tac_output)
         print(f"  Estado: OK | Tiempo: {t_tac:.2f}ms")
         resultados.append(("TAC", "OK", t_tac))
 
@@ -123,9 +122,9 @@ def main():
         resultados.append(("TAC", "ERROR", t_tac))
 
     # ─────────────────────────────────────────
-    # FASE 5 — GENERACIÓN LLVM IR
+    # FASE 5 — GENERACION LLVM IR
     # ─────────────────────────────────────────
-    fase("GENERACIÓN LLVM IR", 5)
+    fase("GENERACION LLVM IR", 5)
     t_inicio = time.time()
 
     try:
@@ -138,7 +137,6 @@ def main():
             f.write(ir_output)
 
         t_ir = (time.time() - t_inicio) * 1000
-        print(ir_output)
         print(f"  Estado: OK | Tiempo: {t_ir:.2f}ms")
         resultados.append(("LLVM IR", "OK", t_ir))
 
@@ -149,9 +147,9 @@ def main():
         resultados.append(("LLVM IR", "ERROR", t_ir))
 
     # ─────────────────────────────────────────
-    # FASE 6 — EJECUCIÓN / INTÉRPRETE
+    # FASE 6 — EJECUCION / INTERPRETE
     # ─────────────────────────────────────────
-    fase("EJECUCIÓN", 6)
+    fase("EJECUCION", 6)
     t_inicio = time.time()
 
     try:
@@ -159,13 +157,13 @@ def main():
         interpreter.visit(tree)
         t_interprete = (time.time() - t_inicio) * 1000
         print(f"  Estado: OK | Tiempo: {t_interprete:.2f}ms")
-        resultados.append(("Ejecución", "OK", t_interprete))
+        resultados.append(("Ejecucion", "OK", t_interprete))
 
     except Exception as e:
         t_interprete = (time.time() - t_inicio) * 1000
-        print(f"  Error ejecución: {e}")
+        print(f"  Error ejecucion: {e}")
         print(f"  Estado: ERROR | Tiempo: {t_interprete:.2f}ms")
-        resultados.append(("Ejecución", "ERROR", t_interprete))
+        resultados.append(("Ejecucion", "ERROR", t_interprete))
 
     # ─────────────────────────────────────────
     # RESUMEN FINAL
