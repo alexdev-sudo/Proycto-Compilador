@@ -139,11 +139,13 @@ class TACGenerator(gramatica_v3Visitor):
 
         self.code.append(f"goto {Lstart}")
         self.code.append(f"{Lend}:")   
-    
+
+  # Genera una nueva variable temporal  
     def new_temp(self):
         self.temp_count += 1
         return f"t{self.temp_count}"
-
+    
+# Genera una nueva etiqueta
     def new_label(self):
         self.label_count += 1
         return f"l{self.label_count}"
