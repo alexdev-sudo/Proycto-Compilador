@@ -12,7 +12,7 @@ class TACGenerator(gramatica_v3Visitor):
         self.temp_count = 0
         self.label_count = 0
 
-
+# Manejo de valores constantes (enteros, floats, strings, booleanos)
     def visitPrimario(self, ctx):
 
         if ctx.NUM():
