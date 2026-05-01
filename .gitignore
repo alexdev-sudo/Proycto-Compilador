@@ -5,7 +5,7 @@
 # Python
 __pycache__/
 *.pyc
-
+*.java
 # Virtual environments
 antlr_env/
 venv/
