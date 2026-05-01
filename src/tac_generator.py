@@ -7,6 +7,7 @@ from src.tabla_simbolos import TablaSibolos
 # Clase que recorre el árbol sintáctico (AST) y genera código intermedio (TAC)
 class TACGenerator(gramatica_v3Visitor):
     def __init__(self):
+        # Lista donde se almacena el código TAC generado
         self.code = []
         self.temp_count = 0
         self.label_count = 0
