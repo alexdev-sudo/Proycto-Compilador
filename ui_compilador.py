@@ -47,6 +47,7 @@ def main():
     console.print(Panel(output, title="Resultado del Pipeline", style="cyan"))
     console.print(Panel(tac, title="Codigo TAC", style="magenta"))
     console.print(Panel(ir, title="LLVM IR", style="green"))
+    # Agrega salto de línea final al código ingresado
     codigo += "\n" 
 
 # Verifica si el archivo existe antes de leerlo
