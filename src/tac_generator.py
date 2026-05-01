@@ -4,7 +4,7 @@ from turtle import left
 from antlr.v3.gramatica_v3Visitor import gramatica_v3Visitor
 from src.tabla_simbolos import TablaSibolos
 
-
+# Clase que recorre el árbol sintáctico (AST) y genera código intermedio (TAC)
 class TACGenerator(gramatica_v3Visitor):
     def __init__(self):
         self.code = []
@@ -174,7 +174,7 @@ class TACGenerator(gramatica_v3Visitor):
             self.visit(ctx.bloque(1))
 
         self.code.append(f"{L2}:")
-        
+
    # Validación de operadores de igualdad ==, !=     
     def visitIgualdad(self, ctx):
 
