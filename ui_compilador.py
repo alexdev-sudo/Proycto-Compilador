@@ -49,6 +49,7 @@ def main():
     console.print(Panel(ir, title="LLVM IR", style="green"))
     codigo += "\n" 
 
+# Verifica si el archivo existe antes de leerlo
 def leer_archivo(path):
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8") as f:
