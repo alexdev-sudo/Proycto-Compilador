@@ -26,7 +26,7 @@ def ejecutar_pipeline(codigo):
 
     return result.stdout
 
-
+# Función principal del programa
 def main():
     
     console.print(Panel("COMPILADOR v3", style="bold green"))
