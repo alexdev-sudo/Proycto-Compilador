@@ -1,5 +1,5 @@
-# Compilador — Expresiones21
-### Proyecto Fase II · Compiladores · Universidad Mariano Gálvez
+# Compilador — gramatica_v3
+### Proyecto Fase III · Compiladores · Universidad Mariano Gálvez
 
 ---
 
@@ -17,9 +17,9 @@
 
 ## Descripción
 
-Este proyecto corresponde a la **Fase II** del compilador desarrollado en el curso de Compiladores. En esta fase se evolucionó el analizador de la Fase I hacia un **front-end de compilación completo** con un **intérprete funcional**.
+Este proyecto corresponde a la **Fase III** del compilador desarrollado en el curso de Compiladores. En esta fase se evolucionó el compilador de la Fase II incorporando la **Generación de Código Intermedio** en dos representaciones complementarias: **Código de Tres Direcciones (TAC)** como instrumento teórico y **LLVM IR funcional** como artefacto ejecutable real. Adicionalmente se construyó una **Interfaz de Compilación Interactiva** y se extendió la gramática del lenguaje.
 
-El compilador procesa un lenguaje propio llamado **Expresiones21**, implementado con **ANTLR4** para el análisis léxico y sintáctico, y **Python** para el análisis semántico y la interpretación. El sistema sigue un pipeline secuencial que garantiza que el código fuente sea analizado, validado y ejecutado solo si no presenta errores.
+El compilador procesa un lenguaje propio implementado con **ANTLR4** para el análisis léxico y sintáctico, y **Python** para el análisis semántico, interpretación y generación de código. El sistema sigue un pipeline secuencial de **6 fases** que garantiza que el código fuente sea analizado, validado y ejecutado solo si no presenta errores.
 
 ---
 
@@ -29,6 +29,8 @@ El compilador procesa un lenguaje propio llamado **Expresiones21**, implementado
 |------------|-----|
 | Python 3 | Lenguaje principal del proyecto |
 | ANTLR4 | Generación del analizador léxico y sintáctico |
+| llvmlite | Generación de código LLVM IR |
+| rich | Interfaz de compilación interactiva en terminal |
 | WSL 2 + Ubuntu | Entorno de ejecución |
 | Visual Studio Code | IDE de desarrollo |
 | Git + GitHub | Control de versiones |
@@ -37,30 +39,40 @@ El compilador procesa un lenguaje propio llamado **Expresiones21**, implementado
 
 ## Arquitectura del Proyecto
 
-El compilador sigue un **pipeline secuencial** de 4 fases. Si en cualquier fase se detectan errores, el pipeline se detiene y no continúa a la siguiente fase.
+El compilador sigue un **pipeline secuencial de 6 fases**. Si en las fases léxica o sintáctica se detectan errores, el pipeline se detiene. Las fases TAC e IR reportan error pero no detienen el pipeline.
 
 ```
-Código fuente (.txt)
+Código fuente (.src)
         │
         ▼
-┌─────────────────┐
-│  Fase Léxica    │  Expresiones21Lexer  ──► Error léxico → detener
-└─────────────────┘
+┌─────────────────────┐
+│  Fase 1 — Léxico    │  gramatica_v3Lexer   ──► Error léxico → detener
+└─────────────────────┘
         │
         ▼
-┌─────────────────┐
-│  Fase Sintáctica│  Expresiones21Parser ──► Error sintáctico → detener
-└─────────────────┘
+┌─────────────────────┐
+│  Fase 2 — Sintáctico│  gramatica_v3Parser  ──► Error sintáctico → detener
+└─────────────────────┘
         │
         ▼
-┌─────────────────┐
-│  Fase Semántica │  semanticVisitor     ──► Error semántico → detener
-└─────────────────┘
+┌─────────────────────┐
+│  Fase 3 — Semántico │  semanticVisitor     ──► Error semántico → detener
+└─────────────────────┘
         │
         ▼
-┌─────────────────┐
-│  Intérprete     │  EvalVisitor         ──► Ejecución y resultados
-└─────────────────┘
+┌─────────────────────┐
+│  Fase 4 — TAC       │  TACGenerator        ──► output.tac
+└─────────────────────┘
+        │
+        ▼
+┌─────────────────────┐
+│  Fase 5 — LLVM IR   │  IRGenerator         ──► output.ll
+└─────────────────────┘
+        │
+        ▼
+┌─────────────────────┐
+│  Fase 6 — Ejecución │  EvalVisitor         ──► Resultados en consola
+└─────────────────────┘
 ```
 
 ---
@@ -70,67 +82,94 @@ Código fuente (.txt)
 ```
 Proycto-Compilador/
 │
-├── Expresiones21.g4              # Gramática del lenguaje en ANTLR4
+├── antlr/
+│   ├── v1/                        # Gramática original Expresiones21
+│   └── v3/                        # Gramática actualizada
+│       ├── gramatica_v3.g4        # Gramática del lenguaje en ANTLR4
+│       ├── gramatica_v3Lexer.py   # Generado por ANTLR4
+│       ├── gramatica_v3Parser.py  # Generado por ANTLR4
+│       └── gramatica_v3Visitor.py # Generado por ANTLR4
 │
-├── Pipeline.py                   # Punto de entrada: orquesta todas las fases
-├── custom_errors.py              # Listeners personalizados para errores léxicos y sintácticos
-├── tabla_simbolos.py             # Tabla de símbolos: pila de tablas hash para scopes
-├── visitador_semantico.py        # Visitor semántico: validaciones de tipos y scopes
-├── visitador_interprete.py       # Visitor intérprete: ejecuta el árbol sintáctico
+├── src/
+│   ├── pipeline_v3.py             # Orquesta las 6 fases con medición de tiempos
+│   ├── main.py                    # Punto de entrada alternativo
+│   ├── custom_errors.py           # Listeners para errores léxicos y sintácticos
+│   ├── tabla_simbolos.py          # Tabla de símbolos con manejo de scopes
+│   ├── visitador_semantico.py     # Visitor semántico
+│   ├── visitador_interprete.py    # Visitor intérprete
+│   ├── tac_generator.py           # Generador de código TAC
+│   ├── ir_generator.py            # Generador de código LLVM IR
+│   └── ui_compilador.py           # Interfaz interactiva de compilación
 │
-├── Expresiones21Lexer.py         # Generado por ANTLR4
-├── Expresiones21Parser.py        # Generado por ANTLR4
-├── Expresiones21Visitor.py       # Generado por ANTLR4
+├── inputs/
+│   ├── test_ok.src                # Caso de prueba válido complejo
+│   ├── test_lexico.src            # Caso de prueba: error léxico
+│   ├── test_sintactico.src        # Caso de prueba: error sintáctico
+│   └── test_semantico.src         # Caso de prueba: error semántico
 │
-└── entradas/
-    ├── programa_valido.txt       # Caso de prueba: programa válido completo
-    ├── error_lexico.txt          # Caso de prueba: error léxico
-    ├── error_sintactico.txt      # Caso de prueba: error sintáctico
-    └── error_semantico.txt       # Caso de prueba: error semántico
+├── outputs/                       # Generado automáticamente (ignorado por Git)
+│   ├── output.tac                 # Código de tres direcciones generado
+│   └── output.ll                  # Módulo LLVM IR generado
+│
+└── .gitignore
 ```
 
 ---
 
-## Gramática del Lenguaje (Expresiones21)
+## Gramática del Lenguaje (gramatica_v3)
 
 ### Tipos de datos soportados
 ```
 int     float     string     bool     void
 ```
 
+### Novedades en Fase III
+
+#### Arreglos 1D
+```
+int[] nums = [1, 2, 3];
+print(nums[0]);
+```
+
+#### Operador módulo
+```
+int r = x % 2;
+```
+
+#### Break y Continue
+```
+while (x > 0) {
+    if (x == 5) { break; }
+    x = x - 1;
+}
+```
+
+#### Imports
+```
+import math;
+```
+
+#### Concatenación de cadenas
+```
+string msg = "Hola" + " mundo";
+```
+
 ### Estructuras de control
 ```
-if / else      while      for
+if / else      while      for      break      continue
 ```
 
 ### Funciones
 ```
-// Definición
 int factorial(int n) {
-    if (n <= 1) {
-        return 1;
-    } else {
-        return n * factorial(n - 1);
-    }
+    if (n <= 1) { return 1; }
+    return n * factorial(n - 1);
 }
-
-// Llamada
-int resultado;
-resultado = factorial(5);
 ```
 
 ### Instrucción de impresión
 ```
 print(resultado);
-print(x);
-```
-
-### Declaración de variables
-```
-int x;
-float precio;
-string nombre;
-bool activo;
 ```
 
 ---
@@ -145,17 +184,23 @@ sudo apt update
 sudo apt install python3 python3-pip
 ```
 
-### 3. Instalar ANTLR4 runtime para Python
+### 3. Crear y activar entorno virtual
 ```bash
-pip install antlr4-python3-runtime
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-### 4. Instalar Java (necesario para ANTLR4)
+### 4. Instalar dependencias
+```bash
+pip install antlr4-python3-runtime llvmlite rich
+```
+
+### 5. Instalar Java (necesario para ANTLR4)
 ```bash
 sudo apt install default-jdk
 ```
 
-### 5. Descargar ANTLR4
+### 6. Descargar ANTLR4
 ```bash
 wget https://www.antlr.org/download/antlr-4.13.1-complete.jar
 ```
@@ -170,135 +215,128 @@ git clone https://github.com/alexdev-sudo/Proycto-Compilador.git
 cd Proycto-Compilador
 ```
 
-### Paso 2: Generar los archivos de ANTLR4
-```bash
-java -jar antlr-4.13.1-complete.jar -Dlanguage=Python3 Expresiones21.g4 -visitor
-```
-
-### Paso 3: Activar el entorno virtual (si aplica)
+### Paso 2: Activar el entorno virtual
 ```bash
 source venv/bin/activate
 ```
 
-### Paso 4: Ejecutar el pipeline con un archivo de entrada
+### Paso 3: Regenerar archivos de ANTLR4 (si es necesario)
 ```bash
-python3 Pipeline.py entradas/programa_valido.txt
+cd antlr/v3
+antlr4 -Dlanguage=Python3 -visitor -no-listener gramatica_v3.g4
+cd ../..
+```
+
+### Paso 4: Ejecutar la interfaz interactiva
+```bash
+python3 ui_compilador.py
+```
+
+### Paso 5: O ejecutar el pipeline directamente
+```bash
+python3 src/pipeline_v3.py inputs/test_ok.src
 ```
 
 ---
 
 ## Casos de Prueba
 
-### Programa válido
+### Programa válido complejo (`inputs/test_ok.src`)
 ```
 program {
-    int x;
-    x = 10;
-    string prefijo;
-    prefijo = "El resultado es: ";
+    import math;
+    int[] nums = [3, 1, 4, 1, 5];
+    int total = 0;
+    int i = 0;
 
-    int factorial(int n) {
-        if (n <= 1) {
-            return 1;
-        } else {
-            return n * factorial(n - 1);
+    while (i < 5) {
+        int r = nums[i] % 2;
+        if (r == 0) {
+            total = total + nums[i];
         }
+        i = i + 1;
+        if (total > 10) { break; }
     }
 
-    while (x > 0) {
-        int temp;
-        temp = factorial(x);
-        print(prefijo);
-        print(temp);
-        x = x - 2;
+    string msg = "Resultado: " + "calculado";
+    print(msg);
+    print(total);
+}
+```
+**Salida esperada:**
+```
+Resultado: calculado
+4
+```
+
+---
+
+### Error léxico (`inputs/test_lexico.src`)
+```
+program {
+    int x = 10;
+    int y = 20@5;
+    print(x);
+}
+```
+**Salida esperada:**
+```
+[Error Léxico] Línea 3, Columna 14: Símbolo no reconocido '@'
+Pipeline detenido en fase léxica.
+```
+
+---
+
+### Error sintáctico (`inputs/test_sintactico.src`)
+```
+program {
+    int x = 10
+    if (x > 5) {
+        print(x)
     }
 }
 ```
-**Salida esperada:** Imprime los factoriales de 10, 8, 6, 4, 2.
-
----
-
-### Error semántico — Tipos incompatibles
-```
-program {
-    int x;
-    x = "hola";
-}
-```
 **Salida esperada:**
 ```
-[Error semántico] en línea 3, columna 0: Tipo incompatible: no se puede asignar 'string' a 'int'
-Error en Fase Semantica, Pipeline detenido
+[Error Sintáctico] Línea 3, Columna 4: missing ';' at 'if'
+Pipeline detenido en fase sintáctica.
 ```
 
 ---
 
-### Error sintáctico — Falta semicolon
+### Error semántico (`inputs/test_semantico.src`)
 ```
 program {
-    int x
-    x = 10;
+    int x = 10;
+    print(y);
 }
 ```
-**Salida esperada:**
-```
-[Error sintáctico] en línea 3, columna 4: ...
-Error en Fase Sintactica, Pipeline detendo
-```
-
----
-
-### Error léxico — Carácter no reconocido
-```
-program {
-    int x;
-    x = 10 @ 5;
-}
-```
-**Salida esperada:**
-```
-[Error léxico] carácter no reconocido '@'
-Error en Fase Lexica, Pipeline detendo
-```
+**Salida esperada:** Error detectado por el visitor semántico — variable `y` no declarada.
 
 ---
 
 ## Componentes principales
 
-### `Pipeline.py`
-Punto de entrada del compilador. Orquesta las 4 fases secuencialmente. Si alguna fase falla, detiene la ejecución e imprime los errores encontrados.
+### `src/pipeline_v3.py`
+Orquesta las 6 fases secuencialmente con medición de tiempos en milisegundos. Muestra un resumen final con el estado de cada fase.
 
-### `tabla_simbolos.py`
-Implementa la **pila de tablas hash** para el manejo de scopes. Permite declarar, buscar y actualizar variables y funciones respetando la jerarquía de ámbitos.
+### `src/tac_generator.py`
+Visitor que recorre el AST y emite instrucciones de Código de Tres Direcciones. Genera temporales (`t1`, `t2`...) y etiquetas (`L1`, `L2`...) automáticamente. Soporta arreglos, funciones, break, continue, import y módulo.
 
-Métodos principales:
-- `declare(name, tipo)` — Registra una variable en el scope actual
-- `assign(name, tipo)` — Actualiza una variable en los scopes activos
-- `lookup(name)` — Busca una variable respetando la jerarquía de scopes
-- `declare_function(name, return_type, params, ctx)` — Registra una función en el scope global
-- `get_function(name)` — Recupera la información de una función declarada
+### `src/ir_generator.py`
+Visitor que genera un módulo LLVM IR usando `llvmlite`. Produce código compilable y ejecutable. Soporta tipos `int`, `float`, `bool`, arreglos, funciones, ciclos y break.
 
-### `visitador_semantico.py`
-Visitor que recorre el árbol sintáctico realizando validaciones lógicas:
-- Verificación de tipos en asignaciones y expresiones
-- Validación de variables declaradas antes de su uso
-- Manejo de scopes mediante creación y eliminación de ámbitos
-- Validación de funciones, parámetros y tipo de retorno
+### `src/ui_compilador.py`
+Interfaz interactiva de terminal usando `rich`. Permite escribir código fuente directamente, compilarlo con CTRL+D y visualizar el resultado del pipeline, el TAC generado y el LLVM IR en paneles estilizados.
 
-### `visitador_interprete.py`
-Visitor que ejecuta el programa una vez superadas todas las validaciones:
-- Soporte para estructuras de control: `while`, `for`, `if/else`
-- Soporte para funciones con parámetros y retorno
-- Instrucción `print` para mostrar resultados en terminal
-- Reconocimiento de tipos: `int`, `float`, `string`, `bool`
+### `src/tabla_simbolos.py`
+Implementa la pila de tablas hash para el manejo de scopes. Soporta declaración de variables, arreglos y funciones con validación de tipos.
 
----
+### `src/visitador_semantico.py`
+Valida tipos, scopes, arreglos, funciones y nuevas instrucciones (break, continue, import).
 
-## Observaciones y Limitaciones conocidas
-
-- La ejecución de funciones no está completamente implementada en tiempo de ejecución.
-- El manejo de instrucciones `return` no está totalmente integrado en el proceso de interpretación.
-- No se dispone de un stack de llamadas para gestionar funciones anidadas correctamente.
+### `src/visitador_interprete.py`
+Ejecuta el programa con soporte completo para arreglos, módulo `%`, break, continue e imports.
 
 ---
 
@@ -309,9 +347,26 @@ El proyecto utiliza la siguiente estructura de ramas:
 | Rama | Descripción |
 |------|-------------|
 | `main` | Rama de producción — código estable y entregable |
-| `test` | Rama de desarrollo — commits de trabajo y pruebas |
+| `production` | Rama de producción alternativa |
+| `test` | Rama de desarrollo — integración de todas las features |
 
-Los commits están organizados de forma descriptiva para evidenciar el progreso incremental del proyecto.
+Los commits están organizados de forma descriptiva por fase y componente.
+
+---
+
+## Resumen de cambios Fase II → Fase III
+
+| Componente | Cambio |
+|------------|--------|
+| `gramatica_v3.g4` | Arreglos 1D, módulo, break, continue, imports |
+| `pipeline_v3.py` | 6 fases con medición de tiempos |
+| `tac_generator.py` | Nuevo — genera código TAC |
+| `ir_generator.py` | Nuevo — genera LLVM IR con llvmlite |
+| `ui_compilador.py` | Nuevo — interfaz interactiva con rich |
+| `visitador_semantico.py` | Migrado a gramatica_v3, nuevas reglas |
+| `visitador_interprete.py` | Migrado a gramatica_v3, soporte arreglos y break |
+| `tabla_simbolos.py` | Soporte para tipos arreglo (`int[]`, `float[]`) |
+| Estructura | Reorganización en carpetas `antlr/`, `src/`, `inputs/`, `outputs/` |
 
 ---
 
