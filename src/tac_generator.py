@@ -147,6 +147,7 @@ class TACGenerator(gramatica_v3Visitor):
         self.label_count += 1
         return f"l{self.label_count}"
     
+  # Maneja operaciones + y - usando temporales  
     def visitSuma(self, ctx):
         left = self.visit(ctx.producto(0))
 
