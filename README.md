@@ -17,7 +17,7 @@
 
 ## Descripción
 
-Este proyecto corresponde a la **Fase III** del compilador desarrollado en el curso de Compiladores. En esta fase se evolucionó el compilador de la Fase II incorporando la **Generación de Código Intermedio** en dos representaciones complementarias: **Código de Tres Direcciones (TAC)** como instrumento teórico y **LLVM IR funcional** como artefacto ejecutable real. Adicionalmente se construyó una **Interfaz de Compilación Interactiva** y se extendió la gramática del lenguaje.
+Este proyecto corresponde a la **Fase III** del compilador desarrollado en el curso de Compiladores. En esta fase se evolucionó el compilador de la Fase II incorporando la **Generación de Código Intermedio** en dos representaciones complementarias: **Código de Tres Direcciones (TAC)** como instrumento teórico y **LLVM IR funcional** como artefacto ejecutable real. Adicionalmente se construyó una **Interfaz de Compilación** y se extendió la gramática del lenguaje.
 
 El compilador procesa un lenguaje propio implementado con **ANTLR4** para el análisis léxico y sintáctico, y **Python** para el análisis semántico, interpretación y generación de código. El sistema sigue un pipeline secuencial de **6 fases** que garantiza que el código fuente sea analizado, validado y ejecutado solo si no presenta errores.
 
@@ -346,8 +346,8 @@ El proyecto utiliza la siguiente estructura de ramas:
 
 | Rama | Descripción |
 |------|-------------|
-| `main` | Rama de producción — código estable y entregable |
-| `production` | Rama de producción alternativa |
+| `production` | Rama de producción — código estable y entregable |
+| `main` | Rama de producción alternativa |
 | `test` | Rama de desarrollo — integración de todas las features |
 
 Los commits están organizados de forma descriptiva por fase y componente.
