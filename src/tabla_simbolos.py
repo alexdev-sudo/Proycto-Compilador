@@ -14,7 +14,7 @@ class TablaSibolos:
             raise Exception(f"Variable '{name}' ya declarada en el scope actual.")
         self.Scopes[-1][name] = tipo
 
-    # Busca la variable en todos los scopes activos y actualiza su tipo si existe
+    # Busca la variable en todos los scopes activos y actualiza su tipo si existe.
     def assign(self, name, tipo):
         for scope in reversed(self.Scopes):
             if name in scope:

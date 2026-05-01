@@ -2,10 +2,9 @@ from antlr4.error.ErrorListener import ErrorListener
 
 class CustomErrorListener(ErrorListener):
     def __init__(self):
-        super().__init__()   #  inicializa la clase padre
+        super().__init__()
         self.errors = []
 
-  
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
         token = offendingSymbol.text if offendingSymbol else "?"
         self.errors.append(
@@ -18,6 +17,7 @@ class LexerErrorListener(ErrorListener):
         self.errors = []
 
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+        simbolo = msg.split("'")[1] if "'" in msg else "?"
         self.errors.append(
-            f"[Error Léxico] Línea {line}, Columna {column}: Símbolo no reconocido"
+            f"[Error Léxico] Línea {line}, Columna {column}: Símbolo no reconocido '{simbolo}'"
         )
