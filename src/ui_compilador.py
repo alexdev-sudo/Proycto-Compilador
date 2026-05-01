@@ -7,6 +7,12 @@ import os
 console = Console()
 
 def ejecutar_pipeline(codigo):
+    #limpiar archivos viejos
+    if os.path.exists("outputs/output.tac"):
+        os.remove("outputs/output.tac")
+    if os.path.exists("outputs/output.ll"):
+        os.remove("outputs/output.ll")
+
     with tempfile.NamedTemporaryFile(delete=False, suffix=".src", mode="w") as f:
         f.write(codigo)
         filename = f.name
