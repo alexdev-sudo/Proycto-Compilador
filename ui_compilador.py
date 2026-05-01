@@ -12,7 +12,9 @@ console = Console()
 def ejecutar_pipeline(codigo):
     # Crear archivo temporal
     with tempfile.NamedTemporaryFile(delete=False, suffix=".src", mode="w") as f:
+        # Escribe el código dentro del archivo temporal
         f.write(codigo)
+        # Guarda la ruta/nombre del archivo para usarlo después en el pipeline
         filename = f.name
 
     # Ejecutar pipeline
