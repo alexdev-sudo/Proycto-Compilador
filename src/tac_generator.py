@@ -63,6 +63,7 @@ class TACGenerator(gramatica_v3Visitor):
             left = temp
 
         return left    
+   # Genera código TAC para comparaciones relacionales 
     def visitComparacion(self, ctx):
 
         left = self.visit(ctx.suma(0))
