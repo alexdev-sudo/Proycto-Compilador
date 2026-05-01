@@ -43,6 +43,7 @@ class TACGenerator(gramatica_v3Visitor):
 
         if ctx.expr():
             return self.visit(ctx.expr())    
+ # Evalúa expresiones multiplicativas generando temporales
     def visitProducto(self, ctx):
 
         left = self.visit(ctx.unario(0))
