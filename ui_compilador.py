@@ -60,7 +60,7 @@ def leer_archivo(path):
     return "No generado."    
 
 
-
+# Punto de entrada del programa
 if __name__ == "__main__":
     main()
    
