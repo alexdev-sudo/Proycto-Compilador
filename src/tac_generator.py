@@ -41,12 +41,14 @@ class TACGenerator(gramatica_v3Visitor):
     # VARIABLES
     # ─────────────────────────────────────────
     def visitVarint(self, ctx):
-        nombre = ctx.VAR().getText()
+        nombre   = ctx.VAR().getText()
+        tipo_str = ctx.getChild(0).getText()
         if ctx.expr():
             val = self.visit(ctx.expr())
             self.emit(f"{nombre} = {val}")
         else:
-            self.emit(f"{nombre} = 0")
+            default = '""' if tipo_str == "string" else "0"
+            self.emit(f"{nombre} = {default}")
 
     def visitAsignacion(self, ctx):
         nombre = ctx.VAR().getText()

@@ -10,17 +10,27 @@ class IRGenerator(gramatica_v3Visitor):
         self.variables = {}
         self.functions = {}
         self.loop_stack = []
+        self._str_counter = 0
 
         # Tipos base
-        self.int_type   = ir.IntType(32)
-        self.float_type = ir.DoubleType()
-        self.bool_type  = ir.IntType(1)
-        self.void_type  = ir.VoidType()
+        self.int_type    = ir.IntType(32)
+        self.float_type  = ir.DoubleType()
+        self.bool_type   = ir.IntType(1)
+        self.void_type   = ir.VoidType()
+        self.char_type   = ir.IntType(8)
+        self.str_type    = self.char_type.as_pointer()   # i8*
 
         # Declarar printf externo
-        voidptr_ty = ir.IntType(8).as_pointer()
-        printf_ty  = ir.FunctionType(self.int_type, [voidptr_ty], var_arg=True)
+        printf_ty  = ir.FunctionType(self.int_type, [self.str_type], var_arg=True)
         self.printf = ir.Function(self.module, printf_ty, name="printf")
+
+        # Declarar strcat externo  (para concatenacion de strings)
+        strcat_ty  = ir.FunctionType(self.str_type, [self.str_type, self.str_type])
+        self.strcat_fn = ir.Function(self.module, strcat_ty, name="strcat")
+
+        # Declarar malloc externo  (para buffers dinamicos)
+        malloc_ty  = ir.FunctionType(self.str_type, [ir.IntType(64)])
+        self.malloc_fn = ir.Function(self.module, malloc_ty, name="malloc")
 
         # Función main
         main_ty   = ir.FunctionType(self.int_type, [])
@@ -28,11 +38,44 @@ class IRGenerator(gramatica_v3Visitor):
         block     = self.func.append_basic_block(name="entry")
         self.builder = ir.IRBuilder(block)
 
-    def get_ir(self):
-        if not self.builder.block.is_terminated:
-            self.builder.ret(ir.Constant(self.int_type, 0))
-        return str(self.module)
+    # ─────────────────────────────────────────
+    # HELPERS DE STRING
+    # ─────────────────────────────────────────
+    def _make_str_constant(self, text: str) -> ir.Value:
+        """Crea un global de cadena constante y devuelve un i8* a ella."""
+        # Quitar comillas si las tiene
+        if text.startswith('"') and text.endswith('"'):
+            text = text[1:-1]
+        # Escapar secuencias comunes
+        text = text.replace('\\n', '\n').replace('\\t', '\t')
+        data = bytearray((text + '\0').encode('utf-8'))
+        arr_type = ir.ArrayType(self.char_type, len(data))
+        name = f"str_{self._str_counter}"
+        self._str_counter += 1
+        gvar = ir.GlobalVariable(self.module, arr_type, name=name)
+        gvar.global_constant = True
+        gvar.linkage = 'internal'
+        gvar.initializer = ir.Constant(arr_type, list(data))
+        idx = [ir.Constant(self.int_type, 0), ir.Constant(self.int_type, 0)]
+        return self.builder.gep(gvar, idx, inbounds=True)
 
+    def _concat_strings(self, left: ir.Value, right: ir.Value) -> ir.Value:
+        """Concatena dos i8* usando un buffer dinamico."""
+        buf_size = ir.Constant(ir.IntType(64), 512)
+        buf = self.builder.call(self.malloc_fn, [buf_size], name="concat_buf")
+        # Inicializar buffer con cadena vacia
+        empty = self._make_str_constant("")
+        self.builder.call(self.strcat_fn, [buf, empty])
+        self.builder.call(self.strcat_fn, [buf, left])
+        self.builder.call(self.strcat_fn, [buf, right])
+        return buf
+
+    def _is_str_val(self, val: ir.Value) -> bool:
+        return isinstance(val.type, ir.PointerType) and val.type.pointee == self.char_type
+
+    # ─────────────────────────────────────────
+    # TIPOS
+    # ─────────────────────────────────────────
     def get_type(self, tipo_str):
         if tipo_str == "int":
             return self.int_type
@@ -40,8 +83,18 @@ class IRGenerator(gramatica_v3Visitor):
             return self.float_type
         elif tipo_str == "bool":
             return self.bool_type
+        elif tipo_str == "string":
+            return self.str_type          # i8*
         else:
             return self.int_type
+
+    # ─────────────────────────────────────────
+    # IR FINAL
+    # ─────────────────────────────────────────
+    def get_ir(self):
+        if not self.builder.block.is_terminated:
+            self.builder.ret(ir.Constant(self.int_type, 0))
+        return str(self.module)
 
     # ─────────────────────────────────────────
     # PROGRAMA
@@ -63,37 +116,48 @@ class IRGenerator(gramatica_v3Visitor):
     # VARIABLES
     # ─────────────────────────────────────────
     def visitVarint(self, ctx):
-        nombre = ctx.VAR().getText()
-        tipo_str = ctx.getChild(0).getText()
+        nombre    = ctx.VAR().getText()
+        tipo_str  = ctx.getChild(0).getText()
         llvm_type = self.get_type(tipo_str)
 
-        ptr = self.builder.alloca(llvm_type, name=nombre)
-        self.variables[nombre] = (ptr, llvm_type)
-
-        if ctx.expr():
-            val = self.visit(ctx.expr())
-            val = self._cast(val, llvm_type)
-            self.builder.store(val, ptr)
+        if llvm_type == self.str_type:
+            # Variable string: almacenamos un puntero (i8**)
+            ptr = self.builder.alloca(self.str_type, name=nombre)
+            if ctx.expr():
+                val = self.visit(ctx.expr())
+                self.builder.store(val, ptr)
+            else:
+                null_str = self._make_str_constant("")
+                self.builder.store(null_str, ptr)
+            self.variables[nombre] = (ptr, self.str_type)
         else:
-            self.builder.store(ir.Constant(llvm_type, 0), ptr)
+            ptr = self.builder.alloca(llvm_type, name=nombre)
+            self.variables[nombre] = (ptr, llvm_type)
+            if ctx.expr():
+                val = self.visit(ctx.expr())
+                val = self._cast(val, llvm_type)
+                self.builder.store(val, ptr)
+            else:
+                self.builder.store(ir.Constant(llvm_type, 0), ptr)
 
     def visitAsignacion(self, ctx):
         nombre = ctx.VAR().getText()
-        val = self.visit(ctx.expr())
+        val    = self.visit(ctx.expr())
         if nombre in self.variables:
             ptr, llvm_type = self.variables[nombre]
-            val = self._cast(val, llvm_type)
+            if llvm_type != self.str_type:
+                val = self._cast(val, llvm_type)
             self.builder.store(val, ptr)
 
     # ─────────────────────────────────────────
     # ARREGLOS
     # ─────────────────────────────────────────
     def visitArraydecl(self, ctx):
-        nombre = ctx.VAR().getText()
-        tipo_str = ctx.getChild(0).getText()
+        nombre    = ctx.VAR().getText()
+        tipo_str  = ctx.getChild(0).getText()
         llvm_type = self.get_type(tipo_str)
-        valores = [self.visit(e) for e in ctx.expr()]
-        n = len(valores)
+        valores   = [self.visit(e) for e in ctx.expr()]
+        n         = len(valores)
 
         arr_type = ir.ArrayType(llvm_type, n)
         ptr = self.builder.alloca(arr_type, name=nombre)
@@ -261,25 +325,20 @@ class IRGenerator(gramatica_v3Visitor):
         return self.builder.call(func, args)
 
     # ─────────────────────────────────────────
-    # PRINT
+    # PRINT  (soporta int, float, string)
     # ─────────────────────────────────────────
     def visitPrintstm(self, ctx):
         val = self.visit(ctx.expr())
 
-        if isinstance(val.type, ir.IntType) and val.type.width == 32:
-            fmt = "%d\n\0"
+        if self._is_str_val(val):
+            fmt_ptr = self._make_str_constant("%s\n")
+        elif isinstance(val.type, ir.IntType) and val.type.width == 32:
+            fmt_ptr = self._make_str_constant("%d\n")
         elif isinstance(val.type, ir.DoubleType):
-            fmt = "%f\n\0"
+            fmt_ptr = self._make_str_constant("%f\n")
         else:
-            fmt = "%d\n\0"
+            fmt_ptr = self._make_str_constant("%d\n")
 
-        fmt_bytes  = bytearray(fmt.encode("utf8"))
-        fmt_type   = ir.ArrayType(ir.IntType(8), len(fmt_bytes))
-        fmt_global = ir.GlobalVariable(self.module, fmt_type, name=f"fmt_{len(self.module.globals)}")
-        fmt_global.global_constant = True
-        fmt_global.initializer = ir.Constant(fmt_type, fmt_bytes)
-
-        fmt_ptr = self.builder.bitcast(fmt_global, ir.IntType(8).as_pointer())
         self.builder.call(self.printf, [fmt_ptr, val])
 
     # ─────────────────────────────────────────
@@ -326,7 +385,15 @@ class IRGenerator(gramatica_v3Visitor):
         for i in range(1, len(ctx.producto())):
             right = self.visit(ctx.producto(i))
             op = ctx.getChild(2*i - 1).getText()
-            if op == "+":
+            # Concatenacion de strings con '+'
+            if op == "+" and (self._is_str_val(resultado) or self._is_str_val(right)):
+                # Asegurar que ambos sean i8*
+                if not self._is_str_val(resultado):
+                    resultado = self._int_to_str(resultado)
+                if not self._is_str_val(right):
+                    right = self._int_to_str(right)
+                resultado = self._concat_strings(resultado, right)
+            elif op == "+":
                 resultado = self.builder.add(resultado, right)
             else:
                 resultado = self.builder.sub(resultado, right)
@@ -370,6 +437,9 @@ class IRGenerator(gramatica_v3Visitor):
             return ir.Constant(self.bool_type, 1)
         if ctx.FALSE():
             return ir.Constant(self.bool_type, 0)
+        # ── STRVAL: crear global de cadena constante ──
+        if ctx.STRVAL():
+            return self._make_str_constant(ctx.STRVAL().getText())
         if ctx.VAR():
             nombre = ctx.VAR().getText()
             if nombre in self.variables:
@@ -383,6 +453,20 @@ class IRGenerator(gramatica_v3Visitor):
     # ─────────────────────────────────────────
     # UTILIDADES
     # ─────────────────────────────────────────
+    def _int_to_str(self, val: ir.Value) -> ir.Value:
+        """Convierte un entero a string usando sprintf en un buffer temporal."""
+        buf_size = ir.Constant(ir.IntType(64), 32)
+        buf = self.builder.call(self.malloc_fn, [buf_size], name="int_str_buf")
+        # Declarar sprintf si no existe
+        if "sprintf" not in self.module.globals:
+            sprintf_ty = ir.FunctionType(self.int_type, [self.str_type, self.str_type], var_arg=True)
+            sprintf_fn = ir.Function(self.module, sprintf_ty, name="sprintf")
+        else:
+            sprintf_fn = self.module.globals["sprintf"]
+        fmt = self._make_str_constant("%d")
+        self.builder.call(sprintf_fn, [buf, fmt, val])
+        return buf
+
     def _cast(self, val, target_type):
         if val.type == target_type:
             return val
