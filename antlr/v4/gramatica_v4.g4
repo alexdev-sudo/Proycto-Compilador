@@ -133,6 +133,7 @@ producto: unario   ((MUL  | DIV  | MOD)  unario)*;
 // Casting: (int) expr,  (float) expr,  (bool) expr,  (string) expr
 unario
     : NOT unario                        #unarioNot
+    | REST unario                       #unarioNeg
     | PARENI tipodato PAREND unario     #unarioCast
     | primario                          #unarioPrimario
     ;
