@@ -249,6 +249,13 @@ stdout, stderr = ejecutar_pipeline(codigo, target)
     # ── Panel especial: contenido del LLVM IR generado ──────
     ir_code = leer_archivo("outputs/output.ll")
     mostrar_artefacto("⚡  LLVM IR  (outputs/output.ll)", ir_code, "bold green")
+    ir_opt = leer_archivo("outputs/output.opt.ll")
+
+mostrar_artefacto(
+    "LLVM IR OPTIMIZADO O3 (outputs/output.opt.ll)",
+    ir_opt,
+    "bold bright_green"
+)
 
     # ── Tabla resumen final ──────────────────────────────────
     if fases_data:
