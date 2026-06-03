@@ -46,10 +46,10 @@ def ejecutar_pipeline(codigo: str, target: str):
         filename = f.name
 
     result = subprocess.run(
-        ["python3", "src/pipeline_v3.py", filename],
-        capture_output=True,
-        text=True
-    )
+    ["python3", "src/pipeline_v3.py", filename, "--target", target],
+    capture_output=True,
+    text=True
+)
     os.unlink(filename)
     return result.stdout, result.stderr
 
