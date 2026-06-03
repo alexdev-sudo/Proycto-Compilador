@@ -1,6 +1,6 @@
-# Generated from gramatica_v4.g4 by ANTLR 4.11.1
+# Generated from antlr/v4/gramatica_v4.g4 by ANTLR 4.13.1
 from antlr4 import *
-if __name__ is not None and "." in __name__:
+if "." in __name__:
     from .gramatica_v4Parser import gramatica_v4Parser
 else:
     from gramatica_v4Parser import gramatica_v4Parser
@@ -196,6 +196,11 @@ class gramatica_v4Visitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by gramatica_v4Parser#unarioNot.
     def visitUnarioNot(self, ctx:gramatica_v4Parser.UnarioNotContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gramatica_v4Parser#unarioNeg.
+    def visitUnarioNeg(self, ctx:gramatica_v4Parser.UnarioNegContext):
         return self.visitChildren(ctx)
 
 
