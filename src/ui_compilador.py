@@ -195,13 +195,26 @@ def main():
     except EOFError:
         pass
 
-    if not codigo.strip():
-        console.print("[red]No se ingresó código.[/red]")
-        return
+if not codigo.strip():
+    console.print("[red]No se ingresó código.[/red]")
+    return
 
-    console.print("\n[bold cyan]⚙  Compilando...[/bold cyan]\n")
+console.print("[bold cyan]Plataforma destino:[/bold cyan]")
+console.print("1. Linux")
+console.print("2. Windows")
+console.print("3. Ambas")
 
-    stdout, stderr = ejecutar_pipeline(codigo)
+opcion = input("Selecciona 1/2/3: ").strip()
+
+target = {
+    "1": "linux",
+    "2": "windows",
+    "3": "both",
+}.get(opcion, "linux")
+
+console.print("\n[bold cyan]⚙  Compilando...[/bold cyan]\n")
+
+stdout, stderr = ejecutar_pipeline(codigo)
 
     # ── Mostrar errores de Python (si los hay) ──────────────
     if stderr and stderr.strip():
