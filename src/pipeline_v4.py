@@ -5,8 +5,8 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from antlr4 import *
-from antlr.v3.gramatica_v3Lexer import gramatica_v3Lexer
-from antlr.v3.gramatica_v3Parser import gramatica_v3Parser
+from antlr.v4.gramatica_v4Lexer import gramatica_v4Lexer
+from antlr.v4.gramatica_v4Parser import gramatica_v4Parser
 from src.custom_errors import CustomErrorListener, LexerErrorListener
 from src.visitador_semantico import semanticVisitor
 from src.visitador_interprete import EvalVisitor
@@ -29,7 +29,7 @@ def main():
     fase("LEXICO", 1)
     t_inicio = time.time()
 
-    lexer = gramatica_v3Lexer(input_stream)
+    lexer = gramatica_v4Lexer(input_stream)
     lexer_listener = LexerErrorListener()
     lexer.removeErrorListeners()
     lexer.addErrorListener(lexer_listener)
@@ -55,7 +55,7 @@ def main():
     fase("SINTACTICO", 2)
     t_inicio = time.time()
 
-    parser = gramatica_v3Parser(token_stream)
+    parser = gramatica_v4Parser(token_stream)
     parser_listener = CustomErrorListener()
     parser.removeErrorListeners()
     parser.addErrorListener(parser_listener)

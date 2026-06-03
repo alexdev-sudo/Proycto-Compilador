@@ -41,7 +41,7 @@ def ejecutar_pipeline(codigo: str):
         filename = f.name
 
     result = subprocess.run(
-        ["python3", "src/pipeline_v3.py", filename],
+        ["python3", "src/pipeline_v4.py", filename],
         capture_output=True,
         text=True
     )
