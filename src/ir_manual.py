@@ -2,6 +2,9 @@ import difflib
 import subprocess
 import tempfile
 from pathlib import Path
+
+# Mapeo entre los nombres de optimizaciones soportadas
+# y los nombres de pases utilizados por LLVM.
 PASS_MAP = {
     "mem2reg": "mem2reg",
     "instcombine": "instcombine",
