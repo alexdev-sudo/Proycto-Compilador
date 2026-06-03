@@ -266,6 +266,11 @@ def main():
     console.print("[bold cyan]IR Manual - passes disponibles:[/bold cyan]")
     console.print("mem2reg, instcombine, simplifycfg, dce, inline, loop-unroll")
 
+    raw = input("Passes separados por coma, o Enter para omitir: ").strip()
+
+    if raw:
+        selected = [p.strip() for p in raw.split(",") if p.strip()]
+
     # ── Tabla resumen final ──────────────────────────────────
     if fases_data:
         mostrar_resumen(fases_data)
