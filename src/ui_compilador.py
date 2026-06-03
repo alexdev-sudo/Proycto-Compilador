@@ -274,6 +274,12 @@ def main():
         manual_ir, info = apply_manual_passes(ir_code, selected)
         export_manual_ir(manual_ir)
 
+        mostrar_artefacto(
+            "IR MANUAL (outputs/output.manual.ll)",
+            manual_ir,
+            "bold magenta"
+        )
+
     # ── Tabla resumen final ──────────────────────────────────
     if fases_data:
         mostrar_resumen(fases_data)
