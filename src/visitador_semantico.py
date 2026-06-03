@@ -44,6 +44,12 @@ class semanticVisitor(gramatica_v4Visitor):
         if not is_global:
             self.tabla_simbolos.pop()
 
+    def visitStatement(self, ctx):
+        # statement no usa labeled alternatives en la gramática v4,
+        # así que despachamos manualmente al único hijo que tiene.
+        if ctx.getChildCount() > 0:
+            return self.visit(ctx.getChild(0))
+
     # ─────────────────────────────────────────
     # VARIABLES
     # ─────────────────────────────────────────
