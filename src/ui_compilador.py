@@ -34,7 +34,7 @@ FASES = [
 # ─────────────────────────────────────────────────────────
 # EJECUTAR PIPELINE
 # ─────────────────────────────────────────────────────────
-def ejecutar_pipeline(codigo: str):
+def ejecutar_pipeline(codigo: str, target: str):
     """Ejecuta el pipeline y retorna (stdout, stderr)."""
     if os.path.exists("outputs/output.tac"):
         os.remove("outputs/output.tac")
@@ -214,7 +214,7 @@ target = {
 
 console.print("\n[bold cyan]⚙  Compilando...[/bold cyan]\n")
 
-stdout, stderr = ejecutar_pipeline(codigo)
+stdout, stderr = ejecutar_pipeline(codigo, target)
 
     # ── Mostrar errores de Python (si los hay) ──────────────
     if stderr and stderr.strip():
