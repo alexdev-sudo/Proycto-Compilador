@@ -195,31 +195,36 @@ def main():
     except EOFError:
         pass
 
-if not codigo.strip():
-    console.print("[red]No se ingresó código.[/red]")
-    return
+    if not codigo.strip():
+        console.print("[red]No se ingresó código.[/red]")
+        return
 
-console.print("[bold cyan]Plataforma destino:[/bold cyan]")
-console.print("1. Linux")
-console.print("2. Windows")
-console.print("3. Ambas")
+    console.print("[bold cyan]Plataforma destino:[/bold cyan]")
+    console.print("1. Linux")
+    console.print("2. Windows")
+    console.print("3. Ambas")
 
-opcion = input("Selecciona 1/2/3: ").strip()
+    opcion = input("Selecciona 1/2/3: ").strip()
 
-target = {
-    "1": "linux",
-    "2": "windows",
-    "3": "both",
-}.get(opcion, "linux")
+    target = {
+        "1": "linux",
+        "2": "windows",
+        "3": "both",
+    }.get(opcion, "linux")
 
-console.print("\n[bold cyan]⚙  Compilando...[/bold cyan]\n")
+    console.print("\n[bold cyan]⚙  Compilando...[/bold cyan]\n")
 
-stdout, stderr = ejecutar_pipeline(codigo, target)
+    stdout, stderr = ejecutar_pipeline(codigo, target)
 
     # ── Mostrar errores de Python (si los hay) ──────────────
     if stderr and stderr.strip():
-        console.print(Panel(stderr, title="[bold red]⚠  Errores del sistema[/bold red]",
-                            border_style="red"))
+        console.print(
+            Panel(
+                stderr,
+                title="[bold red]⚠  Errores del sistema[/bold red]",
+                border_style="red"
+            )
+        )
         console.print()
 
     # ── Parsear y mostrar 6 paneles de fase ─────────────────
@@ -249,13 +254,14 @@ stdout, stderr = ejecutar_pipeline(codigo, target)
     # ── Panel especial: contenido del LLVM IR generado ──────
     ir_code = leer_archivo("outputs/output.ll")
     mostrar_artefacto("⚡  LLVM IR  (outputs/output.ll)", ir_code, "bold green")
+
     ir_opt = leer_archivo("outputs/output.opt.ll")
 
-mostrar_artefacto(
-    "LLVM IR OPTIMIZADO O3 (outputs/output.opt.ll)",
-    ir_opt,
-    "bold bright_green"
-)
+    mostrar_artefacto(
+        "LLVM IR OPTIMIZADO O3 (outputs/output.opt.ll)",
+        ir_opt,
+        "bold bright_green"
+    )
 
     # ── Tabla resumen final ──────────────────────────────────
     if fases_data:
