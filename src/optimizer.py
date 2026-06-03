@@ -21,7 +21,8 @@ def count_instructions(ir_text):
             total += 1
 
     return total
-    
+
+# Optimización basada en el New Pass Manager de llvmlite 0.47    
 def optimize_o3(ir_text):
     before = count_instructions(ir_text)
 
