@@ -46,6 +46,7 @@ def optimize_o3(ir_text):
     optimized = str(module)
     after = count_instructions(optimized)
 
+# Se utilizan métricas de instrucciones para estimar el impacto de la optimización.
     reduction = ((before - after) / before * 100.0) if before else 0.0
 
     return optimized, {
