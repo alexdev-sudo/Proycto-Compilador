@@ -44,21 +44,39 @@ FASES = [
 # ─────────────────────────────────────────────────────────
 def ejecutar_pipeline(codigo: str, target: str):
     """Ejecuta el pipeline y retorna (stdout, stderr)."""
-    if os.path.exists("outputs/output.tac"):
-        os.remove("outputs/output.tac")
-    if os.path.exists("outputs/output.ll"):
-        os.remove("outputs/output.ll")
 
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".src", mode="w", encoding="utf-8") as f:
+    outputs_dir = os.path.join(PROJECT_ROOT, "outputs")
+
+    for name in ("output.tac", "output.ll", "output.opt.ll", "output.manual.ll"):
+        path = os.path.join(outputs_dir, name)
+
+        if os.path.exists(path):
+            os.remove(path)
+
+    with tempfile.NamedTemporaryFile(
+        delete=False,
+        suffix=".src",
+        mode="w",
+        encoding="utf-8"
+    ) as f:
         f.write(codigo)
         filename = f.name
 
+    pipeline_path = os.path.join(
+        PROJECT_ROOT,
+        "src",
+        "pipeline_v3.py"
+    )
+
     result = subprocess.run(
-    ["python3", "src/pipeline_v3.py", filename, "--target", target],
-    capture_output=True,
-    text=True
-)
+        ["python3", pipeline_path, filename, "--target", target],
+        cwd=PROJECT_ROOT,
+        capture_output=True,
+        text=True
+    )
+
     os.unlink(filename)
+
     return result.stdout, result.stderr
 
 
