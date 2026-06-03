@@ -17,6 +17,9 @@ PASS_MAP = {
 def apply_manual_passes(ir_text, selected_passes):
     passes = []
 
+     # Valida que todos los pases solicitados existan
+    # dentro de la lista de pases soportados.
+
     for p in selected_passes:
         name = p.strip()
 
