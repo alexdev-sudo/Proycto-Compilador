@@ -279,6 +279,11 @@ def main():
             manual_ir,
             "bold magenta"
         )
+    mostrar_artefacto(
+        "DIFF ORIGINAL VS MANUAL",
+        diff_ir(ir_code, manual_ir),
+        "bold red"
+    )        
 
     # ── Tabla resumen final ──────────────────────────────────
     if fases_data:
