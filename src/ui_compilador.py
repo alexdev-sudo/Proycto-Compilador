@@ -11,6 +11,9 @@ import subprocess
 import tempfile
 import os
 import re
+from src.ir_manual import apply_manual_passes
+from src.ir_manual import export_manual_ir
+from src.ir_manual import diff_ir
 
 console = Console()
 
