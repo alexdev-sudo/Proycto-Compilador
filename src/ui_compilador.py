@@ -271,6 +271,9 @@ def main():
     if raw:
         selected = [p.strip() for p in raw.split(",") if p.strip()]
 
+        manual_ir, info = apply_manual_passes(ir_code, selected)
+        export_manual_ir(manual_ir)
+
     # ── Tabla resumen final ──────────────────────────────────
     if fases_data:
         mostrar_resumen(fases_data)
