@@ -81,6 +81,7 @@ def diff_ir(before, after):
 def export_manual_ir(ir_text, path="outputs/output.manual.ll"):
     # Crea el directorio si no existe.
     Path(path).parent.mkdir(parents=True, exist_ok=True)
+     # Escribe el contenido en disco.
     Path(path).write_text(ir_text, encoding="utf-8")
     return path
 
