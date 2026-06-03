@@ -263,6 +263,9 @@ def main():
         "bold bright_green"
     )
 
+    console.print("[bold cyan]IR Manual - passes disponibles:[/bold cyan]")
+    console.print("mem2reg, instcombine, simplifycfg, dce, inline, loop-unroll")
+
     # ── Tabla resumen final ──────────────────────────────────
     if fases_data:
         mostrar_resumen(fases_data)
