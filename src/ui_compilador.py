@@ -11,6 +11,14 @@ import subprocess
 import tempfile
 import os
 import re
+import sys
+
+PROJECT_ROOT = os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+)
+
+sys.path.insert(0, PROJECT_ROOT)
+
 from src.ir_manual import apply_manual_passes
 from src.ir_manual import export_manual_ir
 from src.ir_manual import diff_ir
