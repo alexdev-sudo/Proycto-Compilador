@@ -35,6 +35,9 @@ def apply_manual_passes(ir_text, selected_passes):
     if not passes:
         return ir_text, {"passes": [], "changed": False}
 
+ # Crea archivos temporales para almacenar
+    # el IR de entrada y el resultado optimizado.
+
     with tempfile.TemporaryDirectory() as tmp:
         in_path = Path(tmp) / "input.ll"
         out_path = Path(tmp) / "output.ll"
