@@ -287,14 +287,15 @@ def main():
     ir_code = leer_archivo("outputs/output.ll")
     mostrar_artefacto("⚡  LLVM IR  (outputs/output.ll)", ir_code, "bold green")
 
-    ir_opt = leer_archivo("outputs/output.opt.ll")
+ir_opt = leer_archivo("outputs/output.opt.ll")
 
-    mostrar_artefacto(
-        "LLVM IR OPTIMIZADO O3 (outputs/output.opt.ll)",
-        ir_opt,
-        "bold bright_green"
-    )
+mostrar_artefacto(
+    "LLVM IR OPTIMIZADO O3 (outputs/output.opt.ll)",
+    ir_opt,
+    "bold bright_green"
+)
 
+# IR Manual
 if ir_code == "No generado.":
     console.print(
         "[yellow]IR Manual omitido: no existe outputs/output.ll.[/yellow]"
@@ -313,11 +314,7 @@ else:
         selected = [p.strip() for p in raw.split(",") if p.strip()]
 
         try:
-            manual_ir, info = apply_manual_passes(
-                ir_code,
-                selected
-            )
-
+            manual_ir, info = apply_manual_passes(ir_code, selected)
             export_manual_ir(manual_ir)
 
             mostrar_artefacto(
@@ -337,11 +334,11 @@ else:
                 "ERROR IR MANUAL",
                 str(e),
                 "bold red"
-            )        
+            )
 
-    # ── Tabla resumen final ──────────────────────────────────
-    if fases_data:
-        mostrar_resumen(fases_data)
+# RESUMEN (también dentro de main)
+if fases_data:
+    mostrar_resumen(fases_data)
 
 
 if __name__ == "__main__":
