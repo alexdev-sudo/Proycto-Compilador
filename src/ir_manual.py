@@ -41,6 +41,8 @@ def apply_manual_passes(ir_text, selected_passes):
     with tempfile.TemporaryDirectory() as tmp:
         in_path = Path(tmp) / "input.ll"
         out_path = Path(tmp) / "output.ll"
+
+        # Guarda el código IR original.
         in_path.write_text(ir_text, encoding="utf-8")
 
                 # Une la lista de pases en una cadena separada por comas
