@@ -128,9 +128,15 @@ def parsear_fases(stdout: str) -> dict:
 # LEER ARCHIVO DE SALIDA
 # ─────────────────────────────────────────────────────────
 def leer_archivo(path: str) -> str:
-    if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
+    full_path = path
+
+    if not os.path.isabs(path):
+        full_path = os.path.join(PROJECT_ROOT, path)
+
+    if os.path.exists(full_path):
+        with open(full_path, "r", encoding="utf-8") as f:
             return f.read()
+
     return "No generado."
 
 
