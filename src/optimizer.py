@@ -11,3 +11,13 @@ INSTRUCTION_RE = re.compile(
     r"icmp|fcmp|br|switch|call|ret|getelementptr|select|sitofp|fptosi|"
     r"zext|trunc)\b"
 )
+def count_instructions(ir_text):
+    total = 0
+
+    for line in ir_text.splitlines():
+        clean = line.strip()
+
+        if clean and not clean.startswith(";") and INSTRUCTION_RE.match(clean):
+            total += 1
+
+    return total
