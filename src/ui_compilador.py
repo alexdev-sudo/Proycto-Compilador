@@ -1,27 +1,23 @@
 """
-ui_compilador.py — Interfaz Interactiva del Compilador v3
+ui_compilador.py — Interfaz Interactiva del Compilador v4
 Muestra 6 paneles individuales: uno por cada fase del pipeline.
 """
-from rich.console import Console
-from rich.panel   import Panel
-from rich.table   import Table
-from rich.text    import Text
-from rich         import box
 import subprocess
 import tempfile
 import os
 import re
 import sys
-
-PROJECT_ROOT = os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))
-)
-
+import time
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
-from src.ir_manual import apply_manual_passes
-from src.ir_manual import export_manual_ir
-from src.ir_manual import diff_ir
+from rich.console import Console
+from rich.panel   import Panel
+from rich.table   import Table
+from rich.text    import Text
+from rich         import box
+from src.ir_manual import apply_manual_passes, export_manual_ir, diff_ir
+
 
 console = Console()
 
@@ -29,12 +25,12 @@ console = Console()
 # ESTILOS POR FASE
 # ─────────────────────────────────────────────────────────
 FASES = [
-    {"numero": 1, "nombre": "LÉXICO",           "color": "bold cyan"},
-    {"numero": 2, "nombre": "SINTÁCTICO",        "color": "bold blue"},
-    {"numero": 3, "nombre": "SEMÁNTICO",         "color": "bold magenta"},
-    {"numero": 4, "nombre": "GENERACIÓN TAC",    "color": "bold yellow"},
-    {"numero": 5, "nombre": "GENERACIÓN LLVM IR","color": "bold green"},
-    {"numero": 6, "nombre": "EJECUCIÓN",         "color": "bold white"},
+    {"numero": 1, "nombre": "LEXICO", "color": "bold cyan"},
+    {"numero": 2, "nombre": "SINTACTICO", "color": "bold blue"},
+    {"numero": 3, "nombre": "SEMANTICO", "color": "bold magenta"},
+    {"numero": 4, "nombre": "GENERACION TAC", "color": "bold yellow"},
+    {"numero": 5, "nombre": "GENERACION LLVM IR", "color": "bold green"},
+    {"numero": 6, "nombre": "EJECUCION", "color": "bold white"},
     {"numero": 7, "nombre": "OPTIMIZACION O3", "color": "bold bright_green"},
     {"numero": 8, "nombre": "BINARIO NATIVO", "color": "bold bright_blue"},
 ]
@@ -42,41 +38,48 @@ FASES = [
 # ─────────────────────────────────────────────────────────
 # EJECUTAR PIPELINE
 # ─────────────────────────────────────────────────────────
-def ejecutar_pipeline(codigo: str, target: str):
-    """Ejecuta el pipeline y retorna (stdout, stderr)."""
+import os
+import subprocess
+import tempfile
 
+def ejecutar_pipeline(codigo: str, target: str):
+    # Define la ruta del directorio de salidas del proyecto
     outputs_dir = os.path.join(PROJECT_ROOT, "outputs")
 
-    for name in ("output.tac", "output.ll", "output.opt.ll", "output.manual.ll"):
+    # Limpia los archivos de salida previos si ya existen
+    for name in (
+        "output.tac",
+        "output.ll",
+        "output.opt.ll",
+        "output.native.ll",
+        "output.manual.ll",
+        "program_linux",
+        "program_windows.exe",
+    ):
         path = os.path.join(outputs_dir, name)
-
         if os.path.exists(path):
             os.remove(path)
 
-    with tempfile.NamedTemporaryFile(
-        delete=False,
-        suffix=".src",
-        mode="w",
-        encoding="utf-8"
-    ) as f:
+    # Crea un archivo temporal para guardar el codigo de entrada
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".src", mode="w", encoding="utf-8") as f:
         f.write(codigo)
         filename = f.name
 
-    pipeline_path = os.path.join(
-        PROJECT_ROOT,
-        "src",
-        "pipeline_v3.py"
-    )
+    # Define la ruta del script del pipeline que se va a ejecutar
+    pipeline_path = os.path.join(PROJECT_ROOT, "src", "pipeline_v3.py")
 
+    # Ejecuta el pipeline como un subproceso del sistema
     result = subprocess.run(
         ["python3", pipeline_path, filename, "--target", target],
         cwd=PROJECT_ROOT,
         capture_output=True,
-        text=True
+        text=True,
     )
 
+    # Elimina el archivo temporal creado anteriormente
     os.unlink(filename)
-
+    
+    # Retorna el resultado de la salida estandar y el error estandar
     return result.stdout, result.stderr
 
 
@@ -147,7 +150,6 @@ def parsear_fases(stdout: str) -> dict:
 # ─────────────────────────────────────────────────────────
 def leer_archivo(path: str) -> str:
     full_path = path
-
     if not os.path.isabs(path):
         full_path = os.path.join(PROJECT_ROOT, path)
 
@@ -156,7 +158,6 @@ def leer_archivo(path: str) -> str:
             return f.read()
 
     return "No generado."
-
 
 # ─────────────────────────────────────────────────────────
 # MOSTRAR PANEL DE FASE
@@ -212,7 +213,7 @@ def mostrar_resumen(fases_data: dict):
 def main():
     console.print()
     console.print(Panel(
-        "[bold white]🔧  COMPILADOR INTERACTIVO  v3[/bold white]\n"
+        "[bold white]🔧  COMPILADOR INTERACTIVO  v4[/bold white]\n"
         "[dim]Ingresa código fuente y observa el resultado de cada fase del pipeline.[/dim]",
         style="bold dark_blue",
         padding=(1, 4)
@@ -230,12 +231,11 @@ def main():
     if not codigo.strip():
         console.print("[red]No se ingresó código.[/red]")
         return
-
+    
     console.print("[bold cyan]Plataforma destino:[/bold cyan]")
     console.print("1. Linux")
     console.print("2. Windows")
     console.print("3. Ambas")
-
     opcion = input("Selecciona 1/2/3: ").strip()
 
     target = {
@@ -244,19 +244,15 @@ def main():
         "3": "both",
     }.get(opcion, "linux")
 
-    console.print("\n[bold cyan]⚙  Compilando...[/bold cyan]\n")
-
+    console.print("\n[bold cyan]Compilando...[/bold cyan]\n")
     stdout, stderr = ejecutar_pipeline(codigo, target)
+
+  
 
     # ── Mostrar errores de Python (si los hay) ──────────────
     if stderr and stderr.strip():
-        console.print(
-            Panel(
-                stderr,
-                title="[bold red]⚠  Errores del sistema[/bold red]",
-                border_style="red"
-            )
-        )
+        console.print(Panel(stderr, title="[bold red]⚠  Errores del sistema[/bold red]",
+                            border_style="red"))
         console.print()
 
     # ── Parsear y mostrar 6 paneles de fase ─────────────────
@@ -286,59 +282,44 @@ def main():
     # ── Panel especial: contenido del LLVM IR generado ──────
     ir_code = leer_archivo("outputs/output.ll")
     mostrar_artefacto("⚡  LLVM IR  (outputs/output.ll)", ir_code, "bold green")
+    ir_opt = leer_archivo("outputs/output.opt.ll")
+    mostrar_artefacto("LLVM IR OPTIMIZADO O3 (outputs/output.opt.ll)", ir_opt, "bold bright_green")
+    
+    # Verifica si el codigo de representacion intermedia no se genero
+    if ir_code == "No generado.":
+        # Muestra un aviso en amarillo indicando que se omitio el proceso
+        console.print("[yellow]IR Manual omitido: no existe outputs/output.ll.[/yellow]")
+    else:
+        # Muestra al usuario los pases de optimizacion que tiene disponibles
+        console.print("[bold cyan]IR Manual - passes disponibles:[/bold cyan]")
+        console.print("mem2reg, instcombine, simplifycfg, dce, inline, loop-unroll")
+        
+        # Solicita los pases por teclado y elimina los espacios sobrantes
+        raw = input("Passes separados por coma, o Enter para omitir: ").strip()
 
-ir_opt = leer_archivo("outputs/output.opt.ll")
+        # Si el usuario ingreso texto y no presiono Enter vacio
+        if raw:
+            # Crea una lista con los pases limpios eliminando espacios en blanco
+            selected = [p.strip() for p in raw.split(",") if p.strip()]
 
-mostrar_artefacto(
-    "LLVM IR OPTIMIZADO O3 (outputs/output.opt.ll)",
-    ir_opt,
-    "bold bright_green"
-)
+            try:
+                # Aplica los pases seleccionados al codigo de representacion intermedia
+                manual_ir, info = apply_manual_passes(ir_code, selected)
+                # Exporta el resultado a un archivo en el disco
+                export_manual_ir(manual_ir)
 
-# IR Manual
-if ir_code == "No generado.":
-    console.print(
-        "[yellow]IR Manual omitido: no existe outputs/output.ll.[/yellow]"
-    )
-else:
-    console.print("[bold cyan]IR Manual - passes disponibles:[/bold cyan]")
-    console.print(
-        "mem2reg, instcombine, simplifycfg, dce, inline, loop-unroll"
-    )
+                # Muestra en la consola el codigo optimizado resultante
+                mostrar_artefacto("IR MANUAL (outputs/output.manual.ll)", manual_ir, "bold magenta")
+                # Muestra la diferencia visual entre el codigo original y el modificado
+                mostrar_artefacto("DIFF ORIGINAL VS MANUAL", diff_ir(ir_code, manual_ir), "bold red")
 
-    raw = input(
-        "Passes separados por coma, o Enter para omitir: "
-    ).strip()
+            except Exception as e:
+                # Captura cualquier falla en el proceso y muestra el mensaje de error
+                mostrar_artefacto("ERROR IR MANUAL", str(e), "bold red")
 
-    if raw:
-        selected = [p.strip() for p in raw.split(",") if p.strip()]
-
-        try:
-            manual_ir, info = apply_manual_passes(ir_code, selected)
-            export_manual_ir(manual_ir)
-
-            mostrar_artefacto(
-                "IR MANUAL (outputs/output.manual.ll)",
-                manual_ir,
-                "bold magenta"
-            )
-
-            mostrar_artefacto(
-                "DIFF ORIGINAL VS MANUAL",
-                diff_ir(ir_code, manual_ir),
-                "bold red"
-            )
-
-        except Exception as e:
-            mostrar_artefacto(
-                "ERROR IR MANUAL",
-                str(e),
-                "bold red"
-            )
-
-# RESUMEN (también dentro de main)
-if fases_data:
-    mostrar_resumen(fases_data)
+    # ── Tabla resumen final ──────────────────────────────────
+    if fases_data:
+        mostrar_resumen(fases_data)
 
 
 if __name__ == "__main__":
