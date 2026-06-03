@@ -295,27 +295,49 @@ def main():
         "bold bright_green"
     )
 
+if ir_code == "No generado.":
+    console.print(
+        "[yellow]IR Manual omitido: no existe outputs/output.ll.[/yellow]"
+    )
+else:
     console.print("[bold cyan]IR Manual - passes disponibles:[/bold cyan]")
-    console.print("mem2reg, instcombine, simplifycfg, dce, inline, loop-unroll")
+    console.print(
+        "mem2reg, instcombine, simplifycfg, dce, inline, loop-unroll"
+    )
 
-    raw = input("Passes separados por coma, o Enter para omitir: ").strip()
+    raw = input(
+        "Passes separados por coma, o Enter para omitir: "
+    ).strip()
 
     if raw:
         selected = [p.strip() for p in raw.split(",") if p.strip()]
 
-        manual_ir, info = apply_manual_passes(ir_code, selected)
-        export_manual_ir(manual_ir)
+        try:
+            manual_ir, info = apply_manual_passes(
+                ir_code,
+                selected
+            )
 
-        mostrar_artefacto(
-            "IR MANUAL (outputs/output.manual.ll)",
-            manual_ir,
-            "bold magenta"
-        )
-    mostrar_artefacto(
-        "DIFF ORIGINAL VS MANUAL",
-        diff_ir(ir_code, manual_ir),
-        "bold red"
-    )        
+            export_manual_ir(manual_ir)
+
+            mostrar_artefacto(
+                "IR MANUAL (outputs/output.manual.ll)",
+                manual_ir,
+                "bold magenta"
+            )
+
+            mostrar_artefacto(
+                "DIFF ORIGINAL VS MANUAL",
+                diff_ir(ir_code, manual_ir),
+                "bold red"
+            )
+
+        except Exception as e:
+            mostrar_artefacto(
+                "ERROR IR MANUAL",
+                str(e),
+                "bold red"
+            )        
 
     # ── Tabla resumen final ──────────────────────────────────
     if fases_data:
