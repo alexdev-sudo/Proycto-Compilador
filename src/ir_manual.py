@@ -44,6 +44,8 @@ def apply_manual_passes(ir_text, selected_passes):
 
         # Guarda el código IR original.
         in_path.write_text(ir_text, encoding="utf-8")
+        # Construye el pipeline de optimización.
+        # Ejemplo: mem2reg,instcombine,dce
 
                 # Une la lista de pases en una cadena separada por comas
         pipeline = ",".join(passes)
