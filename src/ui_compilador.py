@@ -24,6 +24,8 @@ FASES = [
     {"numero": 4, "nombre": "GENERACIÓN TAC",    "color": "bold yellow"},
     {"numero": 5, "nombre": "GENERACIÓN LLVM IR","color": "bold green"},
     {"numero": 6, "nombre": "EJECUCIÓN",         "color": "bold white"},
+    {"numero": 7, "nombre": "OPTIMIZACION O3", "color": "bold bright_green"},
+    {"numero": 8, "nombre": "BINARIO NATIVO", "color": "bold bright_blue"},
 ]
 
 # ─────────────────────────────────────────────────────────
