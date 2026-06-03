@@ -29,6 +29,9 @@ def apply_manual_passes(ir_text, selected_passes):
 
         passes.append(PASS_MAP[name])
 
+# Si no se seleccionó ningún pase,
+    # devuelve el código original sin modificaciones.
+
     if not passes:
         return ir_text, {"passes": [], "changed": False}
 
