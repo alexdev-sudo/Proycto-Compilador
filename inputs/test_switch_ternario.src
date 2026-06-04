@@ -1,0 +1,14 @@
+program {
+    int nota = 85;
+    string calificacion = nota >= 90 ? "Excelente" : "Aprobado";
+    print(calificacion);
+    switch(nota) {
+        case 100: print("perfecto"); break;
+        case 85:  print("muy bien"); break;
+        case 70:  print("aprobado"); break;
+        default:  print("revisar");
+    }
+    int x = 15;
+    string rango = x < 10 ? "bajo" : x < 20 ? "medio" : "alto";
+    print(rango);
+}
