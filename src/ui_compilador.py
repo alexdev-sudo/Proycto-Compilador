@@ -308,6 +308,14 @@ def main():
                 # Exporta el resultado a un archivo en el disco
                 export_manual_ir(manual_ir)
 
+                # Muestra métricas de reducción
+                console.print(f"\n[bold cyan]  Passes aplicados : {', '.join(info['applied'])}[/bold cyan]")
+                if info.get('skipped'):
+                    console.print(f"[yellow]  Passes ignorados : {', '.join(info['skipped'])}[/yellow]")
+                console.print(f"[bold green]  Instrucciones antes  : {info['before']}[/bold green]")
+                console.print(f"[bold green]  Instrucciones después: {info['after']}[/bold green]")
+                console.print(f"[bold green]  Reducción            : {info['reduction_percent']}%[/bold green]")
+
                 # Muestra en la consola el codigo optimizado resultante
                 mostrar_artefacto("IR MANUAL (outputs/output.manual.ll)", manual_ir, "bold magenta")
                 # Muestra la diferencia visual entre el codigo original y el modificado
