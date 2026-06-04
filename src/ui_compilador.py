@@ -286,6 +286,10 @@ def main():
     mostrar_artefacto("LLVM IR OPTIMIZADO O3 (outputs/output.opt.ll)", ir_opt, "bold bright_green")
     
     # Verifica si el codigo de representacion intermedia no se genero
+    ir_base = leer_archivo("outputs/output.opt.ll")
+    if ir_base == "No generado.":
+        ir_base = ir_code  # fallback al IR crudo si no existe el optimizado
+
     if ir_code == "No generado.":
         # Muestra un aviso en amarillo indicando que se omitio el proceso
         console.print("[yellow]IR Manual omitido: no existe outputs/output.ll.[/yellow]")
@@ -303,8 +307,8 @@ def main():
             selected = [p.strip() for p in raw.split(",") if p.strip()]
 
             try:
-                # Aplica los pases seleccionados al codigo de representacion intermedia
-                manual_ir, info = apply_manual_passes(ir_code, selected)
+                # Aplica los pases sobre el IR optimizado O3 (base limpia para el diff)
+                manual_ir, info = apply_manual_passes(ir_base, selected)
                 # Exporta el resultado a un archivo en el disco
                 export_manual_ir(manual_ir)
 
@@ -319,7 +323,7 @@ def main():
                 # Muestra en la consola el codigo optimizado resultante
                 mostrar_artefacto("IR MANUAL (outputs/output.manual.ll)", manual_ir, "bold magenta")
                 # Muestra la diferencia visual entre el codigo original y el modificado
-                mostrar_artefacto("DIFF ORIGINAL VS MANUAL", diff_ir(ir_code, manual_ir), "bold red")
+                mostrar_artefacto("DIFF IR O3 VS MANUAL", diff_ir(ir_base, manual_ir), "bold red")
 
             except Exception as e:
                 # Captura cualquier falla en el proceso y muestra el mensaje de error
