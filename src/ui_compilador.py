@@ -66,7 +66,7 @@ def ejecutar_pipeline(codigo: str, target: str):
         filename = f.name
 
     # Define la ruta del script del pipeline que se va a ejecutar
-    pipeline_path = os.path.join(PROJECT_ROOT, "src", "pipeline_v3.py")
+    pipeline_path = os.path.join(PROJECT_ROOT, "src", "pipeline_v4.py")
 
     # Ejecuta el pipeline como un subproceso del sistema
     result = subprocess.run(
