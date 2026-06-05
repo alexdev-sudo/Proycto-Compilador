@@ -1,6 +1,6 @@
 ; ModuleID = '<string>'
 source_filename = "<string>"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-pc-linux-gnu"
 
 @str_0 = internal constant [6 x i8] c"lejos\00"
 @str_5 = internal constant [11 x i8] c"opcion dos\00"

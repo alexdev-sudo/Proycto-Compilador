@@ -21,7 +21,19 @@ from src.ir_manual import apply_manual_passes, export_manual_ir, diff_ir
 
 console = Console()
 
-def ejecutar_pipeline(codigo):
+FASES = [
+    {"numero": 1, "nombre": "LEXICO", "color": "bold cyan"},
+    {"numero": 2, "nombre": "SINTACTICO", "color": "bold cyan"},
+    {"numero": 3, "nombre": "SEMANTICO", "color": "bold cyan"},
+    {"numero": 4, "nombre": "GENERACION TAC", "color": "bold cyan"},
+    {"numero": 5, "nombre": "GENERACION LLVM IR", "color": "bold cyan"},
+    {"numero": 6, "nombre": "EJECUCION", "color": "bold cyan"},
+    {"numero": 7, "nombre": "OPTIMIZACION O3", "color": "bold cyan"},
+    {"numero": 8, "nombre": "GENERACION BINARIO NATIVO", "color": "bold cyan"},
+]
+
+
+def ejecutar_pipeline(codigo, target):
     #limpiar archivos viejos
     if os.path.exists("outputs/output.tac"):
         os.remove("outputs/output.tac")
@@ -37,7 +49,7 @@ def ejecutar_pipeline(codigo):
 
     # Ejecuta el pipeline como un subproceso del sistema
     result = subprocess.run(
-        ["python3", pipeline_path, filename, "--target", target],
+        [sys.executable, pipeline_path, filename, "--target", target],
         cwd=PROJECT_ROOT,
         capture_output=True,
         text=True,
