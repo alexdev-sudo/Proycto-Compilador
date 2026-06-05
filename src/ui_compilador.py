@@ -21,47 +21,14 @@ from src.ir_manual import apply_manual_passes, export_manual_ir, diff_ir
 
 console = Console()
 
-# ─────────────────────────────────────────────────────────
-# ESTILOS POR FASE
-# ─────────────────────────────────────────────────────────
-FASES = [
-    {"numero": 1, "nombre": "LEXICO", "color": "bold cyan"},
-    {"numero": 2, "nombre": "SINTACTICO", "color": "bold blue"},
-    {"numero": 3, "nombre": "SEMANTICO", "color": "bold magenta"},
-    {"numero": 4, "nombre": "GENERACION TAC", "color": "bold yellow"},
-    {"numero": 5, "nombre": "GENERACION LLVM IR", "color": "bold green"},
-    {"numero": 6, "nombre": "EJECUCION", "color": "bold white"},
-    {"numero": 7, "nombre": "OPTIMIZACION O3", "color": "bold bright_green"},
-    {"numero": 8, "nombre": "BINARIO NATIVO", "color": "bold bright_blue"},
-]
+def ejecutar_pipeline(codigo):
+    #limpiar archivos viejos
+    if os.path.exists("outputs/output.tac"):
+        os.remove("outputs/output.tac")
+    if os.path.exists("outputs/output.ll"):
+        os.remove("outputs/output.ll")
 
-# ─────────────────────────────────────────────────────────
-# EJECUTAR PIPELINE
-# ─────────────────────────────────────────────────────────
-import os
-import subprocess
-import tempfile
-
-def ejecutar_pipeline(codigo: str, target: str):
-    # Define la ruta del directorio de salidas del proyecto
-    outputs_dir = os.path.join(PROJECT_ROOT, "outputs")
-
-    # Limpia los archivos de salida previos si ya existen
-    for name in (
-        "output.tac",
-        "output.ll",
-        "output.opt.ll",
-        "output.native.ll",
-        "output.manual.ll",
-        "program_linux",
-        "program_windows.exe",
-    ):
-        path = os.path.join(outputs_dir, name)
-        if os.path.exists(path):
-            os.remove(path)
-
-    # Crea un archivo temporal para guardar el codigo de entrada
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".src", mode="w", encoding="utf-8") as f:
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".src", mode="w") as f:
         f.write(codigo)
         filename = f.name
 
