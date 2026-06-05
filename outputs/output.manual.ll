@@ -1,163 +1,74 @@
-; ModuleID = '/tmp/tmpzmwicx9j/input.ll'
-source_filename = "/tmp/tmpzmwicx9j/input.ll"
-target datalayout = "e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
-target triple = "x86_64-w64-windows-gnu"
+; ModuleID = '<string>'
+source_filename = "<string>"
+target triple = "x86_64-pc-linux-gnu"
 
 @str_0 = internal constant [6 x i8] c"lejos\00"
-@str_1 = internal constant [6 x i8] c"cerca\00"
-@str_2 = internal constant [4 x i8] c"%s\0A\00"
-@str_3 = internal constant [11 x i8] c"opcion uno\00"
-@str_4 = internal constant [4 x i8] c"%s\0A\00"
 @str_5 = internal constant [11 x i8] c"opcion dos\00"
-@str_6 = internal constant [4 x i8] c"%s\0A\00"
-@str_7 = internal constant [12 x i8] c"otra opcion\00"
-@str_8 = internal constant [4 x i8] c"%s\0A\00"
 @str_9 = internal constant [4 x i8] c"%d\0A\00"
 @str_10 = internal constant [4 x i8] c"%d\0A\00"
 
-declare i32 @printf(ptr, ...)
+; Function Attrs: nofree nounwind
+declare noundef i32 @printf(ptr nocapture noundef readonly, ...) local_unnamed_addr #0
 
-declare ptr @strcat(ptr, ptr)
-
-declare ptr @malloc(i64)
-
-define i32 @main() {
+; Function Attrs: nofree nounwind
+define noundef i32 @main() local_unnamed_addr #0 {
 entry:
-  %p = alloca { i32, i32 }, align 8
-  %.2 = getelementptr inbounds { i32, i32 }, ptr %p, i32 0, i32 0
-  store i32 3, ptr %.2, align 4
-  %.4 = getelementptr inbounds { i32, i32 }, ptr %p, i32 0, i32 1
-  store i32 4, ptr %.4, align 4
-  %.6 = getelementptr inbounds { i32, i32 }, ptr %p, i32 0, i32 0
-  %.7 = load i32, ptr %.6, align 4
-  %.8 = getelementptr inbounds { i32, i32 }, ptr %p, i32 0, i32 0
-  %.9 = load i32, ptr %.8, align 4
-  %.10 = mul i32 %.7, %.9
-  %.11 = getelementptr inbounds { i32, i32 }, ptr %p, i32 0, i32 1
-  %.12 = load i32, ptr %.11, align 4
-  %.13 = getelementptr inbounds { i32, i32 }, ptr %p, i32 0, i32 1
-  %.14 = load i32, ptr %.13, align 4
-  %.15 = mul i32 %.12, %.14
-  %.16 = add i32 %.10, %.15
-  %.17 = sitofp i32 %.16 to double
-  %.20 = fcmp ogt double %.17, 2.000000e+01
-  %.21 = getelementptr inbounds [6 x i8], ptr @str_0, i32 0, i32 0
-  %.22 = getelementptr inbounds [6 x i8], ptr @str_1, i32 0, i32 0
-  %.23 = select i1 %.20, ptr %.21, ptr %.22
-  %.26 = getelementptr inbounds [4 x i8], ptr @str_2, i32 0, i32 0
-  %.27 = call i32 (ptr, ...) @printf(ptr %.26, ptr %.23)
-  switch i32 2, label %switch_default [
-    i32 1, label %switch_case
-    i32 2, label %switch_case.1
-  ]
+  %puts = tail call i32 @puts(ptr nonnull dereferenceable(1) @str_0)
+  %puts3 = tail call i32 @puts(ptr nonnull dereferenceable(1) @str_5)
+  %nums = alloca [5 x i32], align 16
+  store <4 x i32> <i32 5, i32 8, i32 13, i32 21>, ptr %nums, align 16
+  %.51 = getelementptr inbounds nuw i8, ptr %nums, i64 16
+  store i32 34, ptr %.51, align 16
+  br label %while_body
 
-switch_end:                                       ; preds = %switch_case.1, %switch_case, %switch_default
-  %nums = alloca [5 x i32], align 4
-  %.43 = getelementptr inbounds [5 x i32], ptr %nums, i32 0, i32 0
-  store i32 5, ptr %.43, align 4
-  %.45 = getelementptr inbounds [5 x i32], ptr %nums, i32 0, i32 1
-  store i32 8, ptr %.45, align 4
-  %.47 = getelementptr inbounds [5 x i32], ptr %nums, i32 0, i32 2
-  store i32 13, ptr %.47, align 4
-  %.49 = getelementptr inbounds [5 x i32], ptr %nums, i32 0, i32 3
-  store i32 21, ptr %.49, align 4
-  %.51 = getelementptr inbounds [5 x i32], ptr %nums, i32 0, i32 4
-  store i32 34, ptr %.51, align 4
-  %i = alloca i32, align 4
-  store i32 0, ptr %i, align 4
-  %total = alloca i32, align 4
-  store i32 0, ptr %total, align 4
-  br label %while_cond
-
-switch_default:                                   ; preds = %entry
-  %.39 = getelementptr inbounds [12 x i8], ptr @str_7, i32 0, i32 0
-  %.40 = getelementptr inbounds [4 x i8], ptr @str_8, i32 0, i32 0
-  %.41 = call i32 (ptr, ...) @printf(ptr %.40, ptr %.39)
-  br label %switch_end
-
-switch_case:                                      ; preds = %entry
-  %.31 = getelementptr inbounds [11 x i8], ptr @str_3, i32 0, i32 0
-  %.32 = getelementptr inbounds [4 x i8], ptr @str_4, i32 0, i32 0
-  %.33 = call i32 (ptr, ...) @printf(ptr %.32, ptr %.31)
-  br label %switch_end
-
-switch_case.1:                                    ; preds = %entry
-  %.35 = getelementptr inbounds [11 x i8], ptr @str_5, i32 0, i32 0
-  %.36 = getelementptr inbounds [4 x i8], ptr @str_6, i32 0, i32 0
-  %.37 = call i32 (ptr, ...) @printf(ptr %.36, ptr %.35)
-  br label %switch_end
-
-while_cond:                                       ; preds = %endif.1, %switch_end
-  %.56 = load i32, ptr %i, align 4
-  %.57 = icmp slt i32 %.56, 5
-  br i1 %.57, label %while_body, label %while_end
-
-while_body:                                       ; preds = %while_cond
-  %r = alloca i32, align 4
-  %.59 = load i32, ptr %i, align 4
-  %.60 = getelementptr inbounds [5 x i32], ptr %nums, i32 0, i32 %.59
+while_body:                                       ; preds = %while_body, %entry
+  %i.0 = phi i32 [ 0, %entry ], [ %.76, %while_body ]
+  %total.0 = phi i32 [ 0, %entry ], [ %spec.select, %while_body ]
+  %0 = zext nneg i32 %i.0 to i64
+  %.60 = getelementptr inbounds nuw [5 x i32], ptr %nums, i64 0, i64 %0
   %.61 = load i32, ptr %.60, align 4
-  %.62 = srem i32 %.61, 2
-  store i32 %.62, ptr %r, align 4
-  %.64 = load i32, ptr %r, align 4
-  %.65 = icmp eq i32 %.64, 0
-  br i1 %.65, label %then, label %else
+  %1 = and i32 %.61, 1
+  %.65 = icmp eq i32 %1, 0
+  %.71 = select i1 %.65, i32 %.61, i32 0
+  %spec.select = add i32 %.71, %total.0
+  %.76 = add nuw nsw i32 %i.0, 1
+  %.79 = icmp slt i32 %spec.select, 51
+  %.57 = icmp samesign ult i32 %i.0, 4
+  %or.cond = and i1 %.57, %.79
+  br i1 %or.cond, label %while_body, label %while_end
 
-while_end:                                        ; preds = %then.1, %while_cond
-  %.84 = call i32 @fibonacci(i32 10)
-  %.85 = getelementptr inbounds [4 x i8], ptr @str_9, i32 0, i32 0
-  %.86 = call i32 (ptr, ...) @printf(ptr %.85, i32 %.84)
-  %.87 = load i32, ptr %total, align 4
-  %.88 = getelementptr inbounds [4 x i8], ptr @str_10, i32 0, i32 0
-  %.89 = call i32 (ptr, ...) @printf(ptr %.88, i32 %.87)
+while_end:                                        ; preds = %while_body
+  %.84 = tail call i32 @fibonacci(i32 10)
+  %.86 = tail call i32 (ptr, ...) @printf(ptr nonnull dereferenceable(1) @str_9, i32 %.84)
+  %.89 = tail call i32 (ptr, ...) @printf(ptr nonnull dereferenceable(1) @str_10, i32 %spec.select)
   ret i32 0
-
-then:                                             ; preds = %while_body
-  %.67 = load i32, ptr %total, align 4
-  %.68 = load i32, ptr %i, align 4
-  %.69 = getelementptr inbounds [5 x i32], ptr %nums, i32 0, i32 %.68
-  %.70 = load i32, ptr %.69, align 4
-  %.71 = add i32 %.67, %.70
-  store i32 %.71, ptr %total, align 4
-  br label %endif
-
-else:                                             ; preds = %while_body
-  br label %endif
-
-endif:                                            ; preds = %else, %then
-  %.75 = load i32, ptr %i, align 4
-  %.76 = add i32 %.75, 1
-  store i32 %.76, ptr %i, align 4
-  %.78 = load i32, ptr %total, align 4
-  %.79 = icmp sgt i32 %.78, 50
-  br i1 %.79, label %then.1, label %else.1
-
-then.1:                                           ; preds = %endif
-  br label %while_end
-
-else.1:                                           ; preds = %endif
-  br label %endif.1
-
-endif.1:                                          ; preds = %else.1
-  br label %while_cond
 }
 
-define i32 @fibonacci(i32 %.1) {
+; Function Attrs: nofree nosync nounwind memory(none)
+define i32 @fibonacci(i32 %.1) local_unnamed_addr #1 {
 entry:
-  %.5 = icmp sle i32 %.1, 1
-  br i1 %.5, label %then, label %else
+  %.54 = icmp slt i32 %.1, 2
+  br i1 %.54, label %common.ret, label %endif
 
-then:                                             ; preds = %entry
-  ret i32 %.1
+common.ret:                                       ; preds = %endif, %entry
+  %accumulator.tr.lcssa = phi i32 [ 0, %entry ], [ %.16, %endif ]
+  %.1.tr.lcssa = phi i32 [ %.1, %entry ], [ %.14, %endif ]
+  %accumulator.ret.tr = add i32 %.1.tr.lcssa, %accumulator.tr.lcssa
+  ret i32 %accumulator.ret.tr
 
-else:                                             ; preds = %entry
-  br label %endif
-
-endif:                                            ; preds = %else
-  %.11 = sub i32 %.1, 1
-  %.12 = call i32 @fibonacci(i32 %.11)
-  %.14 = sub i32 %.1, 2
-  %.15 = call i32 @fibonacci(i32 %.14)
-  %.16 = add i32 %.12, %.15
-  ret i32 %.16
+endif:                                            ; preds = %endif, %entry
+  %.1.tr6 = phi i32 [ %.14, %endif ], [ %.1, %entry ]
+  %accumulator.tr5 = phi i32 [ %.16, %endif ], [ 0, %entry ]
+  %.11 = add nsw i32 %.1.tr6, -1
+  %.12 = tail call i32 @fibonacci(i32 %.11)
+  %.14 = add nsw i32 %.1.tr6, -2
+  %.16 = add i32 %.12, %accumulator.tr5
+  %.5 = icmp samesign ult i32 %.1.tr6, 4
+  br i1 %.5, label %common.ret, label %endif
 }
+
+; Function Attrs: nofree nounwind
+declare noundef i32 @puts(ptr nocapture noundef readonly) local_unnamed_addr #0
+
+attributes #0 = { nofree nounwind }
+attributes #1 = { nofree nosync nounwind memory(none) }
