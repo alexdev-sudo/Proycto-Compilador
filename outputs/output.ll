@@ -1,5 +1,5 @@
 ; ModuleID = "programa"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -23,10 +23,25 @@ entry:
   %"i" = alloca i32
   store i32 0, i32* %"i"
   br label %"while_cond"
+switch_default:
+  %".39" = getelementptr inbounds [12 x i8], [12 x i8]* @"str_7", i32 0, i32 0
+  %".40" = getelementptr inbounds [4 x i8], [4 x i8]* @"str_8", i32 0, i32 0
+  %".41" = call i32 (i8*, ...) @"printf"(i8* %".40", i8* %".39")
+  br label %"switch_end"
+switch_case:
+  %".31" = getelementptr inbounds [11 x i8], [11 x i8]* @"str_3", i32 0, i32 0
+  %".32" = getelementptr inbounds [4 x i8], [4 x i8]* @"str_4", i32 0, i32 0
+  %".33" = call i32 (i8*, ...) @"printf"(i8* %".32", i8* %".31")
+  br label %"switch_end"
+switch_case.1:
+  %".35" = getelementptr inbounds [11 x i8], [11 x i8]* @"str_5", i32 0, i32 0
+  %".36" = getelementptr inbounds [4 x i8], [4 x i8]* @"str_6", i32 0, i32 0
+  %".37" = call i32 (i8*, ...) @"printf"(i8* %".36", i8* %".35")
+  br label %"switch_end"
 while_cond:
-  %".15" = load i32, i32* %"i"
-  %".16" = icmp slt i32 %".15", 5
-  br i1 %".16", label %"while_body", label %"while_end"
+  %".56" = load i32, i32* %"i"
+  %".57" = icmp slt i32 %".56", 5
+  br i1 %".57", label %"while_body", label %"while_end"
 while_body:
   %"r" = alloca i32
   %".18" = load i32, i32* %"i"

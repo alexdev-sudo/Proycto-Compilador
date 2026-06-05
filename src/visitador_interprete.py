@@ -1,10 +1,11 @@
 from antlr4 import *
-from antlr.v3.gramatica_v3Visitor import gramatica_v3Visitor
-from antlr.v3.gramatica_v3Parser import gramatica_v3Parser
+from antlr.v4.gramatica_v4Visitor import gramatica_v4Visitor
+from antlr.v4.gramatica_v4Parser import gramatica_v4Parser
 
 class ReturnValue(Exception):
     def __init__(self, value):
         self.value = value
+        
 
 class BreakException(Exception):
     pass
@@ -12,11 +13,12 @@ class BreakException(Exception):
 class ContinueException(Exception):
     pass
 
-class EvalVisitor(gramatica_v3Visitor):
+class EvalVisitor(gramatica_v4Visitor):
 
     def __init__(self):
         self.scopes = [{}]
         self.functions = {}
+        self.struct_defs = {}
 
     # ─────────────────────────────────────────
     # PROGRAMA
@@ -31,7 +33,7 @@ class EvalVisitor(gramatica_v3Visitor):
         return self.visit(ctx.bloque())
 
     def visitBloque(self, ctx):
-        is_global = isinstance(ctx.parentCtx, gramatica_v3Parser.ProgramaRuleContext)
+        is_global = isinstance(ctx.parentCtx, gramatica_v4Parser.ProgramaRuleContext)
         if not is_global:
             self.push()
         for stmt in ctx.statement():
@@ -174,6 +176,46 @@ class EvalVisitor(gramatica_v3Visitor):
     # ─────────────────────────────────────────
     # EXPRESIONES
     # ─────────────────────────────────────────
+    def visitExprSimple(self, ctx):
+        return self.visit(ctx.logicalOr())
+
+    def visitUnarioNot(self, ctx):
+        return not self.visit(ctx.unario())
+
+    def visitUnarioPrimario(self, ctx):
+        return self.visit(ctx.primario())
+
+    def visitPrimLlamada(self, ctx):
+        return self.visit(ctx.llamada())
+
+    def visitPrimArray(self, ctx):
+        nombre = ctx.VAR().getText()
+        indice = self.visit(ctx.expr())
+        arr = self.get_var(nombre)
+        return arr[indice]
+
+    def visitPrimTrue(self, ctx):
+        return True
+
+    def visitPrimFalse(self, ctx):
+        return False
+
+    def visitPrimVar(self, ctx):
+        return self.get_var(ctx.VAR().getText())
+
+    def visitPrimNum(self, ctx):
+        return int(ctx.NUM().getText())
+
+    def visitPrimFnum(self, ctx):
+        return float(ctx.FNUM().getText())
+
+    def visitPrimStr(self, ctx):
+        return ctx.STRVAL().getText()[1:-1]
+
+    def visitPrimParen(self, ctx):
+        return self.visit(ctx.expr())
+
+
     def visitLogicalOr(self, ctx):
         resultado = self.visit(ctx.logicalAnd(0))
         for i in range(1, len(ctx.logicalAnd())):
@@ -283,3 +325,68 @@ class EvalVisitor(gramatica_v3Visitor):
             if name in scope:
                 return scope[name]
         raise Exception(f"Variable '{name}' no definida")
+    
+    def visitUnarioCast(self,ctx):
+        tipo_destino = ctx.tipodato().getText()
+        valor = self.visit(ctx.unario())
+        if tipo_destino == "int": 
+            return int(valor)
+        if tipo_destino == "float":
+            return float(valor)
+        if tipo_destino == "string": 
+            return str(valor)
+        if tipo_destino == "bool":
+            return bool(valor)
+        return  valor 
+    
+    def visitTernario(self,ctx):
+        condicion = self.visit(ctx.logicalOr())
+        if condicion: 
+            return self.visit(ctx.expr(0))
+        return self.visit(ctx.expr(1))
+
+    def visitStructdecl(self,ctx):
+        nombre = ctx.VAR().getText()
+        campos = {}
+        for campo in ctx.campostruct():
+            campos[
+                campo.VAR().getText()
+            ] = None
+        self.struct_defs[nombre] = campos
+
+    def visitVarstruct(self,ctx):
+        tipo = ctx.VAR(0).getText()
+        nombre = ctx.VAR(1).getText()
+        self.scopes[-1][nombre] = dict(
+            self.struct_defs[tipo]
+        )
+    def visitStructasign(self,ctx):
+        variable = ctx.VAR(0).getText()
+        campo = ctx.VAR(1).getText()
+        valor = self.visit(ctx.expr())
+        self.get_var(variable)[campo] = valor
+
+    def visitPrimStructAcceso(self,ctx):
+        variable = ctx.VAR(0).getText()
+        campo = ctx.VAR(1).getText()
+        return self.get_var(variable)[campo]
+    
+    def visitSwitchstm(self,ctx):
+        valor = self.visit(ctx.expr())
+        ejecutado = False
+        for case in ctx.caseclause():
+            case_valor = self.visit(
+                case.expr()
+            )
+            if valor == case_valor:
+                ejecutado = True
+                try:
+                    for stmt in case.statement():
+                        self.visit(stmt)
+                except BreakException:
+                    return
+        if not ejecutado and ctx.defaultclause():
+            for stmt in ctx.defaultclause().statement():
+                self.visit(stmt)
+    def visitUnarioNeg(self, ctx):
+        return -self.visit(ctx.unario())            
