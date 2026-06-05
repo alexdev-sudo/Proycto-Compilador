@@ -1,6 +1,6 @@
-from antlr.v3.gramatica_v3Visitor import gramatica_v3Visitor
+from antlr.v4.gramatica_v4Visitor import gramatica_v4Visitor
 
-class TACGenerator(gramatica_v3Visitor):
+class TACGenerator(gramatica_v4Visitor):
 
     def __init__(self):
         self.code = []
@@ -41,12 +41,14 @@ class TACGenerator(gramatica_v3Visitor):
     # VARIABLES
     # ─────────────────────────────────────────
     def visitVarint(self, ctx):
-        nombre = ctx.VAR().getText()
+        nombre   = ctx.VAR().getText()
+        tipo_str = ctx.getChild(0).getText()
         if ctx.expr():
             val = self.visit(ctx.expr())
             self.emit(f"{nombre} = {val}")
         else:
-            self.emit(f"{nombre} = 0")
+            default = '""' if tipo_str == "string" else "0"
+            self.emit(f"{nombre} = {default}")
 
     def visitAsignacion(self, ctx):
         nombre = ctx.VAR().getText()
@@ -170,6 +172,49 @@ class TACGenerator(gramatica_v3Visitor):
     # ─────────────────────────────────────────
     def visitExpr(self, ctx):
         return self.visit(ctx.logicalOr())
+    
+    def visitExprSimple(self, ctx):
+        return self.visit(ctx.logicalOr())
+
+    def visitUnarioNot(self, ctx):
+        val = self.visit(ctx.unario())
+        t = self.new_temp()
+        self.emit(f"{t} = !{val}")
+        return t
+
+    def visitUnarioPrimario(self, ctx):
+        return self.visit(ctx.primario())
+
+    def visitPrimLlamada(self, ctx):
+        return self.visit(ctx.llamada())
+
+    def visitPrimArray(self, ctx):
+        nombre = ctx.VAR().getText()
+        indice = self.visit(ctx.expr())
+        t = self.new_temp()
+        self.emit(f"{t} = {nombre}[{indice}]")
+        return t
+
+    def visitPrimTrue(self, ctx):
+        return "true"
+
+    def visitPrimFalse(self, ctx):
+        return "false"
+
+    def visitPrimVar(self, ctx):
+        return ctx.VAR().getText()
+
+    def visitPrimNum(self, ctx):
+        return ctx.NUM().getText()
+
+    def visitPrimFnum(self, ctx):
+        return ctx.FNUM().getText()
+
+    def visitPrimStr(self, ctx):
+        return ctx.STRVAL().getText()
+
+    def visitPrimParen(self, ctx):
+        return self.visit(ctx.expr())     
 
     def visitLogicalOr(self, ctx):
         resultado = self.visit(ctx.logicalAnd(0))
@@ -262,3 +307,116 @@ class TACGenerator(gramatica_v3Visitor):
             return ctx.VAR().getText()
         if ctx.expr():
             return self.visit(ctx.expr())
+        
+    def visitUnarioCast(self, ctx):
+        valor = self.visit(ctx.unario())    
+        tipo = ctx.tipodato().getText()
+        t = self.new_temp()
+        self.emit(
+            f"{t} = cast({tipo}) {valor}"
+        )
+        return t
+    def visitTernario(self,ctx):
+        cond = self.visit(ctx.logicalOr())
+        verdadero = self.visit(ctx.expr(0))
+        falso = self.visit(ctx.expr(1))
+        t = self.new_temp()
+        l1 = self.new_label()
+        l2 = self.new_label()
+
+        self.emit(f"if {cond} goto {l1}")
+        self.emit(f"{t} = {falso}")
+        self.emit(f"goto {l2}")
+        self.emit(f"{l1}:")    
+        self.emit(f"{t} = {verdadero}")
+        self.emit(f"{l2}:")
+        return t
+    
+    def visitStructdecl(self,ctx):
+        nombre = ctx.VAR().getText()
+        self.emit(
+            f"struct {nombre}"
+        )
+
+
+    def visitPrimStructAcceso(self,ctx):
+        variable = ctx.VAR(0).getText()
+        campo = ctx.VAR(1).getText()
+        t = self.new_temp()
+        self.emit(
+            f"{t} = {variable}.{campo}"
+        )
+        return t
+    
+    def visitSwitchstm(self,ctx):
+
+        valor = self.visit(ctx.expr())
+
+        fin = self.new_label()
+
+        for case in ctx.caseclause():
+
+            siguiente = self.new_label()
+
+            case_val = self.visit(
+                case.expr()
+            )
+
+            t = self.new_temp()
+
+            self.emit(
+                f"{t} = {valor} == {case_val}"
+            )
+
+            self.emit(
+                f"ifFalse {t} goto {siguiente}"
+            )
+
+            for stmt in case.statement():
+                self.visit(stmt)
+
+            self.emit(
+                f"goto {fin}"
+            )
+
+            self.emit(
+                f"{siguiente}:"
+            )
+
+        if ctx.defaultclause():
+
+            for stmt in ctx.defaultclause().statement():
+                self.visit(stmt)
+
+        self.emit(
+            f"{fin}:"
+        )
+
+    
+    def visitVarstruct(self,ctx):
+
+        tipo = ctx.VAR(0).getText()
+
+        variable = ctx.VAR(1).getText()
+
+        self.emit(
+            f"{variable} = new {tipo}"
+        )
+
+    def visitStructasign(self,ctx):
+
+        variable = ctx.VAR(0).getText()
+
+        campo = ctx.VAR(1).getText()
+
+        valor = self.visit(ctx.expr())
+
+        self.emit(
+            f"{variable}.{campo} = {valor}"
+        )
+    def visitUnarioNeg(self, ctx):
+        val = self.visit(ctx.unario())
+        t = self.new_temp()
+        self.emit(f"{t} = -{val}")
+        return t
+        

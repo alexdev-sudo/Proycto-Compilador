@@ -1,6 +1,9 @@
 class TablaSibolos:
     def __init__(self):
         self.Scopes = [{}] # Lista de diccionarios para manejar los scopes
+        self.structs = {}
+        
+
     # entrar a neuvo escope
     def push(self):
         self.Scopes.append({})
@@ -43,3 +46,31 @@ class TablaSibolos:
         if name in self.Scopes[0]:
             return self.Scopes[0][name]
         raise Exception(f"Función '{name}' no declarada")
+    
+
+    def declare_struct(self,nombre,campos):
+        if nombre in self.structs:
+            raise Exception(
+                f"Struct '{nombre}' ya existe"
+            )
+        self.structs[nombre] = campos
+
+    def get_struct(self,nombre):
+        if nombre not in self.structs:
+            raise Exception(
+                f"Struct '{nombre}' no existe"
+            )
+        return self.structs[nombre]
+    
+    def get_struct_field_index(
+        self,
+        struct_name,
+        field_name
+    ):
+
+        datos = self.structs[struct_name]
+
+        return datos["order"].index(
+            field_name
+        )
+    

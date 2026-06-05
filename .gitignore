@@ -1,15 +1,39 @@
-# ANTLR
+# ── Archivos generados por el compilador ──────────────────
+outputs/output.ll
+outputs/output_o3.ll
+outputs/output.tac
+outputs/*.exe
+outputs/*.obj
+outputs/linux_binary
+
+# ── ANTLR: archivos generados automáticamente ─────────────
 *.tokens
 *.interp
 
-# Python
+# ── Python ────────────────────────────────────────────────
 __pycache__/
 *.pyc
+*.pyo
 *.java
-# Virtual environments
+
+# ── Entornos virtuales ────────────────────────────────────
 antlr_env/
 venv/
 env/
+.env
 
-# VSCode
+# ── VSCode ────────────────────────────────────────────────
 .vscode/
+
+# ── llvmlite / compilación ────────────────────────────────
+*.bc
+*.s
+*.o
+diferencias.txt
+
+# ── Archivos generados adicionales ───────────────────────
+outputs/output.manual.ll
+outputs/output.native.ll
+outputs/output.opt.ll
+outputs/program_linux
+outputs/program_windows.exe
