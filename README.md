@@ -1,5 +1,5 @@
-# Compilador — gramatica_v3
-### Proyecto Fase III · Compiladores · Universidad Mariano Gálvez
+# Compilador — Proyecto Final (v4)
+### Proyecto Final · Compiladores · Universidad Mariano Gálvez · Ciclo 2026
 
 ---
 
@@ -17,9 +17,13 @@
 
 ## Descripción
 
-Este proyecto corresponde a la **Fase III** del compilador desarrollado en el curso de Compiladores. En esta fase se evolucionó el compilador de la Fase II incorporando la **Generación de Código Intermedio** en dos representaciones complementarias: **Código de Tres Direcciones (TAC)** como instrumento teórico y **LLVM IR funcional** como artefacto ejecutable real. Adicionalmente se construyó una **Interfaz de Compilación** y se extendió la gramática del lenguaje.
+Este proyecto corresponde al **Proyecto Final** del curso de Compiladores. Se consolidó el compilador desarrollado en los Proyectos 1, 2 y 3 en un producto de software funcional de nivel de producción, incorporando tres capacidades avanzadas que completan la cadena de compilación moderna:
 
-El compilador procesa un lenguaje propio implementado con **ANTLR4** para el análisis léxico y sintáctico, y **Python** para el análisis semántico, interpretación y generación de código. El sistema sigue un pipeline secuencial de **6 fases** que garantiza que el código fuente sea analizado, validado y ejecutado solo si no presenta errores.
+- **Optimización automática O3** mediante el Pass Manager de LLVM
+- **Módulo de optimización manual** con selector de passes individuales y comparador diff
+- **Generación de binarios nativos** para Linux y Windows (.exe) desde WSL2
+
+Adicionalmente se extendió la gramática a la versión v4 con soporte para switch/case, operador ternario, casting explícito y structs. El pipeline ahora consta de **8 fases en secuencia estricta**.
 
 ---
 
@@ -29,50 +33,62 @@ El compilador procesa un lenguaje propio implementado con **ANTLR4** para el an�
 |------------|-----|
 | Python 3 | Lenguaje principal del proyecto |
 | ANTLR4 | Generación del analizador léxico y sintáctico |
-| llvmlite | Generación de código LLVM IR |
-| rich | Interfaz de compilación interactiva en terminal |
-| WSL 2 + Ubuntu | Entorno de ejecución |
+| llvmlite | Generación de LLVM IR y optimización con Pass Manager |
+| rich | Interfaz interactiva en terminal |
+| clang + mingw-w64 | Compilación de binarios Linux y Windows desde WSL2 |
+| WSL2 + Ubuntu | Entorno de ejecución |
 | Visual Studio Code | IDE de desarrollo |
 | Git + GitHub | Control de versiones |
 
 ---
 
-## Arquitectura del Proyecto
-
-El compilador sigue un **pipeline secuencial de 6 fases**. Si en las fases léxica o sintáctica se detectan errores, el pipeline se detiene. Las fases TAC e IR reportan error pero no detienen el pipeline.
+## Pipeline v4 — 8 Fases en Secuencia Estricta
 
 ```
 Código fuente (.src)
         │
         ▼
-┌─────────────────────┐
-│  Fase 1 — Léxico    │  gramatica_v3Lexer   ──► Error léxico → detener
-└─────────────────────┘
+┌─────────────────────────┐
+│  Fase 1 — Léxico        │  gramatica_v4Lexer    ──► Error léxico → detener
+└─────────────────────────┘
         │
         ▼
-┌─────────────────────┐
-│  Fase 2 — Sintáctico│  gramatica_v3Parser  ──► Error sintáctico → detener
-└─────────────────────┘
+┌─────────────────────────┐
+│  Fase 2 — Sintáctico    │  gramatica_v4Parser   ──► Error sintáctico → detener
+└─────────────────────────┘
         │
         ▼
-┌─────────────────────┐
-│  Fase 3 — Semántico │  semanticVisitor     ──► Error semántico → detener
-└─────────────────────┘
+┌─────────────────────────┐
+│  Fase 3 — Semántico     │  semanticVisitor      ──► Error semántico → detener
+└─────────────────────────┘
         │
         ▼
-┌─────────────────────┐
-│  Fase 4 — TAC       │  TACGenerator        ──► output.tac
-└─────────────────────┘
+┌─────────────────────────┐
+│  Fase 4 — TAC           │  TACGenerator         ──► outputs/output.tac
+└─────────────────────────┘
         │
         ▼
-┌─────────────────────┐
-│  Fase 5 — LLVM IR   │  IRGenerator         ──► output.ll
-└─────────────────────┘
+┌─────────────────────────┐
+│  Fase 5 — LLVM IR       │  IRGenerator          ──► outputs/output.ll
+└─────────────────────────┘
         │
         ▼
-┌─────────────────────┐
-│  Fase 6 — Ejecución │  EvalVisitor         ──► Resultados en consola
-└─────────────────────┘
+┌─────────────────────────┐
+│  Fase 6 — Ejecución     │  EvalVisitor          ──► Salida en consola
+└─────────────────────────┘
+        │
+        ▼
+┌─────────────────────────┐
+│  Fase 7 — Optimización  │  optimizer.py (O3)    ──► outputs/output.opt.ll
+│          O3             │  métricas antes/después
+└─────────────────────────┘
+        │
+        ▼
+┌─────────────────────────┐
+│  Fase 8 — Binario       │  clang + mingw-w64    ──► outputs/program_linux
+│          Nativo         │  selector: Linux /        outputs/program_windows.exe
+│                         │  Windows / Ambas
+└─────────────────────────┘
 ```
 
 ---
@@ -83,291 +99,206 @@ Código fuente (.src)
 Proycto-Compilador/
 │
 ├── antlr/
-│   ├── v1/                        # Gramática original Expresiones21
-│   └── v3/                        # Gramática actualizada
-│       ├── gramatica_v3.g4        # Gramática del lenguaje en ANTLR4
-│       ├── gramatica_v3Lexer.py   # Generado por ANTLR4
-│       ├── gramatica_v3Parser.py  # Generado por ANTLR4
-│       └── gramatica_v3Visitor.py # Generado por ANTLR4
+│   ├── v1/                          # Gramática original Expresiones21
+│   ├── v3/                          # Gramática Fase III
+│   └── v4/                          # Gramática Proyecto Final
+│       ├── gramatica_v4.g4          # Gramática extendida con switch, ternario, casting, structs
+│       ├── gramatica_v4Lexer.py     # Generado por ANTLR4
+│       ├── gramatica_v4Parser.py    # Generado por ANTLR4
+│       └── gramatica_v4Visitor.py   # Generado por ANTLR4
 │
 ├── src/
-│   ├── pipeline_v3.py             # Orquesta las 6 fases con medición de tiempos
-│   ├── main.py                    # Punto de entrada alternativo
-│   ├── custom_errors.py           # Listeners para errores léxicos y sintácticos
-│   ├── tabla_simbolos.py          # Tabla de símbolos con manejo de scopes
-│   ├── visitador_semantico.py     # Visitor semántico
-│   ├── visitador_interprete.py    # Visitor intérprete
-│   ├── tac_generator.py           # Generador de código TAC
-│   ├── ir_generator.py            # Generador de código LLVM IR
-│   └── ui_compilador.py           # Interfaz interactiva de compilación
+│   ├── pipeline_v4.py               # Orquesta las 8 fases con medición de tiempos
+│   ├── main.py                      # Punto de entrada alternativo
+│   ├── custom_errors.py             # Listeners para errores léxicos y sintácticos
+│   ├── tabla_simbolos.py            # Tabla de símbolos con manejo de scopes
+│   ├── visitador_semantico.py       # Visitor semántico (gramática v4)
+│   ├── visitador_interprete.py      # Visitor intérprete
+│   ├── tac_generator.py             # Generador de código TAC
+│   ├── ir_generator.py              # Generador LLVM IR con target triple parametrizable
+│   ├── optimizer.py                 # Optimización automática O3 con métricas
+│   ├── ir_manual.py                 # Módulo de optimización manual con diff y re-ejecución
+│   └── ui_compilador.py             # Interfaz interactiva con panel IR Manual y selector de plataforma
 │
 ├── inputs/
-│   ├── test_ok.src                # Caso de prueba válido complejo
-│   ├── test_lexico.src            # Caso de prueba: error léxico
-│   ├── test_sintactico.src        # Caso de prueba: error sintáctico
-│   └── test_semantico.src         # Caso de prueba: error semántico
+│   ├── test_completo.src            # Programa completo con todas las features v4
+│   ├── test_ok.src                  # Demo de structs y casting explícito
+│   ├── test_switch_ternario.src     # Demo de switch/case y operador ternario
+│   ├── test_lexico.src              # Caso de prueba: error léxico
+│   ├── test_sintactico.src          # Caso de prueba: error sintáctico
+│   └── test_semantico.src           # Caso de prueba: error semántico
 │
-├── outputs/                       # Generado automáticamente (ignorado por Git)
-│   ├── output.tac                 # Código de tres direcciones generado
-│   └── output.ll                  # Módulo LLVM IR generado
+├── outputs/                         # Generado automáticamente (ignorado por Git)
+│   ├── output.tac                   # Código de tres direcciones
+│   ├── output.ll                    # LLVM IR original
+│   ├── output.opt.ll                # LLVM IR optimizado O3
+│   ├── output.manual.ll             # LLVM IR con passes manuales
+│   ├── output.native.ll             # IR saneado para clang
+│   ├── program_linux                # Binario ejecutable Linux
+│   └── program_windows.exe          # Ejecutable Windows (cross-compiled)
 │
 └── .gitignore
 ```
 
 ---
 
-## Gramática del Lenguaje (gramatica_v3)
+## Nuevas Características — Gramática v4
 
-### Tipos de datos soportados
+### Structs con acceso a campos
 ```
-int     float     string     bool     void
-```
-
-### Novedades en Fase III
-
-#### Arreglos 1D
-```
-int[] nums = [1, 2, 3];
-print(nums[0]);
+struct Punto { int x; int y; }
+Punto p;
+p.x = 3;
+p.y = 4;
 ```
 
-#### Operador módulo
+### Operador ternario
 ```
-int r = x % 2;
+string etiqueta = dist > 20.0 ? "lejos" : "cerca";
 ```
 
-#### Break y Continue
+### Switch / case con default
 ```
-while (x > 0) {
-    if (x == 5) { break; }
-    x = x - 1;
+switch(opcion) {
+    case 1: print("uno"); break;
+    case 2: print("dos"); break;
+    default: print("otro");
 }
 ```
 
-#### Imports
+### Casting explícito entre tipos
 ```
-import math;
-```
-
-#### Concatenación de cadenas
-```
-string msg = "Hola" + " mundo";
-```
-
-### Estructuras de control
-```
-if / else      while      for      break      continue
-```
-
-### Funciones
-```
-int factorial(int n) {
-    if (n <= 1) { return 1; }
-    return n * factorial(n - 1);
-}
-```
-
-### Instrucción de impresión
-```
-print(resultado);
+float division = (float)a / (float)b;
+int entero = (int)3.14;
 ```
 
 ---
 
-## Requisitos de instalación
+## Módulos Nuevos — Proyecto Final
 
-### 1. Tener WSL 2 con Ubuntu instalado
+### `optimizer.py`
+Aplica el Pass Manager de LLVM a nivel O3 sobre el IR generado. Retorna el IR optimizado junto con métricas de reducción:
+- Instrucciones antes de la optimización
+- Instrucciones después de la optimización
+- Porcentaje de reducción
 
-### 2. Instalar Python 3 y pip
-```bash
-sudo apt update
-sudo apt install python3 python3-pip
-```
+### `ir_manual.py`
+Módulo de optimización manual. Permite seleccionar passes individuales y aplicarlos programáticamente:
 
-### 3. Crear y activar entorno virtual
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
+| Función | Descripción |
+|---------|-------------|
+| `apply_manual_passes(ir_text, passes)` | Aplica los passes seleccionados y retorna métricas |
+| `export_manual_ir(ir_text)` | Guarda el IR resultante en `outputs/output.manual.ll` |
+| `diff_ir(original, optimizado)` | Genera diff unificado entre IR original y optimizado |
+| `run_ir(ir_path)` | Re-ejecuta el IR resultante con llvmlite JIT |
 
-### 4. Instalar dependencias
-```bash
-pip install antlr4-python3-runtime llvmlite rich
-```
-
-### 5. Instalar Java (necesario para ANTLR4)
-```bash
-sudo apt install default-jdk
-```
-
-### 6. Descargar ANTLR4
-```bash
-wget https://www.antlr.org/download/antlr-4.13.1-complete.jar
-```
-
----
-
-## Cómo ejecutar el proyecto
-
-### Paso 1: Clonar el repositorio
-```bash
-git clone https://github.com/alexdev-sudo/Proycto-Compilador.git
-cd Proycto-Compilador
-```
-
-### Paso 2: Activar el entorno virtual
-```bash
-source venv/bin/activate
-```
-
-### Paso 3: Regenerar archivos de ANTLR4 (si es necesario)
-```bash
-cd antlr/v3
-antlr4 -Dlanguage=Python3 -visitor -no-listener gramatica_v3.g4
-cd ../..
-```
-
-### Paso 4: Ejecutar la interfaz interactiva
-```bash
-python3 ui_compilador.py
-```
-
-### Paso 5: O ejecutar el pipeline directamente
-```bash
-python3 src/pipeline_v3.py inputs/test_ok.src
-```
+**Passes disponibles:** `mem2reg`, `instcombine`, `simplifycfg`, `dce`, `inline`, `loop-unroll`
 
 ---
 
 ## Casos de Prueba
 
-### Programa válido complejo (`inputs/test_ok.src`)
-```
-program {
-    import math;
-    int[] nums = [3, 1, 4, 1, 5];
-    int total = 0;
-    int i = 0;
+### Programa completo v4 (`inputs/test_completo.src`)
+Ejercita todas las características del lenguaje: struct, casting, ternario, switch, fibonacci recursivo, arrays con módulo y break.
 
-    while (i < 5) {
-        int r = nums[i] % 2;
-        if (r == 0) {
-            total = total + nums[i];
-        }
-        i = i + 1;
-        if (total > 10) { break; }
-    }
-
-    string msg = "Resultado: " + "calculado";
-    print(msg);
-    print(total);
-}
-```
 **Salida esperada:**
 ```
-Resultado: calculado
-4
+lejos
+opcion dos
+55
+42
 ```
 
----
+### Demo switch/ternario (`inputs/test_switch_ternario.src`)
+Demuestra de forma aislada el operador ternario anidado y switch/case con default.
+
+### Demo structs/casting (`inputs/test_ok.src`)
+Demuestra structs con dos campos y casting explícito int↔float.
 
 ### Error léxico (`inputs/test_lexico.src`)
-```
-program {
-    int x = 10;
-    int y = 20@5;
-    print(x);
-}
-```
-**Salida esperada:**
-```
-[Error Léxico] Línea 3, Columna 14: Símbolo no reconocido '@'
-Pipeline detenido en fase léxica.
-```
-
----
+El símbolo `@` no pertenece al alfabeto — falla en **Fase 1**.
 
 ### Error sintáctico (`inputs/test_sintactico.src`)
-```
-program {
-    int x = 10
-    if (x > 5) {
-        print(x)
-    }
-}
-```
-**Salida esperada:**
-```
-[Error Sintáctico] Línea 3, Columna 4: missing ';' at 'if'
-Pipeline detenido en fase sintáctica.
-```
-
----
+`while` sin paréntesis de cierre — falla en **Fase 2**.
 
 ### Error semántico (`inputs/test_semantico.src`)
+Variable `y` usada sin declarar — falla en **Fase 3**.
+
+---
+
+## Requisitos de Instalación
+
+### 1. WSL2 con Ubuntu
+
+### 2. Python 3 y entorno virtual
+```bash
+sudo apt update && sudo apt install python3 python3-pip
+python3 -m venv venv
+source venv/bin/activate
+pip install antlr4-python3-runtime llvmlite rich
 ```
-program {
-    int x = 10;
-    print(y);
-}
+
+### 3. Java para ANTLR4
+```bash
+sudo apt install default-jdk
+wget https://www.antlr.org/download/antlr-4.13.1-complete.jar
 ```
-**Salida esperada:** Error detectado por el visitor semántico — variable `y` no declarada.
+
+### 4. Herramientas para generación de binarios
+```bash
+sudo apt install llvm clang mingw-w64
+```
 
 ---
 
-## Componentes principales
+## Cómo Ejecutar
 
-### `src/pipeline_v3.py`
-Orquesta las 6 fases secuencialmente con medición de tiempos en milisegundos. Muestra un resumen final con el estado de cada fase.
+### Clonar el repositorio
+```bash
+git clone https://github.com/alexdev-sudo/Proycto-Compilador.git
+cd Proycto-Compilador/Proycto-Compilador
+source ../venv/bin/activate
+```
 
-### `src/tac_generator.py`
-Visitor que recorre el AST y emite instrucciones de Código de Tres Direcciones. Genera temporales (`t1`, `t2`...) y etiquetas (`L1`, `L2`...) automáticamente. Soporta arreglos, funciones, break, continue, import y módulo.
+### Interfaz interactiva (recomendado)
+```bash
+python3 src/ui_compilador.py
+```
 
-### `src/ir_generator.py`
-Visitor que genera un módulo LLVM IR usando `llvmlite`. Produce código compilable y ejecutable. Soporta tipos `int`, `float`, `bool`, arreglos, funciones, ciclos y break.
+### Pipeline directo — solo Linux
+```bash
+python3 src/pipeline_v4.py inputs/test_completo.src
+```
 
-### `src/ui_compilador.py`
-Interfaz interactiva de terminal usando `rich`. Permite escribir código fuente directamente, compilarlo con CTRL+D y visualizar el resultado del pipeline, el TAC generado y el LLVM IR en paneles estilizados.
+### Pipeline directo — Linux y Windows
+```bash
+python3 src/pipeline_v4.py inputs/test_completo.src --target both
+```
 
-### `src/tabla_simbolos.py`
-Implementa la pila de tablas hash para el manejo de scopes. Soporta declaración de variables, arreglos y funciones con validación de tipos.
+### Ejecutar binario generado
+```bash
+# Linux
+./outputs/program_linux
 
-### `src/visitador_semantico.py`
-Valida tipos, scopes, arreglos, funciones y nuevas instrucciones (break, continue, import).
-
-### `src/visitador_interprete.py`
-Ejecuta el programa con soporte completo para arreglos, módulo `%`, break, continue e imports.
-
----
-
-## Control de versiones (Git)
-
-El proyecto utiliza la siguiente estructura de ramas:
-
-| Rama | Descripción |
-|------|-------------|
-| `production` | Rama de producción — código estable y entregable |
-| `main` | Rama de producción alternativa |
-| `test` | Rama de desarrollo — integración de todas las features |
-
-Los commits están organizados de forma descriptiva por fase y componente.
+# Windows (desde WSL2 al escritorio de Windows)
+cp outputs/program_windows.exe /mnt/c/Users/$USER/Desktop/
+```
 
 ---
 
-## Resumen de cambios Fase II → Fase III
+## Resumen de Cambios — Fase III → Proyecto Final
 
 | Componente | Cambio |
 |------------|--------|
-| `gramatica_v3.g4` | Arreglos 1D, módulo, break, continue, imports |
-| `pipeline_v3.py` | 6 fases con medición de tiempos |
-| `tac_generator.py` | Nuevo — genera código TAC |
-| `ir_generator.py` | Nuevo — genera LLVM IR con llvmlite |
-| `ui_compilador.py` | Nuevo — interfaz interactiva con rich |
-| `visitador_semantico.py` | Migrado a gramatica_v3, nuevas reglas |
-| `visitador_interprete.py` | Migrado a gramatica_v3, soporte arreglos y break |
-| `tabla_simbolos.py` | Soporte para tipos arreglo (`int[]`, `float[]`) |
-| Estructura | Reorganización en carpetas `antlr/`, `src/`, `inputs/`, `outputs/` |
+| `gramatica_v4.g4` | Nueva — switch/case, ternario, casting, structs |
+| `pipeline_v4.py` | 8 fases, migrado a gramática v4, selector de plataforma |
+| `optimizer.py` | Nuevo — optimización O3 con métricas |
+| `ir_manual.py` | Nuevo — optimización manual, diff, re-ejecución |
+| `ir_generator.py` | Target triple parametrizable (Linux/Windows) |
+| `ui_compilador.py` | Panel IR Manual, selector plataforma, métricas |
+| `visitador_semantico.py` | Soporte para gramática v4 |
+| `inputs/` | 6 casos de prueba cubriendo todas las features y errores |
 
 ---
 
-*Universidad Mariano Gálvez · Ingeniería en Sistemas de Información · Sede Boca del Monte*
+*Universidad Mariano Gálvez · Ingeniería en Sistemas de Información · Sede Boca del Monte · Ciclo 2026*
